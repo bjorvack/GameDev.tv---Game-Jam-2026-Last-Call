@@ -23,7 +23,7 @@ script = ExtResource("1_krb3x")
 calls = Array[Resource]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
 caller_card = NodePath("HUD/TopBar/TopRow/CallerCard")
 post_box = NodePath("HUD/BottomBar/PostConnectBox")
-patience_container = NodePath("HUD/TopBar/TopRow/Patience")
+patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
 
 [node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
@@ -111,18 +111,24 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Patience" type="HBoxContainer" parent="HUD/TopBar/TopRow" unique_id=333999525]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
+[node name="Patience" type="HBoxContainer" parent="HUD" unique_id=333999525]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 56.0
+grow_horizontal = 0
+theme_override_constants/separation = 8
 
-[node name="PatienceLight" parent="HUD/TopBar/TopRow/Patience" unique_id=587441976 instance=ExtResource("5_v2baq")]
+[node name="PatienceLight" parent="HUD/Patience" unique_id=587441976 instance=ExtResource("5_v2baq")]
 layout_mode = 2
 
-[node name="PatienceLight2" parent="HUD/TopBar/TopRow/Patience" unique_id=1899483641 instance=ExtResource("5_v2baq")]
+[node name="PatienceLight2" parent="HUD/Patience" unique_id=1899483641 instance=ExtResource("5_v2baq")]
 layout_mode = 2
 
-[node name="PatienceLight3" parent="HUD/TopBar/TopRow/Patience" unique_id=997110224 instance=ExtResource("5_v2baq")]
+[node name="PatienceLight3" parent="HUD/Patience" unique_id=997110224 instance=ExtResource("5_v2baq")]
 layout_mode = 2
 
 [node name="BottomBar" type="MarginContainer" parent="HUD" unique_id=205405213]
