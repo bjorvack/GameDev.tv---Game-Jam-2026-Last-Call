@@ -11,18 +11,21 @@
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Hello? Operator?"
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I need to reach Mrs. Hayes on 7th and Vine. She's my mother — she didn't answer her morning call."
+portrait = ExtResource("3_portrait_0")
 duration = 4.5
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I'm two hours out on I-40."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="connected_0"]
@@ -35,12 +38,14 @@ duration = 3.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "She… she must've gone to the market."
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I'll try again later. Thanks."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
@@ -54,12 +59,14 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator? Operator, please — I'll call back."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="wrong_doc_0"]
@@ -73,6 +80,7 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Doc — sorry, I was trying my mother."
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [sub_resource type="Resource" id="wrong_patty_0"]
@@ -86,6 +94,7 @@ duration = 1.8
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Patty, have you seen my mom today?"
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="wrong_patty_2"]

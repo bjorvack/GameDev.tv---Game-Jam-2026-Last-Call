@@ -10,18 +10,21 @@
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "Operator, this is Henley over on 8th."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "There's been an ambulance sitting two streets over near Vine for ten minutes."
+portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "Connect me to the sheriff, would you? Something's not right."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="connected_0"]
@@ -49,6 +52,7 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
@@ -61,6 +65,7 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "Lord, that's her line. Try the sheriff, operator."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [resource]

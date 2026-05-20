@@ -10,18 +10,21 @@
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator… please."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "County General. I'm in the parking lot."
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I need to know if I can still — "
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_0"]
@@ -61,12 +64,14 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "(silence — then a click)"
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
@@ -79,6 +84,7 @@ duration = 3.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "No — the hospital, operator. The hospital."
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [resource]

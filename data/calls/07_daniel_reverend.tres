@@ -11,12 +11,14 @@
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator — the Chapel, Reverend Carter."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Hurry, please."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="connected_0"]
@@ -51,12 +53,14 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator?? OPERATOR."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="wrong_doc_0"]
@@ -70,6 +74,7 @@ duration = 2.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Doc, I need the Chapel. The Reverend."
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [resource]

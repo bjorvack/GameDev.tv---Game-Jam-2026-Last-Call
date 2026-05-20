@@ -11,18 +11,21 @@
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "Operator. I need to reach Daniel Hayes — he's on the highway."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "Try the truck stop payphone at marker 88."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "Tell him his mother's alive. They're taking her to County General."
+portrait = ExtResource("3_portrait_0")
 duration = 4.5
 
 [sub_resource type="Resource" id="connected_0"]
@@ -49,12 +52,14 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "No, no — the truck stop, operator! Marker 88!"
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "(Lord forgive us.)"
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [sub_resource type="Resource" id="wrong_hospital_0"]
@@ -68,6 +73,7 @@ duration = 2.5
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "No — not yet — he needs to know FIRST."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [resource]

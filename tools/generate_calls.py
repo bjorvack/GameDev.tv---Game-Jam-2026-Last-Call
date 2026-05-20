@@ -347,18 +347,16 @@ def lines_array(
     """Emit the sub_resource blocks for these lines and return the array literal.
 
     `portrait_ids` maps an already-registered portrait path to its ext_resource
-    id. Lines whose speaker portrait matches the call's default portrait skip
-    the override (CallerCard falls back to caller_portrait).
+    id. Every line with a known speaker portrait is stamped explicitly — even
+    when it matches the call default — so the .tres files are self-documenting
+    and CallerCard never has to fall back to `caller_portrait` mid-conversation.
     """
     ids_here: list[str] = []
     for i, line in enumerate(lines):
         sid = f"{prefix}_{i}"
         sub_ids.append(sid)
         speaker_portrait = PORTRAITS.get(line.speaker)
-        # Only override when the speaker differs from the call's default portrait.
-        ext_id: str | None = None
-        if speaker_portrait and speaker_portrait != caller_portrait_path:
-            ext_id = portrait_ids.get(speaker_portrait)
+        ext_id = portrait_ids.get(speaker_portrait) if speaker_portrait else None
         blocks.append(emit_line(line, sid, ext_id))
         ids_here.append(sid)
     if not ids_here:

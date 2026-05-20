@@ -11,18 +11,21 @@
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator, it's Daniel Hayes again."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Still no answer at Mom's."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere."
+portrait = ExtResource("3_portrait_0")
 duration = 4.5
 
 [sub_resource type="Resource" id="connected_0"]
@@ -64,12 +67,14 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator? I'm losing signal. Try again — please."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
@@ -82,6 +87,7 @@ duration = 2.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Still nothing. Operator, please — try Doc Wheeler."
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="wrong_sheriff_0"]
@@ -95,6 +101,7 @@ duration = 1.8
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sheriff — I'm sorry, wrong line. I'm trying to reach Doc Wheeler."
+portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
 [sub_resource type="Resource" id="wrong_sheriff_2"]

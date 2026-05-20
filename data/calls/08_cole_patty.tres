@@ -10,18 +10,21 @@
 script = ExtResource("2_dline")
 speaker = "Cole"
 text = "Patty, it's Cole."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Cole"
 text = "Truck stalled out near 7th and Vine — there's two units and a chaplain at Margaret's place."
+portrait = ExtResource("3_portrait_0")
 duration = 4.5
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Cole"
 text = "Anyone heard from Daniel?"
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="connected_0"]
@@ -49,6 +52,7 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Cole"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [resource]

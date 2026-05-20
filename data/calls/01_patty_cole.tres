@@ -10,12 +10,14 @@
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "Mornin', operator. Patty here."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "My delivery truck won't crank — could you put me through to Cole's Garage?"
+portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="connected_0"]
@@ -29,6 +31,7 @@ duration = 3.0
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "Bless you, Cole."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="generic_0"]
@@ -42,6 +45,7 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
@@ -55,6 +59,7 @@ duration = 2.5
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "She must not be in. Try someone else, operator."
+portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
 [resource]

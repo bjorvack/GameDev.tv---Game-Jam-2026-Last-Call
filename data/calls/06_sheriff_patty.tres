@@ -10,12 +10,14 @@
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
 text = "Patty? Briggs."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
 text = "Has Margaret Hayes been in today? Henley says there's a unit at her place."
+portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
 [sub_resource type="Resource" id="connected_0"]
@@ -43,6 +45,7 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
 text = "Sorry — wrong number."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [resource]
