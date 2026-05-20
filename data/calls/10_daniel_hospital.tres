@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
 [ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" path="res://art/portraits/nurse.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -26,12 +28,14 @@ duration = 3.0
 script = ExtResource("2_dline")
 speaker = "Nurse"
 text = "Mr. Hayes? She's awake."
+portrait = ExtResource("3_portrait_1")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
 speaker = "Nurse"
 text = "She's been asking for you."
+portrait = ExtResource("3_portrait_1")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_2"]
@@ -50,6 +54,7 @@ duration = 4.0
 script = ExtResource("2_dline")
 speaker = "???"
 text = "Hello?"
+portrait = ExtResource("3_portrait_2")
 duration = 1.5
 
 [sub_resource type="Resource" id="generic_1"]

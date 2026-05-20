@@ -1,7 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" path="res://art/portraits/henley.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" path="res://art/portraits/sheriff.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -25,18 +28,21 @@ duration = 3.5
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
 text = "Briggs."
+portrait = ExtResource("3_portrait_1")
 duration = 1.5
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
 text = "Appreciate the call, Mrs. Henley. We're already on it. Stay inside."
+portrait = ExtResource("3_portrait_1")
 duration = 4.0
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
 speaker = "???"
 text = "Hello?"
+portrait = ExtResource("3_portrait_2")
 duration = 1.5
 
 [sub_resource type="Resource" id="generic_1"]
@@ -60,6 +66,7 @@ duration = 3.5
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Mrs. Henley"
+caller_portrait = ExtResource("3_portrait_0")
 opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"sheriff"
 connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])

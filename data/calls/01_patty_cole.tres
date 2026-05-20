@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
 [ext_resource type="Texture2D" path="res://art/portraits/patty.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" path="res://art/portraits/cole.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -20,6 +22,7 @@ duration = 3.5
 script = ExtResource("2_dline")
 speaker = "Cole"
 text = "Cole's. Yep, I'll be over in twenty."
+portrait = ExtResource("3_portrait_1")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_1"]
@@ -32,6 +35,7 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "???"
 text = "Hello?"
+portrait = ExtResource("3_portrait_2")
 duration = 1.5
 
 [sub_resource type="Resource" id="generic_1"]
@@ -44,6 +48,7 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "???"
 text = "(ringing… no answer)"
+portrait = ExtResource("3_portrait_2")
 duration = 2.5
 
 [sub_resource type="Resource" id="wrong_hayes_1"]

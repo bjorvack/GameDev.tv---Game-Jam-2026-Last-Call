@@ -19,14 +19,19 @@ OUT_DIR = PROJECT_ROOT / "data" / "calls"
 
 # Caller display name -> portrait resource path. Names that map to the same
 # character (e.g. "Daniel" / "Daniel Hayes") both resolve to the same image.
-# Tier 2 callers (Henley, Sheriff, Cole, Nurse) are not yet generated — they
-# simply get no portrait until added here.
+# "???" is the wrong-number recipient — they get the featureless `unknown`
+# silhouette specifically because no real character is on the other end.
 PORTRAITS: dict[str, str] = {
     "Daniel": "res://art/portraits/daniel.png",
     "Daniel Hayes": "res://art/portraits/daniel.png",
     "Patty": "res://art/portraits/patty.png",
     "Reverend Carter": "res://art/portraits/reverend.png",
     "Doc Wheeler": "res://art/portraits/doc.png",
+    "Mrs. Henley": "res://art/portraits/henley.png",
+    "Sheriff Briggs": "res://art/portraits/sheriff.png",
+    "Cole": "res://art/portraits/cole.png",
+    "Nurse": "res://art/portraits/nurse.png",
+    "???": "res://art/portraits/unknown.png",
 }
 
 
