@@ -2,26 +2,23 @@
 
 For attribution. Fill in as you generate.
 
-## Tool & settings (lock these once, reuse for everything)
+## Tool & settings
 
-- Tool: _e.g. Stable Diffusion XL via Automatic1111 / DALL·E 3 / Midjourney v7_
-- Model / checkpoint: _e.g. SDXL 1.0 + 'Storybook Illustration v3' LoRA_
-- Seed: _fixed across generations for consistency_
-- Sampling steps / CFG: _e.g. 30 steps, CFG 7_
-- Output size: _portraits 512×512, backgrounds 1280×720_
+- **Tool:** ChatGPT with DALL·E 3 (built-in image generation)
+- **Model:** `gpt-4o` / `gpt-4` + DALL·E 3 image backend
+- **Seed:** not exposed by DALL·E 3 — consistency comes from a single ongoing chat conversation
+- **Sizes used:** `1024×1024` (portraits, UI, logo) and `1792×1024` (landscape backgrounds)
+- **Chat opener:** see `docs/STYLE_GUIDE.md`, "Step 1 — chat opener"
+- **Per-prompt prefix:** see `docs/STYLE_GUIDE.md`, "Step 2 — per-image prefix"
 
-## Universal positive prefix
+## Workflow log
 
-(See `docs/STYLE_GUIDE.md`.)
+| Date | File | Size | Prompt summary | Iteration notes | ChatGPT chat link |
+|------|------|------|----------------|------------------|--------------------|
+| _e.g. 2026-05-21_ | `art/portraits/daniel.png` | 1024×1024 | Lean man, baseball cap, phone booth silhouette | Regen 2× to soften the silhouette edge | _optional, paste shared link_ |
 
-## Universal negative prompt
+(Append a row per generation. Style-only iterations within the same conversation can share a row — note the count under "Iteration notes". When you start a new ChatGPT chat for a different batch, log the new chat link.)
 
-(See `docs/STYLE_GUIDE.md`.)
+## Notes on what worked
 
-## Per-asset log
-
-| File | Prompt summary | Seed | Notes |
-|------|----------------|------|-------|
-| _e.g. `art/portraits/daniel.png`_ | Tall lean man, baseball cap, phone booth | `424242` | First gen, locked style |
-
-(Append rows as you generate. This file is the source for `ATTRIBUTIONS.md`.)
+(Fill in as you go — what wording produced strong results, what to avoid, etc. Useful if you have to regenerate later or finish more assets after the jam.)

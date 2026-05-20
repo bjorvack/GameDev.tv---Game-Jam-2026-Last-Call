@@ -79,28 +79,53 @@ Characters are pure dark shapes against an amber-tinted environment glow. To kee
 
 ---
 
-## Universal AI prompt skeleton
+## Universal AI prompt skeleton (ChatGPT / DALL·E 3)
 
-Use the same prefix for every portrait generation so style locks. Replace `<CHARACTER>` with the per-sprite description from `docs/SPRITE_SPEC.md`.
+DALL·E 3 doesn't accept negative prompts and tends to rewrite your prompt unless you tell it not to. Instead of saying "no X", we describe what we *do* want; ChatGPT then renders that.
+
+**Open one ChatGPT conversation and use it for every image.** Paste this lock-in message first, then send prompts one-at-a-time from `docs/SPRITE_SPEC.md`. Style consistency in DALL·E 3 comes from prompt repetition within a single chat, *not* from seeds (which aren't exposed).
+
+### Step 1 — chat opener (paste once at the start)
 
 ```
-A hand-illustrated storybook silhouette portrait. 1985 American small town
-at night. Pure dark figure of <CHARACTER>, no face details, lit from
-upper-right by warm amber lamp light catching a thin rim along the upper
-edges. Deep teal background, very dark, with a soft amber glow on one side.
-Storybook softness, painterly textures, fine warm film grain. Iron Giant
-art direction, Lotte Reiniger shadow play composition. Centre composition,
-60% negative space. No text. No modern elements. Muted, melancholic mood.
+I'm generating a coherent set of illustrations for a small game called
+"Last Call". The style is HAND-ILLUSTRATED STORYBOOK SILHOUETTE, in the
+spirit of Iron Giant and Lotte Reiniger shadow plays. Strict 5-colour
+palette: deep teal night (#0F2A33), mid teal shadow (#173E4A), warm wood
+brown (#5A3A22), amber lamp light (#E8B86A), bone paper white (#F1E4C8).
+Two allowed accent colours: aged red (#C14B4B) only for telephone cables,
+desaturated mint (#7AAE9A) only for tiny indicator lamps.
+
+Lighting is always a single warm amber light source from the upper right,
+catching thin rims on silhouettes; the rest falls to deep teal shadow.
+Mood is melancholic, quiet, 1985 American small town at night.
+
+For every image I send: render my prompt EXACTLY as written. Do NOT
+rewrite, expand, or "improve" my prompt before generating. Do not add
+people unless I describe them. Do not add text or signage to the image.
+Treat each request as the next image in a single coherent illustrated
+storybook.
 ```
 
-Negative prompt (every generation):
+### Step 2 — per-image prefix
+
+Send every image request with this prefix, then the per-sprite description:
+
 ```
-no faces, no facial features, no neon, no daylight, no bright colors, no
-text, no watermark, no harsh outlines, no anime, no realistic photography,
-no modern technology
+Next image in the Last Call storybook set, same style as before.
+Aspect ratio: <SIZE>. Composition: centered with strong negative space.
+Subject: <CHARACTER OR SCENE FROM SPRITE_SPEC.md>
 ```
 
-Seed: fix to one value across all character portraits for maximum consistency.
+`<SIZE>` is either `1024x1024` (portraits, UI) or `1792x1024` (landscape backgrounds). DALL·E 3 only supports those plus `1024x1792`.
+
+### Writing prompts that survive DALL·E 3
+
+- **Flowing prose, not tag soup.** "A stocky older man in a buttoned waistcoat" beats "stocky, waistcoat, bow tie, glasses".
+- **Describe absence positively.** Instead of "no faces", say "pure dark silhouette with no facial features visible". Instead of "no text", just leave text unmentioned (and add "no text or signage" only if it's been a problem).
+- **Place light explicitly.** "Lit from the upper right by a warm amber lamp" produces consistent lighting across images.
+- **Repeat the style words.** Every prompt should include "hand-illustrated storybook silhouette" and the palette anchors ("deep teal", "amber"). Yes it's repetitive — that's how DALL·E 3 stays on style.
+- **Iterate in chat.** If a generation drifts, reply: "make the silhouette darker / move the figure further from the center / reduce the amber glow / match the style of the previous image more closely". The next render usually corrects.
 
 ---
 
