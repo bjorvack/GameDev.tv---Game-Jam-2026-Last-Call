@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/reverend.png" id="3_portrait"]
+[ext_resource type="Texture2D" path="res://art/portraits/reverend.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" path="res://art/portraits/doc.png" id="3_portrait_1"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -20,6 +21,7 @@ duration = 4.5
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
 text = "On my way, Reverend."
+portrait = ExtResource("3_portrait_1")
 duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
@@ -37,7 +39,7 @@ duration = 2.0
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Reverend Carter"
-caller_portrait = ExtResource("3_portrait")
+caller_portrait = ExtResource("3_portrait_0")
 opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"doc"
 connected_dialogue = Array[Resource]([SubResource("connected_0")])

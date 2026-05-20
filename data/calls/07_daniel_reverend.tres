@@ -1,8 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait"]
+[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" path="res://art/portraits/reverend.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" path="res://art/portraits/doc.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -20,18 +22,21 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "I'm leaving now, son."
+portrait = ExtResource("3_portrait_1")
 duration = 2.5
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "I'll be at your mother's door in five."
+portrait = ExtResource("3_portrait_1")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "Stay on the road."
+portrait = ExtResource("3_portrait_1")
 duration = 2.0
 
 [sub_resource type="Resource" id="generic_0"]
@@ -56,6 +61,7 @@ duration = 2.5
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
 text = "Wheeler — Daniel, is that you?"
+portrait = ExtResource("3_portrait_2")
 duration = 2.5
 
 [sub_resource type="Resource" id="wrong_doc_1"]
@@ -67,7 +73,7 @@ duration = 3.0
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
-caller_portrait = ExtResource("3_portrait")
+caller_portrait = ExtResource("3_portrait_0")
 opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"reverend"
 connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])

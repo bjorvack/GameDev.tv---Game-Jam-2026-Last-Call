@@ -313,14 +313,17 @@ CALLS: list[Call] = [
 ]
 
 
-def emit_line(line: Line, sub_id: str) -> str:
-    return (
+def emit_line(line: Line, sub_id: str, portrait_ext_id: str | None) -> str:
+    out = (
         f'[sub_resource type="Resource" id="{sub_id}"]\n'
         f'script = ExtResource("2_dline")\n'
         f'speaker = {json_str(line.speaker)}\n'
         f'text = {json_str(line.text)}\n'
-        f'duration = {line.duration}\n\n'
     )
+    if portrait_ext_id:
+        out += f'portrait = ExtResource("{portrait_ext_id}")\n'
+    out += f'duration = {line.duration}\n\n'
+    return out
 
 
 def json_str(s: str) -> str:
@@ -328,13 +331,30 @@ def json_str(s: str) -> str:
     return '"' + s.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n") + '"'
 
 
-def lines_array(lines: list[Line], prefix: str, sub_ids: list[str], blocks: list[str]) -> str:
-    """Emit the sub_resource blocks and return the array literal."""
+def lines_array(
+    lines: list[Line],
+    prefix: str,
+    sub_ids: list[str],
+    blocks: list[str],
+    caller_portrait_path: str | None,
+    portrait_ids: dict[str, str],
+) -> str:
+    """Emit the sub_resource blocks for these lines and return the array literal.
+
+    `portrait_ids` maps an already-registered portrait path to its ext_resource
+    id. Lines whose speaker portrait matches the call's default portrait skip
+    the override (CallerCard falls back to caller_portrait).
+    """
     ids_here: list[str] = []
     for i, line in enumerate(lines):
         sid = f"{prefix}_{i}"
         sub_ids.append(sid)
-        blocks.append(emit_line(line, sid))
+        speaker_portrait = PORTRAITS.get(line.speaker)
+        # Only override when the speaker differs from the call's default portrait.
+        ext_id: str | None = None
+        if speaker_portrait and speaker_portrait != caller_portrait_path:
+            ext_id = portrait_ids.get(speaker_portrait)
+        blocks.append(emit_line(line, sid, ext_id))
         ids_here.append(sid)
     if not ids_here:
         return "Array[Resource]([])"
@@ -346,14 +366,41 @@ def emit_call(call: Call) -> str:
     sub_ids: list[str] = []
     blocks: list[str] = []
 
-    opening_arr = lines_array(call.opening, "opening", sub_ids, blocks)
-    connected_arr = lines_array(call.connected, "connected", sub_ids, blocks)
-    generic_arr = lines_array(call.generic_wrong, "generic", sub_ids, blocks)
-    timer_arr = lines_array(call.timer_expired, "timer", sub_ids, blocks)
+    # Collect every unique portrait path used by this call: the caller's
+    # default + every line speaker that has a portrait. Each unique path gets
+    # its own ext_resource id so the .tres references stay stable.
+    caller_portrait_path = PORTRAITS.get(call.caller_name)
+    all_line_lists: list[list[Line]] = [
+        call.opening, call.connected, call.generic_wrong, call.timer_expired
+    ]
+    for lines in call.wrong_responses.values():
+        all_line_lists.append(lines)
+
+    portrait_paths: list[str] = []
+    seen_paths: set[str] = set()
+    if caller_portrait_path:
+        portrait_paths.append(caller_portrait_path)
+        seen_paths.add(caller_portrait_path)
+    for lines in all_line_lists:
+        for line in lines:
+            p = PORTRAITS.get(line.speaker)
+            if p and p not in seen_paths:
+                portrait_paths.append(p)
+                seen_paths.add(p)
+
+    portrait_ids: dict[str, str] = {
+        path: f"3_portrait_{i}" for i, path in enumerate(portrait_paths)
+    }
+    caller_portrait_ext_id = portrait_ids.get(caller_portrait_path) if caller_portrait_path else None
+
+    opening_arr = lines_array(call.opening, "opening", sub_ids, blocks, caller_portrait_path, portrait_ids)
+    connected_arr = lines_array(call.connected, "connected", sub_ids, blocks, caller_portrait_path, portrait_ids)
+    generic_arr = lines_array(call.generic_wrong, "generic", sub_ids, blocks, caller_portrait_path, portrait_ids)
+    timer_arr = lines_array(call.timer_expired, "timer", sub_ids, blocks, caller_portrait_path, portrait_ids)
 
     wrong_entries: list[str] = []
     for socket, lines in call.wrong_responses.items():
-        arr = lines_array(lines, f"wrong_{socket}", sub_ids, blocks)
+        arr = lines_array(lines, f"wrong_{socket}", sub_ids, blocks, caller_portrait_path, portrait_ids)
         wrong_entries.append(f"&{json_str(socket)}: {arr}")
     wrong_dict = "{\n" + ",\n".join(wrong_entries) + "\n}" if wrong_entries else "{}"
 
@@ -362,17 +409,17 @@ def emit_call(call: Call) -> str:
         if call.sockets_lit else "Array[StringName]([])"
     )
 
-    portrait_path = PORTRAITS.get(call.caller_name)
-    portrait_ext_resources = ""
-    portrait_assignment = ""
-    if portrait_path:
-        portrait_ext_resources = (
-            f'[ext_resource type="Texture2D" path="{portrait_path}" id="3_portrait"]\n'
-        )
-        portrait_assignment = 'caller_portrait = ExtResource("3_portrait")\n'
+    portrait_ext_resources = "".join(
+        f'[ext_resource type="Texture2D" path="{path}" id="{ext_id}"]\n'
+        for path, ext_id in portrait_ids.items()
+    )
+    portrait_assignment = (
+        f'caller_portrait = ExtResource("{caller_portrait_ext_id}")\n'
+        if caller_portrait_ext_id else ""
+    )
 
-    # 2 script ext_resources + optional portrait ext_resource + N sub_resources
-    load_steps = 2 + (1 if portrait_path else 0) + len(sub_ids)
+    # 2 script ext_resources + N portrait ext_resources + M sub_resources
+    load_steps = 2 + len(portrait_ids) + len(sub_ids)
 
     parts: list[str] = []
     parts.append(f'[gd_resource type="Resource" script_class="CallData" load_steps={load_steps} format=3]\n\n')

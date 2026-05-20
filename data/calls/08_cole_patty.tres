@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" path="res://art/portraits/patty.png" id="3_portrait_0"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -25,12 +26,14 @@ duration = 2.5
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "He's on I-40."
+portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "Lord, he doesn't know yet."
+portrait = ExtResource("3_portrait_0")
 duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
