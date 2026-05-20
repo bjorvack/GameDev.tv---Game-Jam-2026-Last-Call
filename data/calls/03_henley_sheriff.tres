@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Mrs. Henley"
+request_text = "Operator, this is Henley over on 8th. There's been an ambulance sitting two streets over near Vine for ten minutes. Connect me to the sheriff, would you? Something's not right."
+correct_socket = &"sheriff"
+post_connect_lines = Array[String]([
+"Sheriff Briggs: \"Appreciate the call, Mrs. Henley. We're already on it. Stay inside.\""
+])
+sockets_lit = Array[StringName]([])
+pivotal = false

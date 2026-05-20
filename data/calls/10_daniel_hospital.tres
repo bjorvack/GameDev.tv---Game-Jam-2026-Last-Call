@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Daniel Hayes"
+request_text = "Operator… please. County General. I'm in the parking lot. I need to know if I can still — "
+correct_socket = &"hospital"
+post_connect_lines = Array[String]([
+"Nurse: \"Mr. Hayes? She's awake. She's been asking for you.\"",
+"(Daniel's breath catches. The line goes warm with quiet.)",
+"(The operator's board goes dark, one light at a time.)"
+])
+sockets_lit = Array[StringName]([&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole", &"hospital"])
+pivotal = false

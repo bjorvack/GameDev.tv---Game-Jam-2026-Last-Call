@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Daniel Hayes"
+request_text = "Operator — the Chapel, Reverend Carter. Hurry, please."
+correct_socket = &"reverend"
+post_connect_lines = Array[String]([
+"Reverend Carter: \"I'm leaving now, son.\"",
+"\"I'll be at your mother's door in five.\"",
+"\"Stay on the road.\""
+])
+sockets_lit = Array[StringName]([])
+pivotal = false

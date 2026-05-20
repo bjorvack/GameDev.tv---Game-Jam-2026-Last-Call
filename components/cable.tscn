@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/cable.gd" id="1_l8stc"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_ktp8h"]
+
+[node name="root" type="Line2D" unique_id=184587881]
+width = 8.0
+default_color = Color(0.75686276, 0.29411766, 0.29411766, 1)
+script = ExtResource("1_l8stc")
+
+[node name="Jack" type="Sprite2D" parent="." unique_id=953894836]
+texture = ExtResource("2_ktp8h")

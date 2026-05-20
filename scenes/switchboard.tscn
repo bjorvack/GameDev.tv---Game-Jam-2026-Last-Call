@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://ltap26k7fvtk"]
+
+[ext_resource type="Script" uid="uid://b1o072mr8t5ul" path="res://scripts/call_director.gd" id="1_krb3x"]
+[ext_resource type="PackedScene" uid="uid://c3jbenv2iu2qu" path="res://components/cable.tscn" id="2_tflt8"]
+[ext_resource type="PackedScene" uid="uid://c4akekqx6ss61" path="res://components/socket.tscn" id="3_bndc3"]
+[ext_resource type="PackedScene" uid="uid://dupqjqgirp0xs" path="res://components/caller_card.tscn" id="4_48g3e"]
+[ext_resource type="PackedScene" path="res://components/patience_light.tscn" id="5_v2baq"]
+[ext_resource type="PackedScene" uid="uid://drub42ey1woxf" path="res://components/post_connect_box.tscn" id="6_a0qgv"]
+[ext_resource type="Resource" path="res://data/calls/01_patty_cole.tres" id="7_call01"]
+[ext_resource type="Resource" path="res://data/calls/02_daniel_hayes.tres" id="8_call02"]
+[ext_resource type="Resource" path="res://data/calls/03_henley_sheriff.tres" id="9_call03"]
+[ext_resource type="Resource" path="res://data/calls/04_reverend_doc.tres" id="10_call04"]
+[ext_resource type="Resource" path="res://data/calls/05_daniel_doc.tres" id="11_call05"]
+[ext_resource type="Resource" path="res://data/calls/06_sheriff_patty.tres" id="12_call06"]
+[ext_resource type="Resource" path="res://data/calls/07_daniel_reverend.tres" id="13_call07"]
+[ext_resource type="Resource" path="res://data/calls/08_cole_patty.tres" id="14_call08"]
+[ext_resource type="Resource" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
+[ext_resource type="Resource" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
+
+[node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container")]
+script = ExtResource("1_krb3x")
+calls = Array[Resource]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
+caller_card = NodePath("HUD/TopBar/TopRow/CallerCard")
+post_box = NodePath("HUD/BottomBar/PostConnectBox")
+patience_container = NodePath("HUD/TopBar/TopRow/Patience")
+
+[node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
+jack_position = Vector2(640, 640)
+
+[node name="BG" type="ColorRect" parent="." unique_id=1457985166]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.07450981, 0.23529412, 0.29803923, 1)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=902817518]
+
+[node name="SocketsCenter" type="CenterContainer" parent="HUD" unique_id=78765659]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 220.0
+offset_bottom = -220.0
+mouse_filter = 2
+
+[node name="SocketsGrid" type="GridContainer" parent="HUD/SocketsCenter" unique_id=2095414179]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
+columns = 4
+
+[node name="Hayes" parent="HUD/SocketsCenter/SocketsGrid" unique_id=355638940 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"hayes"
+label_text = "Mrs. Hayes — 7th & Vine"
+
+[node name="Doc" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1404150284 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"doc"
+label_text = "Doc Wheeler"
+
+[node name="Sheriff" parent="HUD/SocketsCenter/SocketsGrid" unique_id=160116653 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"sheriff"
+label_text = "Sheriff Briggs"
+
+[node name="Reverend" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1997834584 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"reverend"
+label_text = "Reverend Carter"
+
+[node name="Patty" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1093921433 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"patty"
+label_text = "Patty's Diner"
+
+[node name="Cole" parent="HUD/SocketsCenter/SocketsGrid" unique_id=851263592 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"cole"
+label_text = "Cole's Garage"
+
+[node name="I40" parent="HUD/SocketsCenter/SocketsGrid" unique_id=2022365928 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"i40"
+label_text = "I-40 Truck Stop, Marker 88"
+lit = false
+
+[node name="Hospital" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1474501132 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"hospital"
+label_text = "County General Hospital"
+lit = false
+
+[node name="TopBar" type="MarginContainer" parent="HUD" unique_id=136437707]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 200.0
+
+[node name="TopRow" type="HBoxContainer" parent="HUD/TopBar" unique_id=1923231306]
+layout_mode = 2
+
+[node name="CallerCard" parent="HUD/TopBar/TopRow" unique_id=1278693595 instance=ExtResource("4_48g3e")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Patience" type="HBoxContainer" parent="HUD/TopBar/TopRow" unique_id=333999525]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="PatienceLight" parent="HUD/TopBar/TopRow/Patience" unique_id=587441976 instance=ExtResource("5_v2baq")]
+layout_mode = 2
+
+[node name="PatienceLight2" parent="HUD/TopBar/TopRow/Patience" unique_id=1899483641 instance=ExtResource("5_v2baq")]
+layout_mode = 2
+
+[node name="PatienceLight3" parent="HUD/TopBar/TopRow/Patience" unique_id=997110224 instance=ExtResource("5_v2baq")]
+layout_mode = 2
+
+[node name="BottomBar" type="MarginContainer" parent="HUD" unique_id=205405213]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -160.0
+offset_right = -16.0
+offset_bottom = -16.0
+
+[node name="PostConnectBox" parent="HUD/BottomBar" unique_id=1476095253 instance=ExtResource("6_a0qgv")]
+layout_mode = 2

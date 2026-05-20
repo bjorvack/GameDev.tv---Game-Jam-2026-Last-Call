@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Sheriff Briggs"
+request_text = "Patty? Briggs. Has Margaret Hayes been in today? Henley says there's a unit at her place."
+correct_socket = &"patty"
+post_connect_lines = Array[String]([
+"Patty: \"She came in yesterday morning. Said she was tired.\"",
+"\"Hasn't been in today, Sheriff. Oh god.\""
+])
+sockets_lit = Array[StringName]([])
+pivotal = false

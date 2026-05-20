@@ -1,0 +1,12 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Exports
+/build/
+/export/
+*.pck
+*.zip
+
+# Devin local config (personal, not shared)
+.devin/config.local.json

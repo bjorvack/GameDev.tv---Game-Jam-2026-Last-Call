@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Patty"
+request_text = "Mornin', operator. Patty here. My delivery truck won't crank — could you put me through to Cole's Garage?"
+correct_socket = &"cole"
+post_connect_lines = Array[String](["Cole's. Yep, I'll be over in twenty."])
+sockets_lit = Array[StringName]([])
+pivotal = false

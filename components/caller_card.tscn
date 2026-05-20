@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dupqjqgirp0xs"]
+
+[ext_resource type="Script" uid="uid://bcu65tf2x4ihc" path="res://components/caller_card.gd" id="1_d0414"]
+
+[node name="root" type="PanelContainer" unique_id=1278693595]
+script = ExtResource("1_d0414")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1317715049]
+layout_mode = 2
+
+[node name="Portrait" type="TextureRect" parent="HBoxContainer" unique_id=1305444336]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1364565776]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CallerName" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=323701452]
+layout_mode = 2
+text = "Caller Name"
+
+[node name="RequestText" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=384289823]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(400, 0)
+text = "Request goes here"
+autowrap_mode = 3

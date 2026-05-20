@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Daniel Hayes"
+request_text = "Operator, it's Daniel Hayes again. Still no answer at Mom's. Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere."
+correct_socket = &"doc"
+post_connect_lines = Array[String]([
+"Doc Wheeler: \"Daniel… your mother came in Thursday with chest pains.\"",
+"\"I told her to call me at the first sign it came back.\"",
+"\"Son — drive faster.\""
+])
+sockets_lit = Array[StringName]([])
+pivotal = false

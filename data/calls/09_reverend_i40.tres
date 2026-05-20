@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+
+[resource]
+script = ExtResource("1_calldata")
+caller_name = "Reverend Carter"
+request_text = "Operator. I need to reach Daniel Hayes — he's on the highway. Try the truck stop payphone at marker 88. Tell him his mother's alive. Tell him they're taking her to County General."
+correct_socket = &"i40"
+post_connect_lines = Array[String]([
+"(Static. A trucker grabs the phone, runs out, flags Daniel down.)",
+"Daniel, distant, breathless: \"Tell the Reverend — tell him I'm coming.\""
+])
+sockets_lit = Array[StringName]([&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole", &"i40"])
+pivotal = true
