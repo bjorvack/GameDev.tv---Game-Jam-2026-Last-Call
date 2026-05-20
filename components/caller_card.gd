@@ -11,6 +11,9 @@ extends PanelContainer
 
 var _current_call: CallData
 
+func _ready() -> void:
+	hide()
+
 ## Called when a new call begins. Seeds the caller's name + portrait and
 ## clears the dialogue area.
 func show_call(c: CallData) -> void:
@@ -30,19 +33,18 @@ func show_line(line: DialogueLine) -> void:
 	elif _current_call and _current_call.caller_portrait:
 		portrait.texture = _current_call.caller_portrait
 	request_text.text = line.text
+	show()
 
-## Shown between lines while we wait for the player to route.
+## Hidden between dialogue lines — the player is routing.
 func show_waiting() -> void:
-	request_text.text = "[the caller waits on the line]"
+	hide()
 
-## Shown briefly between calls — the previous caller has hung up.
+## Hidden between calls — the line is clear.
 func show_idle() -> void:
 	_current_call = null
-	caller_name.text = ""
-	request_text.text = "[the line is clear]"
 	portrait.texture = null
+	hide()
 
-## Shown briefly before a new call's opening lines — a ring on the board.
+## Hidden during the ring — visual cue handled elsewhere (or by audio later).
 func show_ringing() -> void:
-	caller_name.text = "Incoming"
-	request_text.text = "[a light flickers on the board — *ring*]"
+	hide()
