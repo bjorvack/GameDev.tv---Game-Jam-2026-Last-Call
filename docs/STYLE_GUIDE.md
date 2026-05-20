@@ -85,27 +85,66 @@ DALL·E 3 doesn't accept negative prompts and tends to rewrite your prompt unles
 
 **Open one ChatGPT conversation and use it for every image.** Paste this lock-in message first, then send prompts one-at-a-time from `docs/SPRITE_SPEC.md`. Style consistency in DALL·E 3 comes from prompt repetition within a single chat, *not* from seeds (which aren't exposed).
 
-### Step 1 — chat opener (paste once at the start)
+### Step 1 — chat opener (paste once at the start of a FRESH chat)
 
 ```
-I'm generating a coherent set of illustrations for a small game called
-"Last Call". The style is HAND-ILLUSTRATED STORYBOOK SILHOUETTE, in the
-spirit of Iron Giant and Lotte Reiniger shadow plays. Strict 5-colour
-palette: deep teal night (#0F2A33), mid teal shadow (#173E4A), warm wood
-brown (#5A3A22), amber lamp light (#E8B86A), bone paper white (#F1E4C8).
-Two allowed accent colours: aged red (#C14B4B) only for telephone cables,
-desaturated mint (#7AAE9A) only for tiny indicator lamps.
+I'm commissioning a set of illustrations for a small narrative game
+called "Last Call". Every image must follow these STRICT, non-negotiable
+constraints — treat them as the brief:
 
-Lighting is always a single warm amber light source from the upper right,
-catching thin rims on silhouettes; the rest falls to deep teal shadow.
-Mood is melancholic, quiet, 1985 American small town at night.
+MEDIUM (hard requirement, never break):
+- Hand-illustrated, two-dimensional, GRAPHIC POSTER STYLE.
+- Style references: Olly Moss, Jon Klassen, Eyvind Earle.
+- FLAT FIELDS of colour. Minimal shading. No 3D rendering.
+- NOT photography. NOT photorealistic. NOT cinematic film stills.
+- NOT CGI. NOT digital painting that imitates photography.
+- Visible painterly grain or screen-print texture is welcome.
 
-For every image I send: render my prompt EXACTLY as written. Do NOT
-rewrite, expand, or "improve" my prompt before generating. Do not add
-people unless I describe them. Do not add text or signage to the image.
-Treat each request as the next image in a single coherent illustrated
-storybook.
+CHARACTERS (when present):
+- Always rendered as PURE BLACK SILHOUETTES (#000000).
+- Zero internal detail: no facial features, no skin tone, no eyes, no
+  lips, no individual hair strands, no fabric folds, no jewellery.
+- A character is a single dark cutout shape — like a paper puppet.
+- The CONTOUR alone tells you who they are (hat shape, posture,
+  what they're holding).
+
+PALETTE (strict, no other colours allowed):
+- Deep teal night #0F2A33  — the dominant background.
+- Mid teal shadow #173E4A  — secondary background plane.
+- Warm wood brown #5A3A22  — wooden interiors only.
+- Amber lamp light #E8B86A — the ONE warm light source per image.
+- Bone paper white #F1E4C8 — small text labels or sign letters.
+- Aged red #C14B4B          — telephone cables ONLY.
+- Mint indicator #7AAE9A    — tiny indicator lamps ONLY.
+Avoid bright neon orange, hot reds, cyan, white skies, any saturated
+colours not in the list.
+
+LIGHT:
+- Exactly ONE warm amber light source per image, falling from the
+  upper right.
+- A thin amber rim catches the top-right edges of silhouettes only;
+  the rest of the silhouette stays pure black.
+- No volumetric god-rays. No bright bloom. No lens flares. No realism.
+
+COMPOSITION:
+- Centered subject, 50–60% NEGATIVE SPACE around it.
+- Looks like a single illustrated plate from a 1980s storybook.
+
+INSTRUCTIONS TO YOU:
+- Render my prompts EXACTLY as written. Do NOT rewrite, expand, or
+  "improve" them before sending to the image model.
+- Do NOT add detail I didn't request.
+- Do NOT add text, signage letters, or words unless I explicitly ask.
+- Do NOT add people or animals I didn't describe.
+- If a generation comes out photographic or with visible faces, I will
+  ask you to regenerate — do not protest, just regenerate enforcing
+  the constraints harder.
+
+Confirm you understand by replying only with: "Locked in. Send the
+first image prompt."
 ```
+
+Wait for ChatGPT's confirmation before sending your first image prompt.
 
 ### Step 2 — per-image prefix
 

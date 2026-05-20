@@ -85,21 +85,53 @@ people, no text.
 
 ### `art/portraits/daniel.png` — 1024×1024 *(generate this FIRST as a style calibration)*
 
+Daniel is the most-used character; getting his silhouette right anchors every other portrait. Iterate as many times as needed here before moving on.
+
 ```
-Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1024x1024.
-Subject: a tall lean man in his early thirties shown as a pure dark
-silhouette in profile, with no facial features visible. He wears a
-baseball cap and a denim work jacket. He grips a 1985-style telephone
-receiver hard against his ear, shoulders hunched forward with worry.
-We see him from the side as if he's in a highway truck-stop phone booth.
-Behind him, the soft amber glow of a distant gas-station sign bleeds
-into a deep teal night. Thin warm amber rim catches the upper edges of
-his silhouette. Centered composition with strong negative space,
-hand-illustrated storybook style.
+
+Olly Moss-style poster illustration. Flat fields of colour, two
+dimensions, no photography, no realism.
+
+Foreground: a pure black silhouette of a man in profile, baseball cap
+with a curved brim, holding a 1985 telephone receiver pressed to his
+ear, shoulders slightly hunched. He is rendered as a completely flat
+black shape — no face, no skin, no eyes, no fabric folds, no internal
+detail of any kind, just a clean cutout outline. The contour clearly
+reads as: baseball-cap brim, head, neck, shoulder, jacket, raised arm
+holding receiver.
+
+Background: a deep teal night sky #0F2A33 fills 70 percent of the
+frame. In the middle distance behind the man, a single small warm
+amber light source (a distant gas station lamp post or window) glows
+honey-coloured #E8B86A, casting a thin amber rim along the top-right
+edges of his cap and shoulder. The bottom 20 percent of the frame is
+a darker teal #173E4A horizon.
+
+Composition: man's silhouette centered, taking up roughly 40 percent
+of the frame, plenty of negative space around him. Looks like a single
+plate from a 1985 silent-storybook. Painterly grain texture, like
+gouache on paper.
+
+No text in the image. No other people.
 ```
 
-*If this first generation matches the style you want, lock that aesthetic in by saying "yes, use this exact look for every subsequent image" in chat. If not, iterate before moving on.*
+**Calibration checklist** before moving on:
+- ✅ Is the figure a pure flat black shape with zero internal detail?
+- ✅ Is the background deep teal-black, NOT bright cyan?
+- ✅ Is the light source soft amber, NOT red/orange neon?
+- ✅ Does it look painted, NOT photographed?
+- ✅ Is there an amber rim only on the upper-right edges?
+
+If any of those fail, regenerate with a direct correction message:
+
+> "The figure has visible facial features — regenerate as a completely flat black silhouette with no internal detail at all, like a paper cutout."
+
+> "Too photographic — regenerate as a flat illustrated poster in the style of Olly Moss, with hand-painted texture and no realism."
+
+> "The colours are too saturated — regenerate with a deep teal-black background (#0F2A33) and a soft honey amber light source (#E8B86A), not neon."
+
+Don't move on to the next character until Daniel is right. He's the anchor.
 
 ### `art/portraits/patty.png` — 1024×1024
 
