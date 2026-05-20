@@ -17,6 +17,18 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 OUT_DIR = PROJECT_ROOT / "data" / "calls"
 
+# Caller display name -> portrait resource path. Names that map to the same
+# character (e.g. "Daniel" / "Daniel Hayes") both resolve to the same image.
+# Tier 2 callers (Henley, Sheriff, Cole, Nurse) are not yet generated — they
+# simply get no portrait until added here.
+PORTRAITS: dict[str, str] = {
+    "Daniel": "res://art/portraits/daniel.png",
+    "Daniel Hayes": "res://art/portraits/daniel.png",
+    "Patty": "res://art/portraits/patty.png",
+    "Reverend Carter": "res://art/portraits/reverend.png",
+    "Doc Wheeler": "res://art/portraits/doc.png",
+}
+
 
 @dataclass
 class Line:
@@ -350,16 +362,31 @@ def emit_call(call: Call) -> str:
         if call.sockets_lit else "Array[StringName]([])"
     )
 
-    load_steps = 2 + len(sub_ids)  # 2 ext_resources + N sub_resources
+    portrait_path = PORTRAITS.get(call.caller_name)
+    portrait_ext_resources = ""
+    portrait_assignment = ""
+    if portrait_path:
+        portrait_ext_resources = (
+            f'[ext_resource type="Texture2D" path="{portrait_path}" id="3_portrait"]\n'
+        )
+        portrait_assignment = 'caller_portrait = ExtResource("3_portrait")\n'
+
+    # 2 script ext_resources + optional portrait ext_resource + N sub_resources
+    load_steps = 2 + (1 if portrait_path else 0) + len(sub_ids)
 
     parts: list[str] = []
     parts.append(f'[gd_resource type="Resource" script_class="CallData" load_steps={load_steps} format=3]\n\n')
     parts.append('[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]\n')
-    parts.append('[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]\n\n')
+    parts.append('[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]\n')
+    if portrait_ext_resources:
+        parts.append(portrait_ext_resources)
+    parts.append("\n")
     parts.extend(blocks)
     parts.append("[resource]\n")
     parts.append('script = ExtResource("1_calldata")\n')
     parts.append(f"caller_name = {json_str(call.caller_name)}\n")
+    if portrait_assignment:
+        parts.append(portrait_assignment)
     parts.append(f"opening = {opening_arr}\n")
     parts.append(f"correct_socket = &{json_str(call.correct_socket)}\n")
     parts.append(f"connected_dialogue = {connected_arr}\n")

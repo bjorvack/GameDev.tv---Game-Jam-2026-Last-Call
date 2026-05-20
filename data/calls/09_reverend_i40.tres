@@ -1,58 +1,38 @@
-[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://bt5u6dgjcbxb2"]
+[gd_resource type="Resource" script_class="CallData" load_steps=13 format=3]
 
-[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" path="res://art/portraits/reverend.png" id="3_portrait"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "Operator — Carter, the Chapel."
+text = "Operator. I need to reach Daniel Hayes — he's on the highway."
+duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "The truck stop payphone at marker 88. It's about Daniel Hayes."
-duration = 4.0
+text = "Try the truck stop payphone at marker 88."
+duration = 3.5
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "For God's sake — hurry."
-duration = 2.5
+text = "Tell him his mother's alive. They're taking her to County General."
+duration = 4.5
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
+speaker = ""
 text = "(Static. A trucker grabs the phone, runs out, flags Daniel down.)"
 duration = 4.0
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "Son — Daniel — your mother's alive."
-duration = 3.5
-
-[sub_resource type="Resource" id="connected_2"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "They've taken her to County General. Don't go to the house — go straight to the hospital."
-duration = 5.0
-
-[sub_resource type="Resource" id="connected_3"]
-script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "(distant, breathless) Tell the Reverend — tell him I'm coming."
 duration = 4.0
-
-[sub_resource type="Resource" id="wrong_hospital_0"]
-script = ExtResource("2_dline")
-speaker = "Nurse"
-text = "County General, please hold —"
-
-[sub_resource type="Resource" id="wrong_hospital_1"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "No — not yet — he needs to know FIRST."
-duration = 3.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -72,17 +52,30 @@ speaker = "Reverend Carter"
 text = "(Lord forgive us.)"
 duration = 3.0
 
+[sub_resource type="Resource" id="wrong_hospital_0"]
+script = ExtResource("2_dline")
+speaker = "Nurse"
+text = "County General, please hold —"
+duration = 2.5
+
+[sub_resource type="Resource" id="wrong_hospital_1"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "No — not yet — he needs to know FIRST."
+duration = 3.5
+
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Reverend Carter"
-opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+caller_portrait = ExtResource("3_portrait")
+opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"i40"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
+connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
 wrong_responses = {
 &"hospital": Array[Resource]([SubResource("wrong_hospital_0"), SubResource("wrong_hospital_1")])
 }
-generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
+generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 18.0
-timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
+timer_expired = Array[Resource]([SubResource("timer_0")])
 sockets_lit = Array[StringName]([&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole", &"i40"])
 pivotal = true

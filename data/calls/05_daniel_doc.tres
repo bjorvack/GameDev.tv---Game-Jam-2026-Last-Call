@@ -1,18 +1,26 @@
-[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://cu82j1r23l1ya"]
+[gd_resource type="Resource" script_class="CallData" load_steps=18 format=3]
 
-[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Operator — it's Daniel Hayes again."
+text = "Operator, it's Daniel Hayes again."
+duration = 2.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Try Doc Wheeler for me. Please — I'm getting worried."
-duration = 4.0
+text = "Still no answer at Mom's."
+duration = 2.0
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere."
+duration = 4.5
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -22,53 +30,21 @@ duration = 1.5
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Doc — it's Daniel. Mom's not picking up. Have you seen her this week?"
+speaker = "Doc Wheeler"
+text = "Daniel… your mother came in Thursday with chest pains."
 duration = 4.0
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
-text = "Daniel… your mother came in Thursday with chest pains."
-duration = 4.0
+text = "I told her to call me at the first sign it came back."
+duration = 3.5
 
 [sub_resource type="Resource" id="connected_3"]
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
-text = "I told her to call me at the first sign it came back."
-duration = 3.5
-
-[sub_resource type="Resource" id="connected_4"]
-script = ExtResource("2_dline")
-speaker = "Doc Wheeler"
 text = "Son — drive faster."
-
-[sub_resource type="Resource" id="wrong_hayes_0"]
-script = ExtResource("2_dline")
-text = "(no answer)"
-
-[sub_resource type="Resource" id="wrong_hayes_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Still nothing. Operator, please — try Doc Wheeler."
-duration = 3.5
-
-[sub_resource type="Resource" id="wrong_sheriff_0"]
-script = ExtResource("2_dline")
-speaker = "Sheriff Briggs"
-text = "Sheriff's office."
-duration = 1.8
-
-[sub_resource type="Resource" id="wrong_sheriff_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Sheriff — sorry, wrong line. I'm trying to reach Doc Wheeler."
-duration = 4.0
-
-[sub_resource type="Resource" id="wrong_sheriff_2"]
-script = ExtResource("2_dline")
-speaker = "Sheriff Briggs"
-text = "…Son, who am I talking to?"
+duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -88,16 +64,49 @@ speaker = "Daniel"
 text = "Operator? I'm losing signal. Try again — please."
 duration = 3.5
 
+[sub_resource type="Resource" id="wrong_hayes_0"]
+script = ExtResource("2_dline")
+speaker = ""
+text = "(no answer)"
+duration = 2.5
+
+[sub_resource type="Resource" id="wrong_hayes_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Still nothing. Operator, please — try Doc Wheeler."
+duration = 3.5
+
+[sub_resource type="Resource" id="wrong_sheriff_0"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Sheriff's office."
+duration = 1.8
+
+[sub_resource type="Resource" id="wrong_sheriff_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Sheriff — I'm sorry, wrong line. I'm trying to reach Doc Wheeler."
+duration = 4.0
+
+[sub_resource type="Resource" id="wrong_sheriff_2"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "…Son, who am I talking to?"
+duration = 2.5
+
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
-opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
+caller_portrait = ExtResource("3_portrait")
+opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"doc"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3"), SubResource("connected_4")])
+connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")]),
 &"sheriff": Array[Resource]([SubResource("wrong_sheriff_0"), SubResource("wrong_sheriff_1"), SubResource("wrong_sheriff_2")])
 }
-generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
+generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 20.0
-timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
+timer_expired = Array[Resource]([SubResource("timer_0")])
+sockets_lit = Array[StringName]([])
+pivotal = false
