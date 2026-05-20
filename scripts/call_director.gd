@@ -25,6 +25,12 @@ const DEFAULT_LIT: Array[StringName] = [
 	&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole"
 ]
 
+## Quiet beat after a call ends, before the next one rings in.
+const INTER_CALL_PAUSE := 1.5
+## How long the "incoming / *ring*" indicator shows before the next call's
+## opening lines begin.
+const RING_DURATION := 1.2
+
 var _current: CallData
 var _phase: int = CallPhase.IDLE
 
@@ -44,6 +50,13 @@ func _start_next() -> void:
 		all_calls_finished.emit()
 		GameState.end_game(true)
 		return
+	# Between calls: let the previous one settle, then ring in the next.
+	if idx > 0:
+		_phase = CallPhase.IDLE
+		caller_card.show_idle()
+		await get_tree().create_timer(INTER_CALL_PAUSE).timeout
+		caller_card.show_ringing()
+		await get_tree().create_timer(RING_DURATION).timeout
 	_current = calls[idx]
 	_apply_lit_state(_current)
 	caller_card.show_call(_current)

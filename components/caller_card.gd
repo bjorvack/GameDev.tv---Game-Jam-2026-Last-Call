@@ -34,3 +34,15 @@ func show_line(line: DialogueLine) -> void:
 ## Shown between lines while we wait for the player to route.
 func show_waiting() -> void:
 	request_text.text = "[the caller waits on the line]"
+
+## Shown briefly between calls — the previous caller has hung up.
+func show_idle() -> void:
+	_current_call = null
+	caller_name.text = ""
+	request_text.text = "[the line is clear]"
+	portrait.texture = null
+
+## Shown briefly before a new call's opening lines — a ring on the board.
+func show_ringing() -> void:
+	caller_name.text = "Incoming"
+	request_text.text = "[a light flickers on the board — *ring*]"
