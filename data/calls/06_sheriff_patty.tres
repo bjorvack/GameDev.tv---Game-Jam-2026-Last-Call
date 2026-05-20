@@ -3,13 +3,42 @@
 [ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Operator — Briggs, sheriff's office."
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Patch me through to Patty's Diner. Police matter."
+duration = 3.5
+
 [sub_resource type="Resource" id="connected_0"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "Patty's Diner."
+duration = 1.8
+
+[sub_resource type="Resource" id="connected_1"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Patty, it's Briggs. Has Margaret Hayes been in today?"
+duration = 3.5
+
+[sub_resource type="Resource" id="connected_2"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Henley says there's a unit at her place."
+duration = 3.0
+
+[sub_resource type="Resource" id="connected_3"]
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "She came in yesterday morning. Said she was tired."
 duration = 3.5
 
-[sub_resource type="Resource" id="connected_1"]
+[sub_resource type="Resource" id="connected_4"]
 script = ExtResource("2_dline")
 speaker = "Patty"
 text = "Hasn't been in today, Sheriff. Oh god."
@@ -27,21 +56,10 @@ speaker = "Sheriff Briggs"
 text = "Sorry — wrong number."
 duration = 2.0
 
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Sheriff Briggs"
-text = "Patty? Briggs."
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Sheriff Briggs"
-text = "Has Margaret Hayes been in today? Henley says there's a unit at her place."
-duration = 4.0
-
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Sheriff Briggs"
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"patty"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3"), SubResource("connected_4")])
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

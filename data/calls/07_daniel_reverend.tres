@@ -3,22 +3,56 @@
 [ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Operator — the Chapel. Reverend Carter."
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Hurry, please. It's family."
+duration = 2.5
+
 [sub_resource type="Resource" id="connected_0"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Chapel — this is Carter."
+duration = 2.0
+
+[sub_resource type="Resource" id="connected_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Reverend — it's Daniel Hayes. Doc says Mom's heart — please get to her house. I'm hours out."
+duration = 5.0
+
+[sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "I'm leaving now, son."
 
-[sub_resource type="Resource" id="connected_1"]
+[sub_resource type="Resource" id="connected_3"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "I'll be at your mother's door in five."
 duration = 3.0
 
-[sub_resource type="Resource" id="connected_2"]
+[sub_resource type="Resource" id="connected_4"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "Stay on the road."
 duration = 2.0
+
+[sub_resource type="Resource" id="wrong_doc_0"]
+script = ExtResource("2_dline")
+speaker = "Doc Wheeler"
+text = "Wheeler — Daniel, is that you?"
+
+[sub_resource type="Resource" id="wrong_doc_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Doc, I need the Chapel. The Reverend."
+duration = 3.0
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -32,39 +66,17 @@ speaker = "Daniel"
 text = "Sorry — wrong number."
 duration = 2.0
 
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Operator — the Chapel, Reverend Carter."
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Hurry, please."
-duration = 2.0
-
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator?? OPERATOR."
-
-[sub_resource type="Resource" id="wrong_doc_0"]
-script = ExtResource("2_dline")
-speaker = "Doc Wheeler"
-text = "Wheeler — Daniel, is that you?"
-
-[sub_resource type="Resource" id="wrong_doc_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Doc, I need the Chapel. The Reverend."
-duration = 3.0
 
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"reverend"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3"), SubResource("connected_4")])
 wrong_responses = {
 &"doc": Array[Resource]([SubResource("wrong_doc_0"), SubResource("wrong_doc_1")])
 }
