@@ -55,10 +55,10 @@ art/
 │   ├── margaret_empty_chair.png # 1024×1024
 │   └── unknown.png              # 1024×1024
 └── ui/
-    ├── socket_lit.png           # hand-painted or placeholder
-    ├── socket_dim.png
-    ├── cable_jack.png
-    └── patience_light.png
+	├── socket_lit.png           # hand-painted or placeholder
+	├── socket_dim.png
+	├── cable_jack.png
+	└── patience_light.png
 ```
 
 ---

@@ -79,11 +79,13 @@ Characters are pure dark shapes against an amber-tinted environment glow. To kee
 
 ---
 
-## Universal AI prompt skeleton (ChatGPT / DALL·E 3)
+## Universal AI prompt skeleton (Gemini / Imagen + Nano Banana)
 
-DALL·E 3 doesn't accept negative prompts and tends to rewrite your prompt unless you tell it not to. Instead of saying "no X", we describe what we *do* want; ChatGPT then renders that.
+Gemini's image generation (Imagen 3 by default, Gemini 2.5 Flash Image "Nano Banana" for editing/iteration) follows prompts more literally than DALL·E 3 and accepts proper multi-image reference input. The winning strategy for our project:
 
-**Open one ChatGPT conversation and use it for every image.** Paste this lock-in message first, then send prompts one-at-a-time from `docs/SPRITE_SPEC.md`. Style consistency in DALL·E 3 comes from prompt repetition within a single chat, *not* from seeds (which aren't exposed).
+1. **One chat session for everything.** Style consistency comes from chat memory + repeated style references.
+2. **After the first good portrait (Daniel) is generated, attach that image as a reference in EVERY subsequent prompt.** Gemini's image-to-image conditioning is its biggest advantage over DALL·E 3 — use it.
+3. **Negative prompts work** — Gemini respects "do not include faces / do not use red colours" reasonably well. We still prefer positive phrasings (clearer to the model) but you can append a short "Avoid:" line.
 
 ### Step 1 — chat opener (paste once at the start of a FRESH chat)
 

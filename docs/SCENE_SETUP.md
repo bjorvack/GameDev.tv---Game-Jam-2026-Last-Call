@@ -42,26 +42,26 @@ extends Area2D
 signal cable_plugged(socket_key: StringName)
 
 @export var socket_key: StringName = &"":
-    set(value):
-        socket_key = value
+	set(value):
+		socket_key = value
 
 @export var label_text: String = "":
-    set(value):
-        label_text = value
-        if is_node_ready():
-            $NameLabel.text = label_text
+	set(value):
+		label_text = value
+		if is_node_ready():
+			$NameLabel.text = label_text
 
 var lit: bool = true:
-    set(value):
-        lit = value
-        modulate.a = 1.0 if lit else 0.3
+	set(value):
+		lit = value
+		modulate.a = 1.0 if lit else 0.3
 
 func _ready() -> void:
-    $NameLabel.text = label_text
+	$NameLabel.text = label_text
 
 func plug() -> void:
-    if lit:
-        cable_plugged.emit(socket_key)
+	if lit:
+		cable_plugged.emit(socket_key)
 ```
 
 (Replace `scripts/socket.gd` with the version above — same intent, just keeps the visual in sync with the export.)
@@ -226,47 +226,47 @@ const DEFAULT_LIT := [&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"col
 var _current: CallData
 
 func _ready() -> void:
-    GameState.reset()
-    GameState.patience_changed.connect(_on_patience_changed)
-    post_box.finished.connect(_start_next)
-    for socket in get_tree().get_nodes_in_group("sockets"):
-        socket.cable_plugged.connect(_on_socket_plugged)
-    _start_next()
+	GameState.reset()
+	GameState.patience_changed.connect(_on_patience_changed)
+	post_box.finished.connect(_start_next)
+	for socket in get_tree().get_nodes_in_group("sockets"):
+		socket.cable_plugged.connect(_on_socket_plugged)
+	_start_next()
 
 func _start_next() -> void:
-    var idx := GameState.current_call_index
-    if idx >= calls.size():
-        all_calls_finished.emit()
-        GameState.end_game(true)
-        return
-    _current = calls[idx]
-    _apply_lit_state(_current)
-    caller_card.show_call(_current)
-    call_started.emit(_current)
+	var idx := GameState.current_call_index
+	if idx >= calls.size():
+		all_calls_finished.emit()
+		GameState.end_game(true)
+		return
+	_current = calls[idx]
+	_apply_lit_state(_current)
+	caller_card.show_call(_current)
+	call_started.emit(_current)
 
 func _apply_lit_state(c: CallData) -> void:
-    var lit_keys := c.sockets_lit if not c.sockets_lit.is_empty() else DEFAULT_LIT
-    for socket in get_tree().get_nodes_in_group("sockets"):
-        socket.lit = socket.socket_key in lit_keys
+	var lit_keys := c.sockets_lit if not c.sockets_lit.is_empty() else DEFAULT_LIT
+	for socket in get_tree().get_nodes_in_group("sockets"):
+		socket.lit = socket.socket_key in lit_keys
 
 func _on_socket_plugged(socket_key: StringName) -> void:
-    if _current == null:
-        return
-    var success := socket_key == _current.correct_socket
-    call_resolved.emit(success, _current)
-    if success:
-        GameState.advance_call()
-        post_box.play(_current.post_connect_lines)
-        # _start_next() is triggered by post_box.finished
-    else:
-        if _current.pivotal:
-            GameState.end_game(false)
-        else:
-            GameState.lose_patience()
+	if _current == null:
+		return
+	var success := socket_key == _current.correct_socket
+	call_resolved.emit(success, _current)
+	if success:
+		GameState.advance_call()
+		post_box.play(_current.post_connect_lines)
+		# _start_next() is triggered by post_box.finished
+	else:
+		if _current.pivotal:
+			GameState.end_game(false)
+		else:
+			GameState.lose_patience()
 
 func _on_patience_changed(value: int) -> void:
-    for i in patience_container.get_child_count():
-        patience_container.get_child(i).visible = i < value
+	for i in patience_container.get_child_count():
+		patience_container.get_child(i).visible = i < value
 ```
 
 Then in the editor, on the `Switchboard` root's Inspector, set:

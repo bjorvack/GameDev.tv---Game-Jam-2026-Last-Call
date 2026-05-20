@@ -1,25 +1,12 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://f85fwrkmmjor"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "Operator — the Chapel here."
-duration = 2.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "I've got old Mr. Bray taking a turn during evening prayer. Put me through to Doc Wheeler, please."
-duration = 4.5
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
 text = "On my way, Reverend."
-duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -33,15 +20,21 @@ speaker = "Reverend Carter"
 text = "Sorry — wrong number."
 duration = 2.0
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Operator — the Chapel here."
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "I've got old Mr. Bray taking a turn during evening prayer. Put me through to Doc Wheeler, please."
+duration = 4.5
+
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Reverend Carter"
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"doc"
-connected_dialogue = Array[Resource]([SubResource("connected_0")])
-wrong_responses = {}
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
-time_limit = 0.0
-timer_expired = Array[Resource]([])
-sockets_lit = Array[StringName]([])
-pivotal = false
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0")])
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

@@ -1,25 +1,7 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://dpd25fijvu058"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Mrs. Henley"
-text = "Operator, this is Henley over on 8th."
-duration = 2.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Mrs. Henley"
-text = "There's been an ambulance sitting two streets over near Vine for ten minutes."
-duration = 4.0
-
-[sub_resource type="Resource" id="opening_2"]
-script = ExtResource("2_dline")
-speaker = "Mrs. Henley"
-text = "Connect me to the sheriff, would you? Something's not right."
-duration = 3.5
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -45,9 +27,25 @@ speaker = "Mrs. Henley"
 text = "Sorry — wrong number."
 duration = 2.0
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Mrs. Henley"
+text = "Operator, this is Henley over on 8th."
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Mrs. Henley"
+text = "There's been an ambulance sitting two streets over near Vine for ten minutes."
+duration = 4.0
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Mrs. Henley"
+text = "Connect me to the sheriff, would you? Something's not right."
+duration = 3.5
+
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")
-speaker = ""
 text = "(no answer)"
 duration = 2.0
 
@@ -60,14 +58,10 @@ duration = 3.5
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Mrs. Henley"
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"sheriff"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")])
 }
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
-time_limit = 0.0
-timer_expired = Array[Resource]([])
-sockets_lit = Array[StringName]([])
-pivotal = false
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

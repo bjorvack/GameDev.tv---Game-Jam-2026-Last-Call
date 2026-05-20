@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://ltap26k7fvtk"]
 
 [ext_resource type="Script" uid="uid://b1o072mr8t5ul" path="res://scripts/call_director.gd" id="1_krb3x"]
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="2_dq83r"]
 [ext_resource type="PackedScene" uid="uid://c3jbenv2iu2qu" path="res://components/cable.tscn" id="2_tflt8"]
 [ext_resource type="PackedScene" uid="uid://c4akekqx6ss61" path="res://components/socket.tscn" id="3_bndc3"]
 [ext_resource type="PackedScene" uid="uid://dupqjqgirp0xs" path="res://components/caller_card.tscn" id="4_48g3e"]
 [ext_resource type="PackedScene" path="res://components/patience_light.tscn" id="5_v2baq"]
 [ext_resource type="PackedScene" uid="uid://drub42ey1woxf" path="res://components/post_connect_box.tscn" id="6_a0qgv"]
-[ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
 [ext_resource type="Resource" path="res://data/calls/01_patty_cole.tres" id="7_call01"]
 [ext_resource type="Resource" path="res://data/calls/02_daniel_hayes.tres" id="8_call02"]
 [ext_resource type="Resource" path="res://data/calls/03_henley_sheriff.tres" id="9_call03"]
@@ -17,10 +17,11 @@
 [ext_resource type="Resource" path="res://data/calls/08_cole_patty.tres" id="14_call08"]
 [ext_resource type="Resource" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
 [ext_resource type="Resource" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
+[ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
 
 [node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
-calls = Array[Resource]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
+calls = Array[ExtResource("2_dq83r")]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
 caller_card = NodePath("HUD/TopBar/TopRow/CallerCard")
 post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/Patience")
@@ -142,10 +143,10 @@ offset_right = -16.0
 offset_bottom = -16.0
 
 [node name="PostConnectBox" parent="HUD/BottomBar" unique_id=1476095253 instance=ExtResource("6_a0qgv")]
-layout_mode = 2
 visible = false
+layout_mode = 2
 
-[node name="CallTimer" parent="HUD/BottomBar" instance=ExtResource("17_timer")]
+[node name="CallTimer" parent="HUD/BottomBar" unique_id=1319055906 instance=ExtResource("17_timer")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

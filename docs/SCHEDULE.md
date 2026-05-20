@@ -8,9 +8,9 @@ Deadline: **May 25, 21:00 PST** (≈ May 26, 06:00 CEST).
   - `Node2D` root → attach `call_director.gd`
   - `Sprite2D` background (placeholder ColorRect for now)
   - `Node2D "Sockets"` with 8 children (Area2D + sprite + label), each:
-    - script: `socket.gd`
-    - group: `sockets`
-    - keys: `hayes`, `doc`, `sheriff`, `reverend`, `patty`, `cole`, `i40`, `hospital`
+	- script: `socket.gd`
+	- group: `sockets`
+	- keys: `hayes`, `doc`, `sheriff`, `reverend`, `patty`, `cole`, `i40`, `hospital`
   - `Line2D "Cable"` with `cable.gd`
   - `Label "CallerRequest"` + `Label "PostConnect"`
   - `HBoxContainer "Patience"` with 3 lights
