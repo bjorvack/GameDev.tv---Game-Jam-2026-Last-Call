@@ -10,3 +10,6 @@
 
 # Devin local config (personal, not shared)
 .devin/config.local.json
+
+# macOS
+.DS_Store

@@ -42,6 +42,7 @@ func _ready() -> void:
 		call_timer.expired.connect(_on_timer_expired)
 	for socket in get_tree().get_nodes_in_group("sockets"):
 		socket.cable_plugged.connect(_on_socket_plugged)
+	AudioManager.play_music()
 	_start_next()
 
 func _start_next() -> void:
@@ -56,7 +57,12 @@ func _start_next() -> void:
 		caller_card.show_idle()
 		await get_tree().create_timer(INTER_CALL_PAUSE).timeout
 		caller_card.show_ringing()
+		AudioManager.play_ring()
 		await get_tree().create_timer(RING_DURATION).timeout
+		AudioManager.stop_ring()
+	else:
+		# First call still gets a single ring as the operator picks up.
+		AudioManager.play_ring()
 	_current = calls[idx]
 	_apply_lit_state(_current)
 	caller_card.show_call(_current)
@@ -79,6 +85,7 @@ func _apply_lit_state(c: CallData) -> void:
 func _on_socket_plugged(socket_key: StringName) -> void:
 	if _phase != CallPhase.AWAITING or _current == null:
 		return
+	AudioManager.play_plug()
 	var success := socket_key == _current.correct_socket
 	if success:
 		_resolve_correct()
@@ -91,6 +98,7 @@ func _resolve_correct() -> void:
 	_phase = CallPhase.CONNECTED
 	call_resolved.emit(true, _current)
 	await _play_lines(_current.connected_dialogue)
+	AudioManager.play_hangup()
 	_phase = CallPhase.FINISHED
 	GameState.advance_call()
 	_start_next()
@@ -114,6 +122,7 @@ func _on_timer_expired() -> void:
 		return
 	_phase = CallPhase.WRONG_RESP
 	await _play_lines(_current.timer_expired)
+	AudioManager.play_hangup()
 	if _current.pivotal:
 		GameState.end_game(false)
 		return
