@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dupqjqgirp0xs" path="res://components/caller_card.tscn" id="4_48g3e"]
 [ext_resource type="PackedScene" path="res://components/patience_light.tscn" id="5_v2baq"]
 [ext_resource type="PackedScene" uid="uid://drub42ey1woxf" path="res://components/post_connect_box.tscn" id="6_a0qgv"]
+[ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
 [ext_resource type="Resource" path="res://data/calls/01_patty_cole.tres" id="7_call01"]
 [ext_resource type="Resource" path="res://data/calls/02_daniel_hayes.tres" id="8_call02"]
 [ext_resource type="Resource" path="res://data/calls/03_henley_sheriff.tres" id="9_call03"]
@@ -17,12 +18,13 @@
 [ext_resource type="Resource" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
 [ext_resource type="Resource" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
 
-[node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container")]
+[node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
 calls = Array[Resource]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
 caller_card = NodePath("HUD/TopBar/TopRow/CallerCard")
 post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/TopBar/TopRow/Patience")
+call_timer = NodePath("HUD/BottomBar/CallTimer")
 
 [node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
 jack_position = Vector2(640, 640)
@@ -135,3 +137,9 @@ offset_bottom = -16.0
 
 [node name="PostConnectBox" parent="HUD/BottomBar" unique_id=1476095253 instance=ExtResource("6_a0qgv")]
 layout_mode = 2
+visible = false
+
+[node name="CallTimer" parent="HUD/BottomBar" instance=ExtResource("17_timer")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4

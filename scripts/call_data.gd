@@ -1,24 +1,55 @@
-## Pure data for one scripted call.
-## Calls are designed in the editor as .tres resources and loaded by CallDirector.
+## A single scripted phone call.
+##
+## Lifecycle the director walks through:
+##   1. `opening` plays — the caller speaks their request.
+##   2. State enters AWAITING_ROUTING. Player drags the cable to a socket.
+##      - Correct → `connected_dialogue` plays → next call.
+##      - Wrong → `wrong_responses[socket]` (or `generic_wrong_response`) plays.
+##        Caller stays on the line, patience decrements. Player can retry.
+##   3. If `time_limit > 0` a countdown runs while AWAITING_ROUTING.
+##      On expiry, `timer_expired` plays, patience drops, call ends.
+##
+## Pivotal calls short-circuit retry: any mis-route or timer expiry triggers
+## the bad ending instantly.
 class_name CallData
 extends Resource
 
+## Display name of the caller, shown above the dialogue text.
 @export var caller_name: String = ""
-@export_multiline var request_text: String = ""
 
-## Key of the socket that completes this call correctly (e.g. "hayes", "doc", "i40", "hospital").
-@export var correct_socket: StringName = &""
-
-## Lines played after a correct connection. One per line, shown sequentially.
-@export var post_connect_lines: Array[String] = []
-
-## Optional portrait shown next to the caller text. Path relative to res://.
+## Default portrait for the caller. Individual DialogueLines may override.
 @export var caller_portrait: Texture2D
 
-## Sockets that should become *available* (lit) when this call starts.
-## Empty array means "use the default 6". Used to reveal I-40 and Hospital late.
+## Lines spoken by the caller when the call comes in.
+@export var opening: Array[DialogueLine] = []
+
+## Socket_key of the recipient the caller is trying to reach.
+@export var correct_socket: StringName = &""
+
+## Dialogue played after a correct routing — the recipient picks up and a
+## short exchange happens.
+@export var connected_dialogue: Array[DialogueLine] = []
+
+## Bespoke wrong-routing exchanges, keyed by socket_key. When the player
+## plugs a wrong socket and there's a matching entry here, these lines play
+## instead of `generic_wrong_response`.
+##
+## Dictionary contract: StringName -> Array[DialogueLine].
+@export var wrong_responses: Dictionary = {}
+
+## Fallback played when the player plugs a wrong socket that has no entry
+## in `wrong_responses`.
+@export var generic_wrong_response: Array[DialogueLine] = []
+
+## Seconds the player has to route correctly. 0 = no timer.
+@export var time_limit: float = 0.0
+
+## Lines played when the timer runs out before correct routing.
+@export var timer_expired: Array[DialogueLine] = []
+
+## Which sockets are lit during this call (empty = the six default townspeople).
 @export var sockets_lit: Array[StringName] = []
 
-## If true, mis-routing this call instantly triggers the bad ending
-## (independent of patience tokens). Used for call 9.
+## If true, a wrong routing or timer expiry triggers the bad ending instead
+## of just consuming a patience token.
 @export var pivotal: bool = false

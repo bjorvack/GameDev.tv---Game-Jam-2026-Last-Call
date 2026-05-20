@@ -1,14 +1,59 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
+
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Patty, it's Cole."
+duration = 2.5
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Truck stalled out near 7th and Vine — there's two units and a chaplain at Margaret's place."
+duration = 4.5
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Anyone heard from Daniel?"
+duration = 2.5
+
+[sub_resource type="Resource" id="connected_0"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "He's on I-40."
+duration = 2.0
+
+[sub_resource type="Resource" id="connected_1"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "Lord, he doesn't know yet."
+duration = 2.5
+
+[sub_resource type="Resource" id="generic_0"]
+script = ExtResource("2_dline")
+speaker = "???"
+text = "Hello?"
+duration = 1.5
+
+[sub_resource type="Resource" id="generic_1"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Sorry — wrong number."
+duration = 2.0
 
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Cole"
-request_text = "Patty, it's Cole. Truck stalled out near 7th and Vine — there's two units and a chaplain at Margaret's place. Anyone heard from Daniel?"
+opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"patty"
-post_connect_lines = Array[String]([
-"Patty: \"He's on I-40. Lord, he doesn't know yet.\""
-])
+connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
+wrong_responses = {}
+generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
+time_limit = 0.0
+timer_expired = Array[Resource]([])
 sockets_lit = Array[StringName]([])
 pivotal = false

@@ -1,15 +1,53 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
+
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Patty? Briggs."
+duration = 2.5
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Has Margaret Hayes been in today? Henley says there's a unit at her place."
+duration = 4.0
+
+[sub_resource type="Resource" id="connected_0"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "She came in yesterday morning. Said she was tired."
+duration = 3.5
+
+[sub_resource type="Resource" id="connected_1"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "Hasn't been in today, Sheriff. Oh god."
+duration = 3.0
+
+[sub_resource type="Resource" id="generic_0"]
+script = ExtResource("2_dline")
+speaker = "???"
+text = "Hello?"
+duration = 1.5
+
+[sub_resource type="Resource" id="generic_1"]
+script = ExtResource("2_dline")
+speaker = "Sheriff Briggs"
+text = "Sorry — wrong number."
+duration = 2.0
 
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Sheriff Briggs"
-request_text = "Patty? Briggs. Has Margaret Hayes been in today? Henley says there's a unit at her place."
+opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"patty"
-post_connect_lines = Array[String]([
-"Patty: \"She came in yesterday morning. Said she was tired.\"",
-"\"Hasn't been in today, Sheriff. Oh god.\""
-])
+connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
+wrong_responses = {}
+generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
+time_limit = 0.0
+timer_expired = Array[Resource]([])
 sockets_lit = Array[StringName]([])
 pivotal = false
