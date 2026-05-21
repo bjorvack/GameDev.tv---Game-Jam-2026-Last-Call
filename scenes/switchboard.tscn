@@ -237,12 +237,15 @@ offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
+mouse_filter = 2
 
 [node name="PostConnectBox" parent="HUD/BottomBar" unique_id=1476095253 instance=ExtResource("6_a0qgv")]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CallTimer" parent="HUD/BottomBar" unique_id=1319055906 instance=ExtResource("17_timer")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
