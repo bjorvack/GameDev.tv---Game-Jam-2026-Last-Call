@@ -90,6 +90,19 @@ An empty environmental scene. NO people anywhere in the frame, NO human figures,
 Wide landscape composition with strong negative space and a single clear focal point. \
 ${STYLE_TAIL}"
         ;;
+    scene)
+        WIDTH=1024
+        HEIGHT=1024
+        OUT_DIR="art/portraits"
+        # Square environmental scenes (e.g. Margaret's empty rocking chair).
+        # Same no-people clause as bg, but at portrait dimensions so the
+        # image can sit inside the same CallerCard frame as the character
+        # portraits.
+        PREAMBLE="\
+An empty environmental scene. NO people anywhere in the frame, NO human figures, NO silhouettes of characters, NO hands holding phones. This is a setting, an architectural illustration, completely unpopulated. \
+Centered composition with strong negative space and a single clear focal point. \
+${STYLE_TAIL}"
+        ;;
     text|logo)
         WIDTH=1024
         HEIGHT=1024
@@ -101,7 +114,7 @@ A hand-lettered text-only illustration. NO figures, NO silhouettes, NO people, N
 ${STYLE_TAIL}"
         ;;
     *)
-        echo "Unknown kind: $KIND (expected: portrait | bg)" >&2
+        echo "Unknown kind: $KIND (expected: portrait | bg | scene | text)" >&2
         exit 1
         ;;
 esac

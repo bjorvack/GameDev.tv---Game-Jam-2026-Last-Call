@@ -24,9 +24,12 @@ run bg ending_good 801 \
 run bg ending_bad 802 \
 "a 1960 telephone exchange operator's room at the end of a long night, the desk lamp is off, the switchboard panel sits dark and silent, a single cold thin shaft of teal moonlight cuts across the operator's empty chair and an untouched coffee cup gone cold on the desk, everything else falls into deep teal-black shadow, centered composition with strong negative space, mournful, no people, no text"
 
-# 3) Margaret empty chair (Tier 3 stretch goal — optional)
-run portrait margaret_empty_chair 803 \
-"an empty wooden rocking chair in a darkened sitting room, on a small side table beside the chair a 1960 telephone sits in its cradle with the cradle's small indicator lamp glowing a faint amber as if the phone is ringing into the empty room, deep teal shadows around the chair, centered composition with strong negative space, melancholic, no people, no text"
+# 3) Margaret empty chair (Tier 3 stretch goal — optional).
+# Uses the `scene` kind (1024x1024 + no-people preamble) so it sits inside
+# the CallerCard frame at the same dimensions as a portrait but without
+# the portrait preamble injecting a silhouette person holding a phone.
+run scene margaret_empty_chair 803 \
+"an empty wooden rocking chair in a darkened sitting room, on a small side table beside the chair a 1960 black corded telephone sits in its cradle with the cradle's small indicator lamp glowing a faint amber as if the phone is ringing into the empty room, deep teal shadows around the chair, centered composition with strong negative space, melancholic, no people, no text"
 
 echo
 echo ">> Missing assets batch complete."
