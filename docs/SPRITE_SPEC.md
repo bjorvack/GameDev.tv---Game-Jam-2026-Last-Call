@@ -72,7 +72,7 @@ art/
 ```
 Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1792x1024.
-Subject: a 1985 telephone exchange switchboard panel seen from the
+Subject: a 1960 telephone exchange switchboard panel seen from the
 operator's seat, tilted slightly forward toward the viewer. Aged brass
 and dark walnut, faintly glowing amber under a single overhead lamp
 that falls from the upper right. Deep teal-black shadow in the corners
@@ -94,7 +94,7 @@ Olly Moss-style poster illustration. Flat fields of colour, two
 dimensions, no photography, no realism.
 
 Foreground: a pure black silhouette of a man in profile, baseball cap
-with a curved brim, holding a 1985 telephone receiver pressed to his
+with a curved brim, holding a 1960 telephone receiver pressed to his
 ear, shoulders slightly hunched. He is rendered as a completely flat
 black shape — no face, no skin, no eyes, no fabric folds, no internal
 detail of any kind, just a clean cutout outline. The contour clearly
@@ -110,7 +110,7 @@ a darker teal #173E4A horizon.
 
 Composition: man's silhouette centered, taking up roughly 40 percent
 of the frame, plenty of negative space around him. Looks like a single
-plate from a 1985 silent-storybook. Painterly grain texture, like
+plate from a 1960 silent-storybook. Painterly grain texture, like
 gouache on paper.
 
 No text in the image. No other people.
@@ -141,7 +141,7 @@ Aspect ratio: 1024x1024.
 Subject: a middle-aged round-shouldered woman shown as a pure dark
 silhouette in profile, no facial features visible. Her hair is tied up
 in a kerchief; an apron's ties dangle behind her. She holds a glass
-coffee pot in one hand and a 1985-style telephone receiver in the other,
+coffee pot in one hand and a 1960-era telephone receiver in the other,
 leaning on a diner counter. Behind her, the faint amber haze of a neon
 "OPEN" sign blurs in deep teal shadow. Thin warm amber rim catches the
 upper edges of her silhouette. Centered composition with strong negative
@@ -157,7 +157,7 @@ Subject: a tall older man in a long dark coat shown as a pure dark
 silhouette in profile, no facial features visible. He holds a
 broad-brimmed hat in his free hand; the bright slit of a white clerical
 collar is visible at his throat. He stands in a chapel foyer with a
-1985 telephone receiver to his ear. Behind him, a small amber sanctuary
+1960 telephone receiver to his ear. Behind him, a small amber sanctuary
 lamp glows in the deep teal darkness. Thin warm amber rim catches the
 upper edges of his silhouette. Centered composition with strong negative
 space, hand-illustrated storybook style.
@@ -171,7 +171,7 @@ Aspect ratio: 1024x1024.
 Subject: a stocky older man shown as a pure dark silhouette in profile,
 no facial features visible. He wears a buttoned waistcoat and a small
 bow tie; two tiny round wire-frame glasses catch a faint amber glint at
-his profile. He holds a 1985 telephone receiver to his ear. Behind him,
+his profile. He holds a 1960 telephone receiver to his ear. Behind him,
 the faint amber glow of a clinic desk lamp on a wooden cabinet. Thin
 warm amber rim along the upper edges of his silhouette. Centered
 composition with strong negative space, hand-illustrated storybook style.
@@ -182,7 +182,7 @@ composition with strong negative space, hand-illustrated storybook style.
 ```
 Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1792x1024.
-Subject: a 1985 telephone exchange operator's room at night, viewed
+Subject: a 1960 telephone exchange operator's room at night, viewed
 from across the room. An unattended switchboard panel of brass and dark
 walnut glows under a single amber desk lamp. The operator's wooden chair
 is empty, pushed slightly back. A heavy coat hangs on a wall hook to
@@ -219,7 +219,7 @@ Aspect ratio: 1024x1024.
 Subject: an elderly thin-shouldered woman shown as a pure dark
 silhouette in profile, no facial features visible. Her hair is pulled
 into a tight bun; a lace collar reads as small bright bumps at her neck.
-She holds a 1985 telephone receiver while peering through a window
+She holds a 1960 telephone receiver while peering through a window
 curtain into the night. Behind her, the cool teal of an empty house at
 night; a sliver of streetlamp amber bleeds through the curtain. Thin
 warm amber rim along the upper edges of her silhouette. Centered
@@ -234,7 +234,7 @@ Aspect ratio: 1024x1024.
 Subject: a stocky man shown as a pure dark silhouette, mostly facing
 the viewer but slightly turned, no facial features visible. He wears a
 wide flat-brimmed cowboy hat; a tiny amber glint marks the metal badge
-on his chest. He is at a desk holding a 1985 telephone receiver. Behind
+on his chest. He is at a desk holding a 1960 telephone receiver. Behind
 him, the cool teal of an office wall with a faint amber wash from a
 single desk lamp. Thin warm amber rim along the upper edges of his
 silhouette. Centered composition with strong negative space,
@@ -250,7 +250,7 @@ Subject: a wiry younger man shown as a pure dark silhouette in profile,
 no facial features visible. He wears a baseball cap turned backwards;
 the silhouette of a wrench in his back pocket and an oily rag draped
 over his shoulder are visible. He leans against a wall holding a
-wall-mounted 1985 telephone receiver. Behind him, the cavernous deep
+wall-mounted 1960 telephone receiver. Behind him, the cavernous deep
 teal of a garage interior with a single amber overhead work-lamp. Thin
 warm amber rim along the upper edges of his silhouette. Centered
 composition with strong negative space, hand-illustrated storybook style.
@@ -261,7 +261,7 @@ composition with strong negative space, hand-illustrated storybook style.
 ```
 Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1024x1024.
-Subject: a woman in a 1980s nursing uniform shown as a pure dark
+Subject: a woman in a 1960 nursing uniform shown as a pure dark
 silhouette in profile, no facial features visible. She wears a small
 soft nurse's cap with a tiny cross visible at its crown; her hair is
 pulled back tight. Her posture is stiff and professional. She holds a
@@ -278,7 +278,7 @@ storybook style.
 Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1024x1024.
 Subject: a generic featureless person-shape, pure dark silhouette of a
-head and one shoulder holding a 1985 telephone receiver, no
+head and one shoulder holding a 1960 telephone receiver, no
 distinguishing features whatsoever. Plain, unadorned, almost absent.
 Background is flat deep teal with only the faintest amber wash. Thin
 warm amber rim along the upper edge of the silhouette. Centered
@@ -305,7 +305,7 @@ style. No people visible in the foreground, no text.
 ```
 Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1792x1024.
-Subject: a 1985 telephone exchange operator's room at the end of a long
+Subject: a 1960 telephone exchange operator's room at the end of a long
 night. The desk lamp is off. The switchboard panel sits dark and silent.
 A single cold thin shaft of teal moonlight cuts across the operator's
 empty chair and an untouched coffee cup gone cold on the desk.
@@ -324,7 +324,7 @@ No people, no text.
 Next image in the Last Call storybook set, same style as before.
 Aspect ratio: 1024x1024.
 Subject: an empty wooden rocking chair in a darkened sitting room.
-On a small side table beside the chair, a 1985 telephone sits in its
+On a small side table beside the chair, a 1960 telephone sits in its
 cradle; the cradle's small indicator lamp glows a faint amber as if
 the phone is ringing into the empty room. Deep teal shadows around the
 chair. Centered composition with strong negative space, melancholic,

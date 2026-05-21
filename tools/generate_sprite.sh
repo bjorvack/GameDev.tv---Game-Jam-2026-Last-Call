@@ -7,7 +7,7 @@
 #
 # Examples:
 #   tools/generate_sprite.sh portrait daniel "a tall lean man in a baseball cap"
-#   tools/generate_sprite.sh bg switchboard "a 1985 telephone exchange switchboard panel" 42
+#   tools/generate_sprite.sh bg switchboard "a 1960 telephone exchange switchboard panel" 42
 #
 # First run downloads ~15 GB of FLUX.2 klein 9B weights to ~/.cache/huggingface.
 # Subsequent runs are ~2 min per image on an M4 24 GB at q4.
@@ -62,7 +62,7 @@ NO moon, NO trees, NO room visible whatsoever. The figure floats on a single sol
 colour field, like a portrait against a studio backdrop. \
 No facial features visible — no eyes, no nose, no mouth, no skin tone — but the \
 silhouette retains a painterly, hand-illustrated edge, not a flat paper cutout. \
-The figure is clearly, unmistakably holding an old 1985 corded telephone: a chunky \
+The figure is clearly, unmistakably holding an old 1960 corded telephone: a chunky \
 black handset receiver pressed against the ear, with a visible coiled cord trailing \
 down out of frame. \
 Medium close-up framing, head-and-shoulders, the figure fills roughly 60% of the \

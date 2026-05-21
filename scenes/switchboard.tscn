@@ -88,7 +88,7 @@ label_text = "Cole's Garage"
 [node name="I40" parent="HUD/SocketsCenter/SocketsGrid" unique_id=2022365928 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"i40"
-label_text = "I-40 Truck Stop, Marker 88"
+label_text = "Highway 40 Truck Stop, MM 88"
 lit = false
 
 [node name="Hospital" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1474501132 instance=ExtResource("3_bndc3")]

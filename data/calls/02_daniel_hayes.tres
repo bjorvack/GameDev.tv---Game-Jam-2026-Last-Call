@@ -24,7 +24,7 @@ duration = 4.5
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "I'm two hours out on I-40."
+text = "I'm two hours out on Highway 40."
 portrait = ExtResource("3_portrait_0")
 duration = 2.5
 

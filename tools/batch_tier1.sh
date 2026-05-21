@@ -29,19 +29,19 @@ run() {
 
 # 3) Patty — diner waitress
 run portrait patty 303 \
-"a middle-aged round-shouldered woman in profile, her hair tied up in a kerchief at the crown of her head with the silhouetted ties of an apron dangling behind her shoulder, holding the 1985 black corded telephone receiver to her ear with one hand. Her free hand holds a small glass coffee pot."
+"a middle-aged round-shouldered woman in profile, her hair tied up in a kerchief at the crown of her head with the silhouetted ties of an apron dangling behind her shoulder, holding the 1960 black corded telephone receiver to her ear with one hand. Her free hand holds a small glass coffee pot."
 
 # 4) Reverend — clergy
 run portrait reverend 404 \
-"a tall older man in profile, the broad brim of a wide hat held in his free hand at chest height (so the hat-brim shape is visible against his torso silhouette), the bright slit of a white clerical collar visible at his throat as a thin lighter notch in the otherwise solid black silhouette. The 1985 black corded telephone receiver is pressed to his ear."
+"a tall older man in profile, the broad brim of a wide hat held in his free hand at chest height (so the hat-brim shape is visible against his torso silhouette), the bright slit of a white clerical collar visible at his throat as a thin lighter notch in the otherwise solid black silhouette. The 1960 black corded telephone receiver is pressed to his ear."
 
 # 5) Doc — physician
 run portrait doc 505 \
-"a stocky older man in profile, his shape defined by a buttoned waistcoat and a small bow tie silhouette at his throat. Two tiny round wire-frame glasses sit at his profile as small ring shapes. The 1985 black corded telephone receiver is pressed to his ear."
+"a stocky older man in profile, his shape defined by a buttoned waistcoat and a small bow tie silhouette at his throat. Two tiny round wire-frame glasses sit at his profile as small ring shapes. The 1960 black corded telephone receiver is pressed to his ear."
 
 # 6) Title background — empty switchboard room
 run bg title 606 \
-"a 1985 telephone exchange operator's room at night viewed from across the room, completely empty of people, an unattended switchboard panel of brass and dark walnut glows under a single amber desk lamp from the upper right, the operator's wooden chair is empty and pushed slightly back, a heavy coat hangs on a wall hook to one side, deep teal shadow fills the rest, no people anywhere in the frame, no text, no signage"
+"a 1960 telephone exchange operator's room at night viewed from across the room, completely empty of people, an unattended switchboard panel of brass and dark walnut glows under a single amber desk lamp from the upper right, the operator's wooden chair is empty and pushed slightly back, a heavy coat hangs on a wall hook to one side, deep teal shadow fills the rest, no people anywhere in the frame, no text, no signage"
 
 # 7) Title logo — hand-lettered text only (writes directly to art/)
 run text title_logo 707 \

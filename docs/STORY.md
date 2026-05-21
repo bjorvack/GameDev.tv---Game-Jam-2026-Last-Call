@@ -1,6 +1,6 @@
 # Last Call — Narrative Script
 
-**Setting:** A small American town, late 1980s. Night shift at the local telephone exchange. You — *the operator* — are working your final shift before the new automated system replaces you tomorrow morning. The town's switchboard has six lit sockets, each labeled with a destination.
+**Setting:** A small American town, autumn of 1960. Night shift at the local telephone exchange. You — *the operator* — are working your final shift before the new automated system replaces you tomorrow morning. The town's switchboard has six lit sockets, each labeled with a destination.
 
 **Theme hook:** "Connections" — literal cables, but also the human ones we make and lose. The game is about being the invisible thread between people, one last time.
 
@@ -11,7 +11,7 @@
 ## Cast
 
 - **You** — the operator. Never seen, never speaks. The player.
-- **Daniel Hayes** — early 30s, lives two hours away on I-40. Calling in throughout the night about his mother.
+- **Daniel Hayes** — early 30s, lives two hours away on Highway 40. Calling in throughout the night about his mother.
 - **Margaret Hayes ("Mrs. Hayes")** — Daniel's mother. 7th & Vine. Never answers.
 - **Doc Wheeler** — town doctor. Knows more than he's letting on.
 - **Reverend Carter** — runs the chapel. Becomes Daniel's eyes on the ground.
@@ -29,7 +29,7 @@
 5. **Patty's Diner**
 6. **Cole's Garage**
 
-(A 7th socket — **I-40 Truck Stop, Marker 88** — lights up only for call 9. A final socket — **County General Hospital** — lights up only for call 10. This keeps the layout clean while letting the endgame *open up*.)
+(A 7th socket — **Highway 40 Truck Stop, Marker 88** — lights up only for call 9. A final socket — **County General Hospital** — lights up only for call 10. This keeps the layout clean while letting the endgame *open up*.)
 
 ---
 
@@ -53,7 +53,7 @@ After the player connects correctly, a short post-connect line plays, then the s
 
 ### Call 2 — *The hook.*
 **Daniel Hayes** → Mrs. Hayes (7th & Vine)
-> "Hello? Operator? I need to reach Mrs. Hayes on 7th and Vine. She's my mother — she didn't answer her morning call. I'm two hours out on I-40."
+> "Hello? Operator? I need to reach Mrs. Hayes on 7th and Vine. She's my mother — she didn't answer her morning call. I'm two hours out on Highway 40."
 
 *Post-connect:* (Ring. Ring. Ring. No answer.) Daniel: "She… she must've gone to the market. I'll try again later. Thanks."
 
@@ -103,12 +103,12 @@ After the player connects correctly, a short post-connect line plays, then the s
 **Cole** → Patty's Diner
 > "Patty, it's Cole. Truck stalled out near 7th and Vine — there's two units and a chaplain at Margaret's place. Anyone heard from Daniel?"
 
-*Post-connect:* Patty: "He's on I-40. Lord, he doesn't know yet."
+*Post-connect:* Patty: "He's on Highway 40. Lord, he doesn't know yet."
 
 ---
 
 ### Call 9 — *The pivotal connection. New socket lights up.*
-**Reverend Carter** → I-40 Truck Stop, Marker 88
+**Reverend Carter** → Highway 40 Truck Stop, Marker 88
 > "Operator. I need to reach Daniel Hayes — he's on the highway. Try the truck stop payphone at marker 88. Tell him his mother's alive. Tell him they're taking her to County General."
 
 *Post-connect:* Static. A trucker grabs the phone, runs out, flags Daniel down. Daniel's voice, distant, breathless: "Tell the Reverend — tell him I'm coming."

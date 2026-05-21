@@ -96,7 +96,7 @@ CALLS: list[Call] = [
         opening=[
             Line("Daniel", "Hello? Operator?"),
             Line("Daniel", "I need to reach Mrs. Hayes on 7th and Vine. She's my mother — she didn't answer her morning call.", duration=4.5),
-            Line("Daniel", "I'm two hours out on I-40.", duration=2.5),
+            Line("Daniel", "I'm two hours out on Highway 40.", duration=2.5),
         ],
         correct_socket="hayes",
         connected=[
@@ -248,7 +248,7 @@ CALLS: list[Call] = [
         ],
         correct_socket="patty",
         connected=[
-            Line("Patty", "He's on I-40.", duration=2.0),
+            Line("Patty", "He's on Highway 40.", duration=2.0),
             Line("Patty", "Lord, he doesn't know yet.", duration=2.5),
         ],
         generic_wrong=generic_wrong("Cole"),

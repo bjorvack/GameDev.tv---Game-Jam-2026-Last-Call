@@ -2,7 +2,7 @@
 
 ## Vision in one line
 
-> *A storybook silhouette set lit by a single amber lamp against the deep teal of a 1985 small-town night.*
+> *A storybook silhouette set lit by a single amber lamp against the deep teal of a 1960 small-town night.*
 
 The game's visual identity sits at the intersection of three references:
 - **The Iron Giant / Anastasia** for the hand-illustrated storybook softness and unmistakable shape language
@@ -130,7 +130,7 @@ LIGHT:
 
 COMPOSITION:
 - Centered subject, 50–60% NEGATIVE SPACE around it.
-- Looks like a single illustrated plate from a 1980s storybook.
+- Looks like a single illustrated plate from a 1960 storybook.
 
 INSTRUCTIONS TO YOU:
 - Render my prompts EXACTLY as written. Do NOT rewrite, expand, or

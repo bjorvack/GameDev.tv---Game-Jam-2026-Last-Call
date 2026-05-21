@@ -33,7 +33,7 @@ run portrait cole 110 \
 
 # 4) Nurse — uniform cap with small cross
 run portrait nurse 211 \
-"a YOUNG WOMAN in profile, wearing a 1980s NURSE'S CAP with a small CROSS SYMBOL visible on its crown (the cap is a small flat shape perched on top of her head, distinct from a hat — clearly medical), her hair pulled back tight against her head. Posture stiff and professional. She holds a SINGLE black telephone handset receiver in ONE HAND, pressed firmly to her ear — only ONE phone, ONE coiled cord trailing down. Her other hand hangs at her side, empty. Beneath her chin the silhouette of a starched uniform collar."
+"a YOUNG WOMAN in profile, wearing a 1960 NURSE'S CAP with a small CROSS SYMBOL visible on its crown (the cap is a small flat shape perched on top of her head, distinct from a hat — clearly medical), her hair pulled back tight against her head. Posture stiff and professional. She holds a SINGLE black telephone handset receiver in ONE HAND, pressed firmly to her ear — only ONE phone, ONE coiled cord trailing down. Her other hand hangs at her side, empty. Beneath her chin the silhouette of a starched uniform collar."
 
 # 5) Unknown — featureless wrong-number recipient
 run portrait unknown 312 \

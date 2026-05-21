@@ -30,7 +30,7 @@ duration = 2.5
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
 speaker = "Patty"
-text = "He's on I-40."
+text = "He's on Highway 40."
 portrait = ExtResource("3_portrait_1")
 duration = 2.0
 
