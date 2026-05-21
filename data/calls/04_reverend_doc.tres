@@ -6,6 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
+[sub_resource type="Resource" id="connected_pickup"]
+script = ExtResource("2_dline")
+speaker = "Doc Wheeler"
+text = "Wheeler."
+portrait = ExtResource("3_portrait_1")
+duration = 1.5
+
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
@@ -46,5 +53,5 @@ caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 caller_socket = &"reverend"
 correct_socket = &"doc"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_0")])
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

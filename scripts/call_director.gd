@@ -16,7 +16,7 @@ signal call_started(call_data: CallData)
 signal call_resolved(success: bool, call_data: CallData)
 signal all_calls_finished()
 
-enum CallPhase { IDLE, RINGING, OPENING, AWAITING, WRONG_RESP, CONNECTED, FINISHED }
+enum CallPhase { IDLE, RINGING, OPENING, AWAITING, WRONG_RESP, DIALING, CONNECTED, FINISHED }
 
 @export var calls: Array[CallData] = []
 
@@ -40,6 +40,12 @@ const INTER_CALL_PAUSE := 1.5
 ## How long the "incoming / *ring*" indicator shows before the caller socket
 ## starts pulsing.
 const RING_DURATION := 1.2
+## Time the destination line rings after a correct route plug, before the
+## recipient picks up and the connected_dialogue starts.
+const DIALING_DURATION := 1.4
+## How long the SceneTransition fade lasts on each side of the operator
+## monologue beat. Longer than a normal dip so the voice-over has air.
+const MONOLOGUE_FADE := 0.8
 
 var _current: CallData
 var _phase: int = CallPhase.IDLE
@@ -74,17 +80,33 @@ func _start_next() -> void:
 		all_calls_finished.emit()
 		GameState.end_game(true)
 		return
-	# Between calls: let the previous one settle, dip to black so the
-	# screen visibly resets, then ring in the next.
+	# Between calls: let the previous one settle, fade to black, optionally
+	# play the previous call's operator inner monologue, then fade back in
+	# and ring the next caller.
 	if idx > 0:
 		_phase = CallPhase.IDLE
 		caller_card.show_idle()
 		await get_tree().create_timer(INTER_CALL_PAUSE).timeout
-		if SceneTransition:
-			await SceneTransition.dip()
+		await _play_operator_thought(calls[idx - 1])
 	_current = calls[idx]
 	_apply_lit_state(_current)
 	_enter_ringing()
+
+func _play_operator_thought(prev: CallData) -> void:
+	if prev == null or prev.operator_thought.is_empty():
+		# No monologue — just a quick visual reset.
+		if SceneTransition:
+			await SceneTransition.dip()
+		return
+	if SceneTransition:
+		await SceneTransition.fade_out(MONOLOGUE_FADE)
+	for line in prev.operator_thought:
+		if line is DialogueLine:
+			caller_card.show_operator_thought(line)
+			await get_tree().create_timer(line.duration).timeout
+	caller_card.show_idle()
+	if SceneTransition:
+		await SceneTransition.fade_in(MONOLOGUE_FADE)
 
 func _enter_ringing() -> void:
 	_phase = CallPhase.RINGING
@@ -152,8 +174,17 @@ func _arm_cable(answer: bool, routing: bool) -> void:
 func _resolve_correct() -> void:
 	if call_timer:
 		call_timer.stop()
-	_phase = CallPhase.CONNECTED
+	# DIALING: the destination phone rings while we wait for the recipient
+	# to pick up. Caller card is hidden so the player just hears the
+	# ringback over a quiet board.
+	_phase = CallPhase.DIALING
 	call_resolved.emit(true, _current)
+	caller_card.show_waiting()
+	AudioManager.play_ring()
+	await get_tree().create_timer(DIALING_DURATION).timeout
+	AudioManager.stop_ring()
+
+	_phase = CallPhase.CONNECTED
 	await _play_lines(_current.connected_dialogue)
 	AudioManager.play_hangup()
 	if _cable:

@@ -59,3 +59,9 @@ extends Resource
 ## If true, a wrong routing or timer expiry triggers the bad ending instead
 ## of just consuming a patience token.
 @export var pivotal: bool = false
+
+## Optional operator inner-monologue lines played after this call wraps and
+## during the fade to the next one. Authored as DialogueLines with
+## `speaker = "Operator"` (and no portrait). Empty = no monologue, the
+## inter-call beat is just a short dip.
+@export var operator_thought: Array[DialogueLine] = []

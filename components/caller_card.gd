@@ -10,6 +10,8 @@ const FADE_DURATION := 0.2
 @onready var portrait: TextureRect = $Portrait
 @onready var caller_name: Label = $CallerName
 @onready var request_text: Label = $RequestText
+@onready var _halo: CanvasItem = get_node_or_null("Halo")
+@onready var _shadow: CanvasItem = get_node_or_null("GroundShadow")
 
 var _current_call: CallData
 var _fade_tween: Tween
@@ -19,13 +21,19 @@ func _ready() -> void:
 	hide()
 
 ## Called when a new call begins. Seeds the caller's name + portrait and
-## clears the dialogue area.
+## clears the dialogue area. Also makes sure the portrait/halo/shadow are
+## visible in case the previous beat was an operator monologue.
 func show_call(c: CallData) -> void:
 	_current_call = c
 	caller_name.text = c.caller_name
 	request_text.text = ""
 	if c.caller_portrait:
 		portrait.texture = c.caller_portrait
+	portrait.visible = true
+	if _halo:
+		_halo.visible = true
+	if _shadow:
+		_shadow.visible = true
 
 ## Shows a single DialogueLine. If the line has its own speaker/portrait,
 ## those override the call defaults for this line only.
@@ -36,6 +44,19 @@ func show_line(line: DialogueLine) -> void:
 		portrait.texture = line.portrait
 	elif _current_call and _current_call.caller_portrait:
 		portrait.texture = _current_call.caller_portrait
+	request_text.text = line.text
+	_fade_to(1.0)
+
+## Voice-over mode. Hides the portrait + halo + shadow so the line floats
+## alone with no character framing — used for the operator's inner monologue
+## between calls.
+func show_operator_thought(line: DialogueLine) -> void:
+	portrait.visible = false
+	if _halo:
+		_halo.visible = false
+	if _shadow:
+		_shadow.visible = false
+	caller_name.text = line.speaker if line.speaker != "" else "Operator"
 	request_text.text = line.text
 	_fade_to(1.0)
 

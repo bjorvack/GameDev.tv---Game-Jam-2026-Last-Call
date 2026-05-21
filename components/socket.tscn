@@ -22,7 +22,7 @@ anchors_preset = 0
 script = ExtResource("1_socket")
 
 [node name="Glow" type="PointLight2D" parent="." unique_id=945591023]
-position = Vector2(70, 28)
+position = Vector2(65, 28)
 scale = Vector2(0.37444195, 0.37444195)
 color = Color(1, 0.78039217, 0.4, 1)
 energy = 0.0
