@@ -30,6 +30,7 @@ caller_card = NodePath("HUD/CallerCard")
 post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
+cable_path = NodePath("CableLayer/Cable")
 
 [node name="Desk" type="Sprite2D" parent="." unique_id=224587900]
 position = Vector2(762, 540)
@@ -50,7 +51,7 @@ offset_left = -160.0
 offset_top = 32.0
 offset_right = 160.0
 offset_bottom = 60.0
-text = "Drag the cable to a socket"
+text = "Click a glowing socket to answer"
 horizontal_alignment = 1
 
 [node name="CableLayer" type="CanvasLayer" parent="." unique_id=184587880]

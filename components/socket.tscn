@@ -1,35 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://bsocket0001"]
+[gd_scene format=3 uid="uid://bsocket0001"]
 
-[ext_resource type="Script" path="res://scripts/socket.gd" id="1_socket"]
-[ext_resource type="Shader" path="res://shaders/socket.gdshader" id="2_socket_shader"]
+[ext_resource type="Script" uid="uid://bd3kjcgwk0k0h" path="res://scripts/socket.gd" id="1_socket"]
+[ext_resource type="Texture2D" uid="uid://cnlfn53xpq11t" path="res://art/props/socket_lit.png" id="2_socket_sprite"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_socket"]
-resource_local_to_scene = true
-shader = ExtResource("2_socket_shader")
-shader_parameter/amber_color = Color(0.91, 0.72, 0.42, 1)
-shader_parameter/brass_color = Color(0.71, 0.45, 0.2, 1)
-shader_parameter/teal_color = Color(0.06, 0.16, 0.2, 1)
-shader_parameter/is_lit = true
+[sub_resource type="Gradient" id="Gradient_socket_glow"]
+offsets = PackedFloat32Array(0, 0.35, 0.7, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.85, 1, 1, 1, 0.45, 1, 1, 1, 0)
 
-[node name="Socket" type="Control" groups=["sockets"]]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_socket_glow"]
+gradient = SubResource("Gradient_socket_glow")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="Socket" type="Control" unique_id=1126002656 groups=["sockets"]]
 custom_minimum_size = Vector2(140, 112)
-mouse_filter = 2
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_socket")
 
-[node name="Visual" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_socket")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-offset_left = -32.0
-offset_right = 32.0
-offset_bottom = 64.0
-color = Color(0, 0, 0, 0)
+[node name="Glow" type="PointLight2D" parent="." unique_id=945591023]
+position = Vector2(70, 28)
+scale = Vector2(0.37444195, 0.37444195)
+color = Color(1, 0.78039217, 0.4, 1)
+energy = 0.0
+range_layer_min = -1
+range_layer_max = 10
+texture = SubResource("GradientTexture2D_socket_glow")
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="Visual" type="TextureRect" parent="." unique_id=157605039]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -38.0
+offset_right = 38.0
+offset_bottom = 76.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_socket_sprite")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="." unique_id=991917301]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -39,5 +55,7 @@ anchor_bottom = 1.0
 offset_left = -70.0
 offset_top = -36.0
 offset_right = 70.0
+grow_horizontal = 2
+grow_vertical = 0
 horizontal_alignment = 1
 autowrap_mode = 2

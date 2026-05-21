@@ -1,12 +1,14 @@
 ## A single scripted phone call.
 ##
 ## Lifecycle the director walks through:
-##   1. `opening` plays — the caller speaks their request.
-##   2. State enters AWAITING_ROUTING. Player drags the cable to a socket.
+##   1. RINGING — `caller_socket` lamp pulses. Player plugs one cable end into
+##      it to answer.
+##   2. `opening` plays — the caller speaks their request.
+##   3. AWAITING_ROUTING — player plugs the other end into a destination.
 ##      - Correct → `connected_dialogue` plays → next call.
 ##      - Wrong → `wrong_responses[socket]` (or `generic_wrong_response`) plays.
 ##        Caller stays on the line, patience decrements. Player can retry.
-##   3. If `time_limit > 0` a countdown runs while AWAITING_ROUTING.
+##   4. If `time_limit > 0` a countdown runs while AWAITING_ROUTING.
 ##      On expiry, `timer_expired` plays, patience drops, call ends.
 ##
 ## Pivotal calls short-circuit retry: any mis-route or timer expiry triggers
@@ -22,6 +24,10 @@ extends Resource
 
 ## Lines spoken by the caller when the call comes in.
 @export var opening: Array[DialogueLine] = []
+
+## Socket_key of the line the call is coming in on. Lamp pulses during
+## RINGING. The player must plug the first cable end here to answer.
+@export var caller_socket: StringName = &""
 
 ## Socket_key of the recipient the caller is trying to reach.
 @export var correct_socket: StringName = &""

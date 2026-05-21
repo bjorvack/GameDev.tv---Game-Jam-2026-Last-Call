@@ -52,6 +52,7 @@ script = ExtResource("1_calldata")
 caller_name = "Sheriff Briggs"
 caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
+caller_socket = &"sheriff"
 correct_socket = &"patty"
 connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1")])
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

@@ -1,18 +1,22 @@
 ## Drives the scripted sequence of calls + the per-call state machine.
 ##
 ## Per-call flow:
-##   OPENING       — caller's opening lines play
-##   AWAITING      — waiting for the player to plug a socket; timer counts down
-##   WRONG_RESP    — wrong-routing exchange playing
-##   CONNECTED     — correct routing; connected_dialogue playing
-##   FINISHED      — call wrapped, ready to advance
+##   RINGING       — caller_socket lamp pulses, waiting for the player to
+##                   plug end A into the caller's socket (= answer).
+##   OPENING       — end A plugged. Caller's opening lines play.
+##   AWAITING      — opening done. Waiting for the player to plug end B into
+##                   a recipient socket.
+##   WRONG_RESP    — end B plugged into the wrong socket. Lines play, then
+##                   end B pops back to the shelf so the player can retry.
+##   CONNECTED     — end B plugged correctly. connected_dialogue plays.
+##   FINISHED      — call wrapped, ready to advance.
 extends Node
 
 signal call_started(call_data: CallData)
 signal call_resolved(success: bool, call_data: CallData)
 signal all_calls_finished()
 
-enum CallPhase { IDLE, OPENING, AWAITING, WRONG_RESP, CONNECTED, FINISHED }
+enum CallPhase { IDLE, RINGING, OPENING, AWAITING, WRONG_RESP, CONNECTED, FINISHED }
 
 @export var calls: Array[CallData] = []
 
@@ -20,6 +24,7 @@ enum CallPhase { IDLE, OPENING, AWAITING, WRONG_RESP, CONNECTED, FINISHED }
 @export var post_box: PostConnectBox  # legacy slot; unused but kept to avoid breaking older scenes
 @export var patience_container: HBoxContainer
 @export var call_timer: CallTimer
+@export var cable_path: NodePath
 
 const DEFAULT_LIT: Array[StringName] = [
 	&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole"
@@ -27,12 +32,13 @@ const DEFAULT_LIT: Array[StringName] = [
 
 ## Quiet beat after a call ends, before the next one rings in.
 const INTER_CALL_PAUSE := 1.5
-## How long the "incoming / *ring*" indicator shows before the next call's
-## opening lines begin.
+## How long the "incoming / *ring*" indicator shows before the caller socket
+## starts pulsing.
 const RING_DURATION := 1.2
 
 var _current: CallData
 var _phase: int = CallPhase.IDLE
+var _cable: Node
 
 func _ready() -> void:
 	GameState.reset()
@@ -40,8 +46,16 @@ func _ready() -> void:
 	GameState.game_ended.connect(_on_game_ended)
 	if call_timer:
 		call_timer.expired.connect(_on_timer_expired)
-	for socket in get_tree().get_nodes_in_group("sockets"):
-		socket.cable_plugged.connect(_on_socket_plugged)
+	if cable_path != NodePath():
+		_cable = get_node_or_null(cable_path)
+	if _cable == null:
+		# Fallback: find first node with a `routed` signal.
+		for node in get_tree().get_nodes_in_group("cable"):
+			_cable = node
+			break
+	if _cable:
+		_cable.answered.connect(_on_cable_answered)
+		_cable.routed.connect(_on_cable_routed)
 	AudioManager.play_music()
 	# We may have been loaded mid-fade by SceneTransition.change_scene —
 	# fade the black overlay back in before the first ring lands.
@@ -63,18 +77,33 @@ func _start_next() -> void:
 		await get_tree().create_timer(INTER_CALL_PAUSE).timeout
 		if SceneTransition:
 			await SceneTransition.dip()
-		caller_card.show_ringing()
-		AudioManager.play_ring()
-		await get_tree().create_timer(RING_DURATION).timeout
-		AudioManager.stop_ring()
-	else:
-		# First call still gets a single ring as the operator picks up.
-		AudioManager.play_ring()
 	_current = calls[idx]
 	_apply_lit_state(_current)
+	_enter_ringing()
+
+func _enter_ringing() -> void:
+	_phase = CallPhase.RINGING
+	caller_card.show_ringing()
+	AudioManager.play_ring()
+	# Light the caller's socket so the player can see where the call is
+	# coming in.
+	for socket in get_tree().get_nodes_in_group("sockets"):
+		if socket.socket_key == _current.caller_socket:
+			socket.state = Socket.State.RINGING
+	_arm_cable(true, false)
+
+func _on_cable_answered(socket_key: StringName) -> void:
+	if _phase != CallPhase.RINGING or _current == null:
+		return
+	if socket_key != _current.caller_socket:
+		return
+	AudioManager.stop_ring()
+	AudioManager.play_plug()
 	caller_card.show_call(_current)
 	call_started.emit(_current)
 	_phase = CallPhase.OPENING
+	# Lock everything while the caller speaks — no plug / unplug.
+	_arm_cable(false, false)
 	await _play_lines(_current.opening)
 	_enter_awaiting()
 
@@ -83,21 +112,37 @@ func _enter_awaiting() -> void:
 	caller_card.show_waiting()
 	if _current.time_limit > 0.0 and call_timer:
 		call_timer.start(_current.time_limit)
+	_arm_cable(false, true)
 
 func _apply_lit_state(c: CallData) -> void:
 	var lit_keys: Array = c.sockets_lit if not c.sockets_lit.is_empty() else DEFAULT_LIT
+	# Make sure the caller_socket is always reachable too.
+	if c.caller_socket != &"" and not (c.caller_socket in lit_keys):
+		lit_keys = lit_keys.duplicate()
+		lit_keys.append(c.caller_socket)
 	for socket in get_tree().get_nodes_in_group("sockets"):
-		socket.lit = socket.socket_key in lit_keys
+		if socket.socket_key in lit_keys:
+			socket.state = Socket.State.REACHABLE
+		else:
+			socket.state = Socket.State.UNLIT
 
-func _on_socket_plugged(socket_key: StringName) -> void:
+func _on_cable_routed(socket_key: StringName) -> void:
 	if _phase != CallPhase.AWAITING or _current == null:
 		return
 	AudioManager.play_plug()
+	# Lock the cable while we play the result so the player can't unplug
+	# mid-line.
+	_arm_cable(false, false)
 	var success := socket_key == _current.correct_socket
 	if success:
 		_resolve_correct()
 	else:
 		_resolve_wrong(socket_key)
+
+func _arm_cable(answer: bool, routing: bool) -> void:
+	if _cable:
+		_cable.accepting_answer = answer
+		_cable.accepting_routing = routing
 
 func _resolve_correct() -> void:
 	if call_timer:
@@ -106,6 +151,8 @@ func _resolve_correct() -> void:
 	call_resolved.emit(true, _current)
 	await _play_lines(_current.connected_dialogue)
 	AudioManager.play_hangup()
+	if _cable:
+		_cable.release_all()
 	_phase = CallPhase.FINISHED
 	GameState.advance_call()
 	_start_next()
@@ -119,8 +166,9 @@ func _resolve_wrong(socket_key: StringName) -> void:
 		GameState.end_game(false)
 		return
 	GameState.lose_patience()
-	# GameState.lose_patience() emits game_ended(false) when patience hits 0,
-	# which routes us to the bad ending via _on_game_ended. Otherwise, retry.
+	# Pop the routing end back so the player can try again.
+	if _cable:
+		_cable.release_routing_end()
 	if GameState.patience > 0:
 		_enter_awaiting()
 
@@ -130,6 +178,8 @@ func _on_timer_expired() -> void:
 	_phase = CallPhase.WRONG_RESP
 	await _play_lines(_current.timer_expired)
 	AudioManager.play_hangup()
+	if _cable:
+		_cable.release_all()
 	if _current.pivotal:
 		GameState.end_game(false)
 		return
