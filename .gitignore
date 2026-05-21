@@ -13,3 +13,9 @@
 
 # macOS
 .DS_Store
+
+# Web export output
+build/
+
+# Playwright MCP screenshots
+.playwright-mcp/
