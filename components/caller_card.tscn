@@ -2,29 +2,63 @@
 
 [ext_resource type="Script" uid="uid://bcu65tf2x4ihc" path="res://components/caller_card.gd" id="1_d0414"]
 
-[node name="root" type="PanelContainer" unique_id=1278693595]
+[node name="root" type="Control" unique_id=1278693595]
+custom_minimum_size = Vector2(360, 300)
+layout_mode = 2
+mouse_filter = 2
 script = ExtResource("1_d0414")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1317715049]
-layout_mode = 2
-
-[node name="Portrait" type="TextureRect" parent="HBoxContainer" unique_id=1305444336]
-custom_minimum_size = Vector2(256, 256)
-layout_mode = 2
+[node name="Portrait" type="TextureRect" parent="." unique_id=1305444336]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = 0.0
+offset_right = 100.0
+offset_bottom = 200.0
+grow_horizontal = 2
+mouse_filter = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1364565776]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="CallerName" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=323701452]
-layout_mode = 2
+[node name="CallerName" type="Label" parent="." unique_id=323701452]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 204.0
+offset_right = 180.0
+offset_bottom = 236.0
+grow_horizontal = 2
+mouse_filter = 2
 text = "Caller Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_colors/font_color = Color(0.95, 0.89, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+uppercase = true
 
-[node name="RequestText" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=384289823]
-layout_mode = 2
-size_flags_horizontal = 3
-custom_minimum_size = Vector2(400, 0)
+[node name="RequestText" type="Label" parent="." unique_id=384289823]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.0
+offset_top = 240.0
+offset_right = 180.0
+offset_bottom = 300.0
+grow_horizontal = 2
+mouse_filter = 2
 text = "Request goes here"
-autowrap_mode = 3
+horizontal_alignment = 1
+vertical_alignment = 0
+autowrap_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.89, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 18

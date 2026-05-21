@@ -26,7 +26,7 @@
 [node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
 calls = Array[ExtResource("2_dq83r")]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
-caller_card = NodePath("HUD/TopBar/TopRow/CallerCard")
+caller_card = NodePath("HUD/CallerCard")
 post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
@@ -53,7 +53,10 @@ offset_bottom = 60.0
 text = "Drag the cable to a socket"
 horizontal_alignment = 1
 
-[node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
+[node name="CableLayer" type="CanvasLayer" parent="." unique_id=184587880]
+layer = 2
+
+[node name="Cable" parent="CableLayer" unique_id=184587881 instance=ExtResource("2_tflt8")]
 jack_position = Vector2(576, 595)
 
 [node name="BGLayer" type="CanvasLayer" parent="." unique_id=1457985165]
@@ -156,20 +159,13 @@ socket_key = &"hospital"
 label_text = "County Hospital"
 lit = false
 
-[node name="TopBar" type="MarginContainer" parent="HUD" unique_id=136437707]
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = 200.0
-
-[node name="TopRow" type="HBoxContainer" parent="HUD/TopBar" unique_id=1923231306]
-layout_mode = 2
-
-[node name="CallerCard" parent="HUD/TopBar/TopRow" unique_id=1278693595 instance=ExtResource("4_48g3e")]
-layout_mode = 2
-size_flags_horizontal = 3
+[node name="CallerCard" parent="HUD" unique_id=1278693595 instance=ExtResource("4_48g3e")]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 384.0
+offset_bottom = 324.0
 
 [node name="Patience" type="HBoxContainer" parent="HUD" unique_id=333999525]
 anchors_preset = 1
