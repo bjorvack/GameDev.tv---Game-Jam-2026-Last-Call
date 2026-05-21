@@ -20,9 +20,18 @@ signal cable_plugged(socket_key: StringName)
 	set(value):
 		lit = value
 		modulate.a = 1.0 if lit else 0.3
+		_apply_lit_to_shader()
 
 func _ready() -> void:
 	$NameLabel.text = label_text
+	_apply_lit_to_shader()
+
+func _apply_lit_to_shader() -> void:
+	if not is_node_ready():
+		return
+	var visual := get_node_or_null("Visual")
+	if visual and visual.material is ShaderMaterial:
+		(visual.material as ShaderMaterial).set_shader_parameter("is_lit", lit)
 
 ## Called by cable.gd when the cable is released over this socket's rect.
 func plug() -> void:

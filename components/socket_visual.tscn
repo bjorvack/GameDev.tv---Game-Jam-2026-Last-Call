@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfwkx5fdrupq3"]
+
+[ext_resource type="Shader" path="res://shaders/socket.gdshader" id="1_socket_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("1_socket_shader")
+shader_parameter/amber_color = Color(0.91, 0.72, 0.42, 1)
+shader_parameter/brass_color = Color(0.71, 0.45, 0.2, 1)
+shader_parameter/teal_color = Color(0.06, 0.16, 0.2, 1)
+shader_parameter/is_lit = true
+
+[node name="SocketVisual" type="ColorRect"]
+custom_minimum_size = Vector2(64, 64)
+material = SubResource("ShaderMaterial_1")
+color = Color(0, 0, 0, 0)

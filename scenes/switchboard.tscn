@@ -27,8 +27,34 @@ post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
 
+[node name="CableBay" type="Node2D" parent="." unique_id=224587881]
+position = Vector2(576, 560)
+
+[node name="Shelf" type="ColorRect" parent="CableBay" unique_id=224587882]
+offset_left = -80.0
+offset_top = -6.0
+offset_right = 80.0
+offset_bottom = 28.0
+color = Color(0.35, 0.21, 0.1, 1)
+
+[node name="ShelfTrim" type="ColorRect" parent="CableBay" unique_id=224587883]
+offset_left = -80.0
+offset_top = -10.0
+offset_right = 80.0
+offset_bottom = -6.0
+color = Color(0.71, 0.45, 0.2, 1)
+
+[node name="HintLabel" type="Label" parent="CableBay" unique_id=224587884]
+offset_left = -160.0
+offset_top = 32.0
+offset_right = 160.0
+offset_bottom = 60.0
+horizontal_alignment = 1
+text = "Drag the cable to a socket"
+modulate = Color(0.95, 0.89, 0.78, 0.75)
+
 [node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
-jack_position = Vector2(640, 640)
+jack_position = Vector2(576, 560)
 
 [node name="BG" type="ColorRect" parent="." unique_id=1457985166]
 anchors_preset = 15

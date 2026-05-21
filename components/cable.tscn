@@ -1,7 +1,13 @@
-[gd_scene format=3]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/cable.gd" id="1_l8stc"]
 [ext_resource type="Texture2D" path="res://icon.svg" id="2_ktp8h"]
+[ext_resource type="Shader" path="res://shaders/jack.gdshader" id="3_jack_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jack"]
+shader = ExtResource("3_jack_shader")
+shader_parameter/red_color = Color(0.76, 0.29, 0.29, 1)
+shader_parameter/brass_color = Color(0.71, 0.45, 0.2, 1)
 
 [node name="root" type="Line2D" unique_id=184587881]
 width = 8.0
@@ -9,4 +15,7 @@ default_color = Color(0.75686276, 0.29411766, 0.29411766, 1)
 script = ExtResource("1_l8stc")
 
 [node name="Jack" type="Sprite2D" parent="." unique_id=953894836]
+material = SubResource("ShaderMaterial_jack")
 texture = ExtResource("2_ktp8h")
+centered = true
+scale = Vector2(0.5, 0.5)

@@ -64,7 +64,10 @@ No facial features visible — no eyes, no nose, no mouth, no skin tone — but 
 silhouette retains a painterly, hand-illustrated edge, not a flat paper cutout. \
 The figure is clearly, unmistakably holding an old 1960 corded telephone: a chunky \
 black handset receiver pressed against the ear, with a visible coiled cord trailing \
-down out of frame. \
+down out of frame. The figure's hand and fingers are clearly visible WRAPPING \
+AROUND the handset — thumb on one side, fingers on the other, the arm bent at the \
+elbow so the wrist meets the receiver. The act of gripping the phone must be \
+unmistakable: this is a person holding a handset, not a handset hovering. \
 Medium close-up framing, head-and-shoulders, the figure fills roughly 60% of the \
 frame, the handset and cord clearly readable in the lower third. The figure's \
 shoulders and torso continue off the bottom edge of the frame so the silhouette \
