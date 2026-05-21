@@ -24,7 +24,7 @@ enum State { UNLIT, REACHABLE, RINGING, PLUGGED }
 	set(value):
 		label_text = value
 		if is_node_ready():
-			$NameLabel.text = label_text
+			$LabelCard/NameLabel.text = label_text
 
 var state: int = State.REACHABLE:
 	set(value):
@@ -35,7 +35,7 @@ var state: int = State.REACHABLE:
 var _pulse_tween: Tween
 
 func _ready() -> void:
-	$NameLabel.text = label_text
+	$LabelCard/NameLabel.text = label_text
 	_apply_state()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	gui_input.connect(_on_gui_input)
@@ -47,23 +47,34 @@ func _on_gui_input(event: InputEvent) -> void:
 			socket_pressed.emit(self)
 			get_viewport().set_input_as_handled()
 
+const GLOW_AMBER := Color(1.0, 0.78, 0.4, 1.0)
+## "This line is dead" red glow. Pushed warmer + more saturated than the
+## cord's aged red because the Light2D's ADD blend mode tints the bronze
+## panel beneath, so a muted red ends up reading as orange.
+const GLOW_RED := Color(1.0, 0.18, 0.18, 1.0)
+
 func _apply_state() -> void:
 	if _pulse_tween:
 		_pulse_tween.kill()
 		_pulse_tween = null
+	modulate = Color(1, 1, 1, 1)
 	var glow := get_node_or_null("Glow") as Light2D
 	if glow:
 		glow.energy = 0.0
+		glow.color = GLOW_AMBER
 	match state:
 		State.UNLIT:
-			modulate = Color(0.45, 0.5, 0.55, 1.0)
+			# Don't darken the socket — paint a small red halo instead so
+			# the player reads "line is dead, don't bother" rather than
+			# "this socket is just dim".
+			if glow:
+				glow.color = GLOW_RED
+				glow.energy = 0.45
 		State.REACHABLE:
-			modulate = Color(1, 1, 1, 1)
+			pass
 		State.RINGING:
-			modulate = Color(1, 1, 1, 1)
 			_start_pulse(glow)
 		State.PLUGGED:
-			modulate = Color(1, 1, 1, 1)
 			if glow:
 				glow.energy = 0.6
 
