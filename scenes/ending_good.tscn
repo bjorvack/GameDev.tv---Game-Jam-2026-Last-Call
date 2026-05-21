@@ -1,11 +1,34 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Texture2D" path="res://art/backgrounds/ending_good.png" id="1_bg"]
 
 [node name="root" type="Control" unique_id=2097286414]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="BG" type="TextureRect" parent="." unique_id=2097286415]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("1_bg")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
+
+[node name="Vignette" type="ColorRect" parent="." unique_id=2097286416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.45)
+mouse_filter = 2
 
 [node name="Message" type="Label" parent="." unique_id=579252545]
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "Connected.
@@ -15,3 +38,6 @@ Margaret Hayes was discharged six days later.
 The new automated exchange went live at sunrise."
 horizontal_alignment = 1
 vertical_alignment = 1
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6

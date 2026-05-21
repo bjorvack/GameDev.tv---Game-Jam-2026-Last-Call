@@ -18,6 +18,7 @@
 [ext_resource type="Resource" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
 [ext_resource type="Resource" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
 [ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
+[ext_resource type="Texture2D" path="res://art/backgrounds/switchboard.png" id="18_bg"]
 
 [node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
@@ -56,13 +57,19 @@ modulate = Color(0.95, 0.89, 0.78, 0.75)
 [node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
 jack_position = Vector2(576, 560)
 
-[node name="BG" type="ColorRect" parent="." unique_id=1457985166]
+[node name="BGLayer" type="CanvasLayer" parent="." unique_id=1457985165]
+layer = -1
+
+[node name="BG" type="TextureRect" parent="BGLayer" unique_id=1457985166]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.07450981, 0.23529412, 0.29803923, 1)
+texture = ExtResource("18_bg")
+expand_mode = 1
+stretch_mode = 6
+mouse_filter = 2
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=902817518]
 
