@@ -53,6 +53,9 @@ var _cable: Node
 
 func _ready() -> void:
 	GameState.reset()
+	# Reorder the socket grid before anyone sees the board, so each run has
+	# a different layout and players can't memorise positions.
+	_shuffle_sockets()
 	GameState.patience_changed.connect(_on_patience_changed)
 	GameState.game_ended.connect(_on_game_ended)
 	if call_timer:
@@ -170,6 +173,21 @@ func _arm_cable(answer: bool, routing: bool) -> void:
 	if _cable:
 		_cable.accepting_answer = answer
 		_cable.accepting_routing = routing
+
+## Reorder the SocketsGrid's children at random. GridContainer lays sockets
+## out by child index, so reordering reshuffles the visual layout. Called
+## once on _ready before the fade-in completes, so the player only ever
+## sees the shuffled board.
+func _shuffle_sockets() -> void:
+	var sockets := get_tree().get_nodes_in_group("sockets")
+	if sockets.size() < 2:
+		return
+	var grid := sockets[0].get_parent()
+	if grid == null:
+		return
+	sockets.shuffle()
+	for i in sockets.size():
+		grid.move_child(sockets[i], i)
 
 func _resolve_correct() -> void:
 	if call_timer:
