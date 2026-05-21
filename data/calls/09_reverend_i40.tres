@@ -1,33 +1,12 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=20 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://bmka6i4837ajn"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/reverend.png" id="3_portrait_0"]
-[ext_resource type="Texture2D" path="res://art/portraits/trucker.png" id="3_portrait_1"]
-[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_2"]
-[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_3"]
-[ext_resource type="Texture2D" path="res://art/portraits/nurse.png" id="3_portrait_4"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "Operator. I need to reach Daniel Hayes — he's on the highway."
-portrait = ExtResource("3_portrait_0")
-duration = 2.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "Doc said his last call came from the diesel stop at marker 88 — that was thirty minutes back. Try the truck stop payphone there."
-portrait = ExtResource("3_portrait_0")
-duration = 5.0
-
-[sub_resource type="Resource" id="opening_2"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "Whoever picks up, tell them to flag him down. Tell him his mother's alive. They're taking her to County General."
-portrait = ExtResource("3_portrait_0")
-duration = 5.0
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" uid="uid://djxt48wvhl80x" path="res://art/portraits/reverend.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" uid="uid://bnjqhn1j78wpa" path="res://art/portraits/trucker.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" uid="uid://5h42femxk4di" path="res://art/portraits/daniel.png" id="3_portrait_2"]
+[ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_3"]
+[ext_resource type="Texture2D" uid="uid://cnjf2igh8v1so" path="res://art/portraits/nurse.png" id="3_portrait_4"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -52,7 +31,6 @@ duration = 2.0
 
 [sub_resource type="Resource" id="connected_3"]
 script = ExtResource("2_dline")
-speaker = ""
 text = "(The phone bangs against the booth glass. Diesel. Footsteps in the cold.)"
 duration = 4.0
 
@@ -77,6 +55,26 @@ text = "No, no — the truck stop, operator! Marker 88!"
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Operator. I need to reach Daniel Hayes — he's on the highway."
+portrait = ExtResource("3_portrait_0")
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Doc said his last call came from the diesel stop at marker 88 — that was thirty minutes back. Try the truck stop payphone there."
+portrait = ExtResource("3_portrait_0")
+duration = 5.0
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Whoever picks up, tell them to flag him down. Tell him his mother's alive. They're taking her to County General."
+portrait = ExtResource("3_portrait_0")
+duration = 5.0
+
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
@@ -89,7 +87,6 @@ script = ExtResource("2_dline")
 speaker = "Nurse"
 text = "County General, please hold —"
 portrait = ExtResource("3_portrait_4")
-duration = 2.5
 
 [sub_resource type="Resource" id="wrong_hospital_1"]
 script = ExtResource("2_dline")
@@ -102,14 +99,14 @@ duration = 3.5
 script = ExtResource("1_calldata")
 caller_name = "Reverend Carter"
 caller_portrait = ExtResource("3_portrait_0")
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"i40"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3"), SubResource("connected_4")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3"), SubResource("connected_4")])
 wrong_responses = {
 &"hospital": Array[Resource]([SubResource("wrong_hospital_0"), SubResource("wrong_hospital_1")])
 }
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 18.0
-timer_expired = Array[Resource]([SubResource("timer_0")])
+timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
 sockets_lit = Array[StringName]([&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole", &"i40"])
 pivotal = true

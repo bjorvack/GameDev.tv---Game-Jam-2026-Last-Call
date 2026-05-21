@@ -43,6 +43,10 @@ func _ready() -> void:
 	for socket in get_tree().get_nodes_in_group("sockets"):
 		socket.cable_plugged.connect(_on_socket_plugged)
 	AudioManager.play_music()
+	# We may have been loaded mid-fade by SceneTransition.change_scene —
+	# fade the black overlay back in before the first ring lands.
+	if SceneTransition:
+		SceneTransition.fade_in()
 	_start_next()
 
 func _start_next() -> void:
@@ -51,11 +55,14 @@ func _start_next() -> void:
 		all_calls_finished.emit()
 		GameState.end_game(true)
 		return
-	# Between calls: let the previous one settle, then ring in the next.
+	# Between calls: let the previous one settle, dip to black so the
+	# screen visibly resets, then ring in the next.
 	if idx > 0:
 		_phase = CallPhase.IDLE
 		caller_card.show_idle()
 		await get_tree().create_timer(INTER_CALL_PAUSE).timeout
+		if SceneTransition:
+			await SceneTransition.dip()
 		caller_card.show_ringing()
 		AudioManager.play_ring()
 		await get_tree().create_timer(RING_DURATION).timeout
@@ -148,4 +155,7 @@ func _on_game_ended(good: bool) -> void:
 	if call_timer:
 		call_timer.stop()
 	var path := "res://scenes/ending_good.tscn" if good else "res://scenes/ending_bad.tscn"
-	get_tree().change_scene_to_file(path)
+	if SceneTransition:
+		SceneTransition.change_scene(path)
+	else:
+		get_tree().change_scene_to_file(path)

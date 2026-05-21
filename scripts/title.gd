@@ -4,10 +4,16 @@ extends Control
 
 const SWITCHBOARD := "res://scenes/switchboard.tscn"
 
+var _starting := false
+
 func _ready() -> void:
 	# In case we come back here from an ending, scrub the run state.
 	if GameState:
 		GameState.reset()
+	# We may have been loaded by a SceneTransition fade-out — make sure
+	# the overlay fades back in.
+	if SceneTransition:
+		SceneTransition.fade_in()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -16,4 +22,7 @@ func _input(event: InputEvent) -> void:
 		_start()
 
 func _start() -> void:
-	get_tree().change_scene_to_file(SWITCHBOARD)
+	if _starting:
+		return
+	_starting = true
+	SceneTransition.change_scene(SWITCHBOARD)

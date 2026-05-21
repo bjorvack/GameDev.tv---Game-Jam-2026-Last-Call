@@ -1,24 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=13 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://dy7ujjg5hcuce"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/patty.png" id="3_portrait_0"]
-[ext_resource type="Texture2D" path="res://art/portraits/cole.png" id="3_portrait_1"]
-[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Patty"
-text = "Mornin', operator. Patty here."
-portrait = ExtResource("3_portrait_0")
-duration = 2.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Patty"
-text = "My delivery truck won't crank — could you put me through to Cole's Garage?"
-portrait = ExtResource("3_portrait_0")
-duration = 3.5
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" uid="uid://j8hv8r6dejab" path="res://art/portraits/patty.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" uid="uid://c8rie3fgslscn" path="res://art/portraits/cole.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -48,12 +34,24 @@ text = "Sorry — wrong number."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "Mornin', operator. Patty here."
+portrait = ExtResource("3_portrait_0")
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "My delivery truck won't crank — could you put me through to Cole's Garage?"
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
+
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")
 speaker = "???"
 text = "(ringing… no answer)"
 portrait = ExtResource("3_portrait_2")
-duration = 2.5
 
 [sub_resource type="Resource" id="wrong_hayes_1"]
 script = ExtResource("2_dline")
@@ -66,14 +64,10 @@ duration = 3.0
 script = ExtResource("1_calldata")
 caller_name = "Patty"
 caller_portrait = ExtResource("3_portrait_0")
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 correct_socket = &"cole"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")])
 }
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
-time_limit = 0.0
-timer_expired = Array[Resource]([])
-sockets_lit = Array[StringName]([])
-pivotal = false
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

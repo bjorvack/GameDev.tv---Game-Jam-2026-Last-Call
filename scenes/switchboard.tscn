@@ -2,23 +2,26 @@
 
 [ext_resource type="Script" uid="uid://b1o072mr8t5ul" path="res://scripts/call_director.gd" id="1_krb3x"]
 [ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="2_dq83r"]
-[ext_resource type="PackedScene" uid="uid://c3jbenv2iu2qu" path="res://components/cable.tscn" id="2_tflt8"]
-[ext_resource type="PackedScene" uid="uid://c4akekqx6ss61" path="res://components/socket.tscn" id="3_bndc3"]
+[ext_resource type="PackedScene" path="res://components/cable.tscn" id="2_tflt8"]
+[ext_resource type="PackedScene" uid="uid://bsocket0001" path="res://components/socket.tscn" id="3_bndc3"]
 [ext_resource type="PackedScene" uid="uid://dupqjqgirp0xs" path="res://components/caller_card.tscn" id="4_48g3e"]
 [ext_resource type="PackedScene" path="res://components/patience_light.tscn" id="5_v2baq"]
 [ext_resource type="PackedScene" uid="uid://drub42ey1woxf" path="res://components/post_connect_box.tscn" id="6_a0qgv"]
-[ext_resource type="Resource" path="res://data/calls/01_patty_cole.tres" id="7_call01"]
-[ext_resource type="Resource" path="res://data/calls/02_daniel_hayes.tres" id="8_call02"]
-[ext_resource type="Resource" path="res://data/calls/03_henley_sheriff.tres" id="9_call03"]
-[ext_resource type="Resource" path="res://data/calls/04_reverend_doc.tres" id="10_call04"]
-[ext_resource type="Resource" path="res://data/calls/05_daniel_doc.tres" id="11_call05"]
-[ext_resource type="Resource" path="res://data/calls/06_sheriff_patty.tres" id="12_call06"]
-[ext_resource type="Resource" path="res://data/calls/07_daniel_reverend.tres" id="13_call07"]
-[ext_resource type="Resource" path="res://data/calls/08_cole_patty.tres" id="14_call08"]
-[ext_resource type="Resource" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
-[ext_resource type="Resource" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
+[ext_resource type="Resource" uid="uid://dy7ujjg5hcuce" path="res://data/calls/01_patty_cole.tres" id="7_call01"]
+[ext_resource type="Resource" uid="uid://dlpv2k422pre3" path="res://data/calls/02_daniel_hayes.tres" id="8_call02"]
+[ext_resource type="Resource" uid="uid://b27ql1p70t40h" path="res://data/calls/03_henley_sheriff.tres" id="9_call03"]
+[ext_resource type="Resource" uid="uid://pjurnkobw1cq" path="res://data/calls/04_reverend_doc.tres" id="10_call04"]
+[ext_resource type="Resource" uid="uid://53tyn3eu64v6" path="res://data/calls/05_daniel_doc.tres" id="11_call05"]
+[ext_resource type="Resource" uid="uid://k4npwfire6xm" path="res://data/calls/06_sheriff_patty.tres" id="12_call06"]
+[ext_resource type="Resource" uid="uid://ciqy073716vdg" path="res://data/calls/07_daniel_reverend.tres" id="13_call07"]
+[ext_resource type="Resource" uid="uid://bmsny7waa0qln" path="res://data/calls/08_cole_patty.tres" id="14_call08"]
+[ext_resource type="Resource" uid="uid://bmka6i4837ajn" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
+[ext_resource type="Resource" uid="uid://dk4wo8lpji73s" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
 [ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
-[ext_resource type="Texture2D" path="res://art/backgrounds/switchboard.png" id="18_bg"]
+[ext_resource type="Texture2D" uid="uid://dfp1qghw1yd3t" path="res://art/backgrounds/room.png" id="18_bg"]
+[ext_resource type="Texture2D" uid="uid://bdyj614ghr8nw" path="res://art/props/switchboard_panel_small.png" id="19_panel"]
+[ext_resource type="Texture2D" uid="uid://b3jckmcddlwf6" path="res://art/props/cable_and_shelf.png" id="20_shelf"]
+[ext_resource type="Texture2D" uid="uid://bpu8fbqi6vj4x" path="res://art/props/operator_desk.png" id="21_desk"]
 
 [node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
@@ -28,34 +31,30 @@ post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
 
+[node name="Desk" type="Sprite2D" parent="." unique_id=224587900]
+position = Vector2(576, 540)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("21_desk")
+
 [node name="CableBay" type="Node2D" parent="." unique_id=224587881]
-position = Vector2(576, 560)
+position = Vector2(576, 595)
 
-[node name="Shelf" type="ColorRect" parent="CableBay" unique_id=224587882]
-offset_left = -80.0
-offset_top = -6.0
-offset_right = 80.0
-offset_bottom = 28.0
-color = Color(0.35, 0.21, 0.1, 1)
-
-[node name="ShelfTrim" type="ColorRect" parent="CableBay" unique_id=224587883]
-offset_left = -80.0
-offset_top = -10.0
-offset_right = 80.0
-offset_bottom = -6.0
-color = Color(0.71, 0.45, 0.2, 1)
+[node name="ShelfSprite" type="Sprite2D" parent="CableBay" unique_id=224587885]
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("20_shelf")
+offset = Vector2(-50, 0)
 
 [node name="HintLabel" type="Label" parent="CableBay" unique_id=224587884]
+modulate = Color(0.95, 0.89, 0.78, 0.75)
 offset_left = -160.0
 offset_top = 32.0
 offset_right = 160.0
 offset_bottom = 60.0
-horizontal_alignment = 1
 text = "Drag the cable to a socket"
-modulate = Color(0.95, 0.89, 0.78, 0.75)
+horizontal_alignment = 1
 
 [node name="Cable" parent="." unique_id=184587881 instance=ExtResource("2_tflt8")]
-jack_position = Vector2(576, 560)
+jack_position = Vector2(576, 595)
 
 [node name="BGLayer" type="CanvasLayer" parent="." unique_id=1457985165]
 layer = -1
@@ -66,68 +65,95 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("18_bg")
 expand_mode = 1
 stretch_mode = 6
-mouse_filter = 2
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=902817518]
 
-[node name="SocketsCenter" type="CenterContainer" parent="HUD" unique_id=78765659]
+[node name="Panel" type="NinePatchRect" parent="HUD" unique_id=78765660]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -260.0
+offset_right = 350.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("19_panel")
+patch_margin_left = 32
+patch_margin_top = 37
+patch_margin_right = 41
+patch_margin_bottom = 40
+
+[node name="PanelMargin" type="MarginContainer" parent="HUD/Panel" unique_id=78765661]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 220.0
-offset_bottom = -220.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="SocketsGrid" type="GridContainer" parent="HUD/SocketsCenter" unique_id=2095414179]
+[node name="SocketsCenter" type="CenterContainer" parent="HUD/Panel/PanelMargin" unique_id=78765659]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/h_separation = 24
-theme_override_constants/v_separation = 24
+
+[node name="SocketsGrid" type="GridContainer" parent="HUD/Panel/PanelMargin/SocketsCenter" unique_id=2095414179]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 8
 columns = 4
 
-[node name="Hayes" parent="HUD/SocketsCenter/SocketsGrid" unique_id=355638940 instance=ExtResource("3_bndc3")]
+[node name="Hayes" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=355638940 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"hayes"
-label_text = "Mrs. Hayes — 7th & Vine"
+label_text = "Mrs. Hayes"
 
-[node name="Doc" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1404150284 instance=ExtResource("3_bndc3")]
+[node name="Doc" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=1404150284 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"doc"
 label_text = "Doc Wheeler"
 
-[node name="Sheriff" parent="HUD/SocketsCenter/SocketsGrid" unique_id=160116653 instance=ExtResource("3_bndc3")]
+[node name="Sheriff" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=160116653 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"sheriff"
 label_text = "Sheriff Briggs"
 
-[node name="Reverend" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1997834584 instance=ExtResource("3_bndc3")]
+[node name="Reverend" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=1997834584 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"reverend"
 label_text = "Reverend Carter"
 
-[node name="Patty" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1093921433 instance=ExtResource("3_bndc3")]
+[node name="Patty" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=1093921433 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"patty"
 label_text = "Patty's Diner"
 
-[node name="Cole" parent="HUD/SocketsCenter/SocketsGrid" unique_id=851263592 instance=ExtResource("3_bndc3")]
+[node name="Cole" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=851263592 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"cole"
 label_text = "Cole's Garage"
 
-[node name="I40" parent="HUD/SocketsCenter/SocketsGrid" unique_id=2022365928 instance=ExtResource("3_bndc3")]
+[node name="I40" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=2022365928 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"i40"
-label_text = "Highway 40 Truck Stop, MM 88"
+label_text = "Highway 40 MM 88"
 lit = false
 
-[node name="Hospital" parent="HUD/SocketsCenter/SocketsGrid" unique_id=1474501132 instance=ExtResource("3_bndc3")]
+[node name="Hospital" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=1474501132 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"hospital"
-label_text = "County General Hospital"
+label_text = "County Hospital"
 lit = false
 
 [node name="TopBar" type="MarginContainer" parent="HUD" unique_id=136437707]
@@ -174,6 +200,8 @@ offset_left = 16.0
 offset_top = -160.0
 offset_right = -16.0
 offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="PostConnectBox" parent="HUD/BottomBar" unique_id=1476095253 instance=ExtResource("6_a0qgv")]
 visible = false

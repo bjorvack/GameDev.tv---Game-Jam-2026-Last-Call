@@ -2,12 +2,15 @@
 # Generate a Last Call sprite locally using mflux (FLUX on Apple MLX).
 #
 # Usage:
-#   tools/generate_sprite.sh portrait <out_name> "<subject prose>" [seed]
-#   tools/generate_sprite.sh bg       <out_name> "<subject prose>" [seed]
+#   tools/generate_sprite.sh portrait  <out_name> "<subject prose>" [seed]
+#   tools/generate_sprite.sh bg        <out_name> "<subject prose>" [seed]
+#   tools/generate_sprite.sh prop      <out_name> "<subject prose>" [seed]   # 1024 square, RGBA cutout
+#   tools/generate_sprite.sh prop_wide <out_name> "<subject prose>" [seed]   # 1792x1024, RGBA cutout
 #
 # Examples:
 #   tools/generate_sprite.sh portrait daniel "a tall lean man in a baseball cap"
 #   tools/generate_sprite.sh bg switchboard "a 1960 telephone exchange switchboard panel" 42
+#   tools/generate_sprite.sh prop_wide panel "an empty wood-framed switchboard face with eight round socket holes" 7
 #
 # First run downloads ~15 GB of FLUX.2 klein 9B weights to ~/.cache/huggingface.
 # Subsequent runs are ~2 min per image on an M4 24 GB at q4.
@@ -27,6 +30,8 @@ KIND="${1:-}"
 NAME="${2:-}"
 SUBJECT="${3:-}"
 SEED="${4:-}"
+CUTOUT=0
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 if [[ -z "$KIND" || -z "$NAME" || -z "$SUBJECT" ]]; then
     grep '^#' "$0" | sed 's/^# \{0,1\}//'
@@ -113,8 +118,33 @@ ${STYLE_TAIL}"
 A hand-lettered text-only illustration. NO figures, NO silhouettes, NO people, NO scenery, NO props, NO lamps — only hand-lettered text floating on a flat background. \
 ${STYLE_TAIL}"
         ;;
+    prop|prop_wide)
+        if [[ "$KIND" == "prop_wide" ]]; then
+            WIDTH=1792
+            HEIGHT=1024
+        else
+            WIDTH=1024
+            HEIGHT=1024
+        fi
+        OUT_DIR="art/props"
+        CUTOUT=1
+        # Props: a single stackable object centred on a uniform flat
+        # background that we will alpha-key out with rembg. NO scenery
+        # around it, no shadows on the floor, no room context — just the
+        # object floating cleanly on the teal so the cutout reads clean.
+        PREAMBLE="\
+A single isolated object centred in frame, rendered as if for a product cutout. \
+The object sits against a completely plain, flat, uniform deep teal #0F2A33 \
+background. The background is empty — NO walls, NO floor, NO ceiling, NO room, \
+NO scenery, NO other furniture, NO cast shadow on the ground, NO additional \
+props. The object is hand-illustrated, lit with the standard warm-amber-from-\
+upper-right rim light only on the object itself. The object fills roughly 70% \
+of the frame with clean negative space around it on all four sides so it can \
+be cut out cleanly. NO people, NO silhouettes, NO hands, NO characters. \
+${STYLE_TAIL}"
+        ;;
     *)
-        echo "Unknown kind: $KIND (expected: portrait | bg | scene | text)" >&2
+        echo "Unknown kind: $KIND (expected: portrait | bg | scene | text | prop | prop_wide)" >&2
         exit 1
         ;;
 esac
@@ -152,5 +182,10 @@ mflux-generate-flux2 \
     --metadata \
     --output "$OUT_PATH" \
     "${SEED_ARGS[@]}"
+
+if [[ "$CUTOUT" == "1" ]]; then
+    echo ">> Cutting background out -> RGBA"
+    "$SCRIPT_DIR/cutout.py" "$OUT_PATH"
+fi
 
 echo ">> Done: $OUT_PATH"

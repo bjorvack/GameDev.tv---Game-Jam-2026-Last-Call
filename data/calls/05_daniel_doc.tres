@@ -1,32 +1,11 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://53tyn3eu64v6"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_0"]
-[ext_resource type="Texture2D" path="res://art/portraits/doc.png" id="3_portrait_1"]
-[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
-[ext_resource type="Texture2D" path="res://art/portraits/sheriff.png" id="3_portrait_3"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Operator, it's Daniel Hayes again. Pulled off at the diesel stop, marker 88."
-portrait = ExtResource("3_portrait_0")
-duration = 3.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Still no answer at Mom's."
-portrait = ExtResource("3_portrait_0")
-duration = 2.0
-
-[sub_resource type="Resource" id="opening_2"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere."
-portrait = ExtResource("3_portrait_0")
-duration = 4.5
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" uid="uid://5h42femxk4di" path="res://art/portraits/daniel.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
+[ext_resource type="Texture2D" uid="uid://bp7ikauukk2wh" path="res://art/portraits/sheriff.png" id="3_portrait_3"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -54,7 +33,6 @@ script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
 text = "Son — drive faster."
 portrait = ExtResource("3_portrait_1")
-duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -70,6 +48,27 @@ text = "Sorry — wrong number."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Operator, it's Daniel Hayes again. Pulled off at the diesel stop, marker 88."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Still no answer at Mom's."
+portrait = ExtResource("3_portrait_0")
+duration = 2.0
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere."
+portrait = ExtResource("3_portrait_0")
+duration = 4.5
+
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
@@ -79,9 +78,7 @@ duration = 3.5
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")
-speaker = ""
 text = "(no answer)"
-duration = 2.5
 
 [sub_resource type="Resource" id="wrong_hayes_1"]
 script = ExtResource("2_dline")
@@ -109,21 +106,18 @@ script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
 text = "…Son, who am I talking to?"
 portrait = ExtResource("3_portrait_3")
-duration = 2.5
 
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 caller_portrait = ExtResource("3_portrait_0")
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"doc"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")]),
 &"sheriff": Array[Resource]([SubResource("wrong_sheriff_0"), SubResource("wrong_sheriff_1"), SubResource("wrong_sheriff_2")])
 }
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 20.0
-timer_expired = Array[Resource]([SubResource("timer_0")])
-sockets_lit = Array[StringName]([])
-pivotal = false
+timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])

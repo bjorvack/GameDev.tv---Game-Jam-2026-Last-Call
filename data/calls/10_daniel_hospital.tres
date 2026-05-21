@@ -1,31 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://dk4wo8lpji73s"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_0"]
-[ext_resource type="Texture2D" path="res://art/portraits/nurse.png" id="3_portrait_1"]
-[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Operator… please."
-portrait = ExtResource("3_portrait_0")
-duration = 2.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "County General. I'm in the parking lot."
-portrait = ExtResource("3_portrait_0")
-duration = 3.0
-
-[sub_resource type="Resource" id="opening_2"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "I need to know if I can still — "
-portrait = ExtResource("3_portrait_0")
-duration = 3.0
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" uid="uid://5h42femxk4di" path="res://art/portraits/daniel.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" uid="uid://cnjf2igh8v1so" path="res://art/portraits/nurse.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -43,13 +22,11 @@ duration = 3.0
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
-speaker = ""
 text = "(Daniel's breath catches. The line goes warm with quiet.)"
 duration = 4.0
 
 [sub_resource type="Resource" id="connected_3"]
 script = ExtResource("2_dline")
-speaker = ""
 text = "(The operator's board goes dark, one light at a time.)"
 duration = 4.0
 
@@ -67,6 +44,26 @@ text = "Sorry — wrong number."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Operator… please."
+portrait = ExtResource("3_portrait_0")
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "County General. I'm in the parking lot."
+portrait = ExtResource("3_portrait_0")
+duration = 3.0
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "I need to know if I can still — "
+portrait = ExtResource("3_portrait_0")
+duration = 3.0
+
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
@@ -76,7 +73,6 @@ duration = 3.5
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")
-speaker = ""
 text = "(no answer — that line is empty now)"
 duration = 3.0
 
@@ -91,14 +87,13 @@ duration = 3.0
 script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 caller_portrait = ExtResource("3_portrait_0")
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"hospital"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")])
 }
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 25.0
-timer_expired = Array[Resource]([SubResource("timer_0")])
+timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
 sockets_lit = Array[StringName]([&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole", &"hospital"])
-pivotal = false

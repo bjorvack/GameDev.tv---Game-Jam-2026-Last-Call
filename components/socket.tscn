@@ -12,7 +12,7 @@ shader_parameter/teal_color = Color(0.06, 0.16, 0.2, 1)
 shader_parameter/is_lit = true
 
 [node name="Socket" type="Control" groups=["sockets"]]
-custom_minimum_size = Vector2(112, 128)
+custom_minimum_size = Vector2(140, 112)
 mouse_filter = 2
 script = ExtResource("1_socket")
 
@@ -36,8 +36,8 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -56.0
-offset_top = -32.0
-offset_right = 56.0
+offset_left = -70.0
+offset_top = -36.0
+offset_right = 70.0
 horizontal_alignment = 1
 autowrap_mode = 2

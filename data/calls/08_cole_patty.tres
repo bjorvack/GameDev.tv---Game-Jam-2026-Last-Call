@@ -1,31 +1,10 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=12 format=3]
+[gd_resource type="Resource" script_class="CallData" format=3 uid="uid://bmsny7waa0qln"]
 
-[ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
-[ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
-[ext_resource type="Texture2D" path="res://art/portraits/cole.png" id="3_portrait_0"]
-[ext_resource type="Texture2D" path="res://art/portraits/patty.png" id="3_portrait_1"]
-[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
-
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Cole"
-text = "Patty, it's Cole."
-portrait = ExtResource("3_portrait_0")
-duration = 2.5
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Cole"
-text = "Truck stalled out near 7th and Vine — there's two units and a chaplain at Margaret's place."
-portrait = ExtResource("3_portrait_0")
-duration = 4.5
-
-[sub_resource type="Resource" id="opening_2"]
-script = ExtResource("2_dline")
-speaker = "Cole"
-text = "Anyone heard from Daniel?"
-portrait = ExtResource("3_portrait_0")
-duration = 2.5
+[ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="1_calldata"]
+[ext_resource type="Script" uid="uid://cnn3ealt34uvp" path="res://scripts/dialogue_line.gd" id="2_dline"]
+[ext_resource type="Texture2D" uid="uid://c8rie3fgslscn" path="res://art/portraits/cole.png" id="3_portrait_0"]
+[ext_resource type="Texture2D" uid="uid://j8hv8r6dejab" path="res://art/portraits/patty.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -39,7 +18,6 @@ script = ExtResource("2_dline")
 speaker = "Patty"
 text = "Lord, he doesn't know yet."
 portrait = ExtResource("3_portrait_1")
-duration = 2.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -55,16 +33,30 @@ text = "Sorry — wrong number."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Patty, it's Cole."
+portrait = ExtResource("3_portrait_0")
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Truck stalled out near 7th and Vine — there's two units and a chaplain at Margaret's place."
+portrait = ExtResource("3_portrait_0")
+duration = 4.5
+
+[sub_resource type="Resource" id="opening_2"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Anyone heard from Daniel?"
+portrait = ExtResource("3_portrait_0")
+
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Cole"
 caller_portrait = ExtResource("3_portrait_0")
-opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"patty"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
-wrong_responses = {}
-generic_wrong_response = Array[Resource]([SubResource("generic_0"), SubResource("generic_1")])
-time_limit = 0.0
-timer_expired = Array[Resource]([])
-sockets_lit = Array[StringName]([])
-pivotal = false
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1")])
+generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

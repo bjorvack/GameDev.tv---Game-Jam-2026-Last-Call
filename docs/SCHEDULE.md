@@ -54,7 +54,7 @@ Deadline: **May 25, 21:00 PST** (≈ May 26, 06:00 CEST).
 - [ ] Itch page: description, 3 screenshots, attributions copy
 - [ ] Submit by 19:00 PST (2h buffer)
 
----
+---/
 
 ## Spec changes since planning
 
