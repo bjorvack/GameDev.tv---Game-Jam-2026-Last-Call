@@ -27,7 +27,12 @@ enum CallPhase { IDLE, RINGING, OPENING, AWAITING, WRONG_RESP, CONNECTED, FINISH
 @export var cable_path: NodePath
 
 const DEFAULT_LIT: Array[StringName] = [
-	&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole"
+	&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole",
+	&"henley", &"bray",
+	# Red herrings — always reachable, never correct.
+	&"fire", &"telegram", &"town_hall", &"lounge",
+	&"sentinel", &"funeral", &"bus", &"esso",
+	&"mill", &"school",
 ]
 
 ## Quiet beat after a call ends, before the next one rings in.

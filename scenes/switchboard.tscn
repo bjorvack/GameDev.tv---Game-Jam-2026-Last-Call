@@ -82,10 +82,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -740.0
-offset_top = -550.0
+offset_left = -680.0
+offset_top = -620.0
 offset_right = -40.0
-offset_bottom = -150.0
+offset_bottom = -60.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("19_panel")
@@ -152,13 +152,71 @@ label_text = "Cole's Garage"
 layout_mode = 2
 socket_key = &"i40"
 label_text = "Highway 40 MM 88"
-lit = false
 
 [node name="Hospital" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=1474501132 instance=ExtResource("3_bndc3")]
 layout_mode = 2
 socket_key = &"hospital"
 label_text = "County Hospital"
-lit = false
+
+[node name="Henley" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3001 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"henley"
+label_text = "Henley 8th St"
+
+[node name="Bray" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3002 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"bray"
+label_text = "Bray Residence"
+
+[node name="Fire" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3003 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"fire"
+label_text = "Fire Station"
+
+[node name="Telegram" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3004 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"telegram"
+label_text = "Western Union"
+
+[node name="TownHall" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3005 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"town_hall"
+label_text = "Town Hall"
+
+[node name="Lounge" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3006 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"lounge"
+label_text = "Sunset Lounge"
+
+[node name="Sentinel" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3007 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"sentinel"
+label_text = "Mayfield Sentinel"
+
+[node name="Funeral" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3008 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"funeral"
+label_text = "Cooper's"
+
+[node name="Bus" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3009 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"bus"
+label_text = "Greyhound Depot"
+
+[node name="Esso" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3010 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"esso"
+label_text = "Mayfield Esso"
+
+[node name="Mill" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3011 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"mill"
+label_text = "Cotton Mill"
+
+[node name="School" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3012 instance=ExtResource("3_bndc3")]
+layout_mode = 2
+socket_key = &"school"
+label_text = "Mayfield School"
 
 [node name="CallerCard" parent="HUD" unique_id=1278693595 instance=ExtResource("4_48g3e")]
 layout_mode = 1
