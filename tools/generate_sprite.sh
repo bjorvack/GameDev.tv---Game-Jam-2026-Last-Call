@@ -58,15 +58,19 @@ A pure dark silhouette of a single person rendered as a solid black shape agains
 completely plain, flat, uniform deep teal #0F2A33 background. The background is \
 empty — NO lamps, NO lampposts, NO sconces, NO candles, NO windows, NO furniture, \
 NO scenery, NO decorations, NO props, NO architectural details, NO sky, NO stars, \
-NO moon, NO trees, NO room visible whatsoever. The figure floats on a single solid \
-colour field, like a portrait against a studio backdrop. \
+NO moon, NO trees, NO room visible whatsoever. The figure stands centred against \
+this single solid colour field, like a portrait against a studio backdrop. \
 No facial features visible — no eyes, no nose, no mouth, no skin tone — but the \
 silhouette retains a painterly, hand-illustrated edge, not a flat paper cutout. \
 The figure is clearly, unmistakably holding an old 1960 corded telephone: a chunky \
 black handset receiver pressed against the ear, with a visible coiled cord trailing \
 down out of frame. \
 Medium close-up framing, head-and-shoulders, the figure fills roughly 60% of the \
-frame, the handset and cord clearly readable in the lower third. \
+frame, the handset and cord clearly readable in the lower third. The figure's \
+shoulders and torso continue off the bottom edge of the frame so the silhouette \
+is anchored to the bottom, not floating in the middle. The cap, hat, hair, or \
+other head feature described in the subject prose remains the dominant element \
+of the upper half of the silhouette. \
 A thin warm amber rim of light catches only the top-right edges of the figure as a \
 stylised contour highlight — this is a lighting effect on the silhouette only, not \
 a visible light source in the frame. \
