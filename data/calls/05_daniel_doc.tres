@@ -10,9 +10,9 @@
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Operator, it's Daniel Hayes again."
+text = "Operator, it's Daniel Hayes again. Pulled off at the diesel stop, marker 88."
 portrait = ExtResource("3_portrait_0")
-duration = 2.5
+duration = 3.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")

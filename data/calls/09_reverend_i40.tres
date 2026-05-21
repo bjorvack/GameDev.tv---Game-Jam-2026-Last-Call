@@ -1,11 +1,12 @@
-[gd_resource type="Resource" script_class="CallData" load_steps=16 format=3]
+[gd_resource type="Resource" script_class="CallData" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/call_data.gd" id="1_calldata"]
 [ext_resource type="Script" path="res://scripts/dialogue_line.gd" id="2_dline"]
 [ext_resource type="Texture2D" path="res://art/portraits/reverend.png" id="3_portrait_0"]
-[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_1"]
-[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_2"]
-[ext_resource type="Texture2D" path="res://art/portraits/nurse.png" id="3_portrait_3"]
+[ext_resource type="Texture2D" path="res://art/portraits/trucker.png" id="3_portrait_1"]
+[ext_resource type="Texture2D" path="res://art/portraits/daniel.png" id="3_portrait_2"]
+[ext_resource type="Texture2D" path="res://art/portraits/unknown.png" id="3_portrait_3"]
+[ext_resource type="Texture2D" path="res://art/portraits/nurse.png" id="3_portrait_4"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
@@ -17,35 +18,56 @@ duration = 2.5
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "Try the truck stop payphone at marker 88."
+text = "Doc said his last call came from the diesel stop at marker 88 — that was thirty minutes back. Try the truck stop payphone there."
 portrait = ExtResource("3_portrait_0")
-duration = 3.5
+duration = 5.0
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "Tell him his mother's alive. They're taking her to County General."
+text = "Whoever picks up, tell them to flag him down. Tell him his mother's alive. They're taking her to County General."
 portrait = ExtResource("3_portrait_0")
-duration = 4.5
+duration = 5.0
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
-speaker = ""
-text = "(Static. A trucker grabs the phone, runs out, flags Daniel down.)"
-duration = 4.0
+speaker = "Trucker"
+text = "Yeah? Hello?"
+portrait = ExtResource("3_portrait_1")
+duration = 2.0
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "A young man's coming through east any minute — dark blue sedan, Greensboro plate. Flag him down. His mother's alive. They've got her at County General."
+portrait = ExtResource("3_portrait_0")
+duration = 5.5
+
+[sub_resource type="Resource" id="connected_2"]
+script = ExtResource("2_dline")
+speaker = "Trucker"
+text = "On it, Reverend."
+portrait = ExtResource("3_portrait_1")
+duration = 2.0
+
+[sub_resource type="Resource" id="connected_3"]
+script = ExtResource("2_dline")
+speaker = ""
+text = "(The phone bangs against the booth glass. Diesel. Footsteps in the cold.)"
+duration = 4.0
+
+[sub_resource type="Resource" id="connected_4"]
+script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "(distant, breathless) Tell the Reverend — tell him I'm coming."
-portrait = ExtResource("3_portrait_1")
+portrait = ExtResource("3_portrait_2")
 duration = 4.0
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
 speaker = "???"
 text = "Hello?"
-portrait = ExtResource("3_portrait_2")
+portrait = ExtResource("3_portrait_3")
 duration = 1.5
 
 [sub_resource type="Resource" id="generic_1"]
@@ -66,7 +88,7 @@ duration = 3.0
 script = ExtResource("2_dline")
 speaker = "Nurse"
 text = "County General, please hold —"
-portrait = ExtResource("3_portrait_3")
+portrait = ExtResource("3_portrait_4")
 duration = 2.5
 
 [sub_resource type="Resource" id="wrong_hospital_1"]
@@ -82,7 +104,7 @@ caller_name = "Reverend Carter"
 caller_portrait = ExtResource("3_portrait_0")
 opening = Array[Resource]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 correct_socket = &"i40"
-connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1")])
+connected_dialogue = Array[Resource]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3"), SubResource("connected_4")])
 wrong_responses = {
 &"hospital": Array[Resource]([SubResource("wrong_hospital_0"), SubResource("wrong_hospital_1")])
 }

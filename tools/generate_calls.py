@@ -31,6 +31,7 @@ PORTRAITS: dict[str, str] = {
     "Sheriff Briggs": "res://art/portraits/sheriff.png",
     "Cole": "res://art/portraits/cole.png",
     "Nurse": "res://art/portraits/nurse.png",
+    "Trucker": "res://art/portraits/trucker.png",
     "???": "res://art/portraits/unknown.png",
 }
 
@@ -165,7 +166,7 @@ CALLS: list[Call] = [
         slug="05_daniel_doc",
         caller_name="Daniel Hayes",
         opening=[
-            Line("Daniel", "Operator, it's Daniel Hayes again."),
+            Line("Daniel", "Operator, it's Daniel Hayes again. Pulled off at the diesel stop, marker 88.", duration=3.5),
             Line("Daniel", "Still no answer at Mom's.", duration=2.0),
             Line("Daniel", "Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere.", duration=4.5),
         ],
@@ -260,12 +261,15 @@ CALLS: list[Call] = [
         caller_name="Reverend Carter",
         opening=[
             Line("Reverend Carter", "Operator. I need to reach Daniel Hayes — he's on the highway."),
-            Line("Reverend Carter", "Try the truck stop payphone at marker 88.", duration=3.5),
-            Line("Reverend Carter", "Tell him his mother's alive. They're taking her to County General.", duration=4.5),
+            Line("Reverend Carter", "Doc said his last call came from the diesel stop at marker 88 — that was thirty minutes back. Try the truck stop payphone there.", duration=5.0),
+            Line("Reverend Carter", "Whoever picks up, tell them to flag him down. Tell him his mother's alive. They're taking her to County General.", duration=5.0),
         ],
         correct_socket="i40",
         connected=[
-            Line("", "(Static. A trucker grabs the phone, runs out, flags Daniel down.)", duration=4.0),
+            Line("Trucker", "Yeah? Hello?", duration=2.0),
+            Line("Reverend Carter", "A young man's coming through east any minute — dark blue sedan, Greensboro plate. Flag him down. His mother's alive. They've got her at County General.", duration=5.5),
+            Line("Trucker", "On it, Reverend.", duration=2.0),
+            Line("", "(The phone bangs against the booth glass. Diesel. Footsteps in the cold.)", duration=4.0),
             Line("Daniel", "(distant, breathless) Tell the Reverend — tell him I'm coming.", duration=4.0),
         ],
         wrong_responses={
