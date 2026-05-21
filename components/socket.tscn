@@ -45,6 +45,9 @@ texture = ExtResource("2_socket_sprite")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Center" type="Marker2D" parent="Visual" unique_id=2087213654]
+position = Vector2(38, 42)
+
 [node name="NameLabel" type="Label" parent="." unique_id=991917301]
 layout_mode = 1
 anchors_preset = 7

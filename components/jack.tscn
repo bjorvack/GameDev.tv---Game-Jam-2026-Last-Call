@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://d2vwhglta3ugv"]
+
+[ext_resource type="Script" uid="uid://hmpt8by0ir1y" path="res://components/jack.gd" id="1_jack"]
+[ext_resource type="Texture2D" uid="uid://ci15ddtqg0i8t" path="res://art/props/jack_idle.png" id="2_idle"]
+[ext_resource type="Texture2D" uid="uid://v3f2omuurvg" path="res://art/props/jack_socketed (1).png" id="3_044qg"]
+
+[node name="Jack" type="Node2D" unique_id=670743489]
+script = ExtResource("1_jack")
+
+[node name="Idle" type="Sprite2D" parent="." unique_id=1712878582]
+visible = false
+position = Vector2(-1.5, -47.5)
+rotation = 3.1415927
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("2_idle")
+
+[node name="Socketed" type="Sprite2D" parent="." unique_id=1995187380]
+position = Vector2(0, -7.9999995)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("3_044qg")
+
+[node name="Center" type="Marker2D" parent="Socketed" unique_id=486140522]
+position = Vector2(0, -9.536742e-06)
+
+[node name="Connection" type="Marker2D" parent="." unique_id=331887557]

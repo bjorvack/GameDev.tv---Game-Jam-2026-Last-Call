@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1o072mr8t5ul" path="res://scripts/call_director.gd" id="1_krb3x"]
 [ext_resource type="Script" uid="uid://dxbl61tligon7" path="res://scripts/call_data.gd" id="2_dq83r"]
-[ext_resource type="PackedScene" path="res://components/cable.tscn" id="2_tflt8"]
+[ext_resource type="PackedScene" uid="uid://bmxh1ql7eh7sm" path="res://components/cable.tscn" id="2_tflt8"]
 [ext_resource type="PackedScene" uid="uid://bsocket0001" path="res://components/socket.tscn" id="3_bndc3"]
 [ext_resource type="PackedScene" uid="uid://dupqjqgirp0xs" path="res://components/caller_card.tscn" id="4_48g3e"]
 [ext_resource type="PackedScene" path="res://components/patience_light.tscn" id="5_v2baq"]
@@ -18,10 +18,8 @@
 [ext_resource type="Resource" uid="uid://bmka6i4837ajn" path="res://data/calls/09_reverend_i40.tres" id="15_call09"]
 [ext_resource type="Resource" uid="uid://dk4wo8lpji73s" path="res://data/calls/10_daniel_hospital.tres" id="16_call10"]
 [ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
-[ext_resource type="Texture2D" uid="uid://dfp1qghw1yd3t" path="res://art/backgrounds/room.png" id="18_bg"]
+[ext_resource type="Texture2D" uid="uid://bapvq0fsw84tc" path="res://art/backgrounds/title.png" id="18_bg"]
 [ext_resource type="Texture2D" uid="uid://bdyj614ghr8nw" path="res://art/props/switchboard_panel_small.png" id="19_panel"]
-[ext_resource type="Texture2D" uid="uid://b3jckmcddlwf6" path="res://art/props/cable_and_shelf.png" id="20_shelf"]
-[ext_resource type="Texture2D" uid="uid://bpu8fbqi6vj4x" path="res://art/props/operator_desk.png" id="21_desk"]
 
 [node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
@@ -32,33 +30,12 @@ patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
 cable_path = NodePath("CableLayer/Cable")
 
-[node name="Desk" type="Sprite2D" parent="." unique_id=224587900]
-position = Vector2(762, 540)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("21_desk")
-
-[node name="CableBay" type="Node2D" parent="." unique_id=224587881]
-position = Vector2(762, 595)
-
-[node name="ShelfSprite" type="Sprite2D" parent="CableBay" unique_id=224587885]
-scale = Vector2(0.36, 0.36)
-texture = ExtResource("20_shelf")
-offset = Vector2(-50, 0)
-
-[node name="HintLabel" type="Label" parent="CableBay" unique_id=224587884]
-modulate = Color(0.95, 0.89, 0.78, 0.75)
-offset_left = -160.0
-offset_top = 32.0
-offset_right = 160.0
-offset_bottom = 60.0
-text = "Click a glowing socket to answer"
-horizontal_alignment = 1
-
 [node name="CableLayer" type="CanvasLayer" parent="." unique_id=184587880]
 layer = 2
 
 [node name="Cable" parent="CableLayer" unique_id=184587881 instance=ExtResource("2_tflt8")]
-jack_position = Vector2(762, 595)
+jack_position = Vector2(576, 620)
+jack_spacing = 120.0
 
 [node name="BGLayer" type="CanvasLayer" parent="." unique_id=1457985165]
 layer = -1
@@ -219,7 +196,7 @@ socket_key = &"school"
 label_text = "Mayfield School"
 
 [node name="CallerCard" parent="HUD" unique_id=1278693595 instance=ExtResource("4_48g3e")]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 0
 offset_left = 24.0
 offset_top = 24.0
@@ -227,14 +204,17 @@ offset_right = 384.0
 offset_bottom = 324.0
 
 [node name="Patience" type="HBoxContainer" parent="HUD" unique_id=333999525]
-anchors_preset = 1
+anchors_preset = 3
 anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
-offset_left = -120.0
-offset_top = 24.0
-offset_right = -24.0
-offset_bottom = 56.0
+anchor_bottom = 1.0
+offset_left = -139.0
+offset_top = -53.0
+offset_right = -43.0
+offset_bottom = -21.0
 grow_horizontal = 0
+grow_vertical = 0
 theme_override_constants/separation = 8
 
 [node name="PatienceLight" parent="HUD/Patience" unique_id=587441976 instance=ExtResource("5_v2baq")]

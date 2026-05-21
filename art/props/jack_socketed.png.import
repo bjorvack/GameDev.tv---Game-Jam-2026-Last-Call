@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpu8fbqi6vj4x"
-path="res://.godot/imported/operator_desk.png-14afacf5f65b3f0b69ef1f058e3f03d9.ctex"
+uid="uid://ddtwuqv3leyxt"
+path="res://.godot/imported/jack_socketed.png-6d6f0effc20ceac735656f3830c80928.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/props/operator_desk.png"
-dest_files=["res://.godot/imported/operator_desk.png-14afacf5f65b3f0b69ef1f058e3f03d9.ctex"]
+source_file="res://art/props/jack_socketed.png"
+dest_files=["res://.godot/imported/jack_socketed.png-6d6f0effc20ceac735656f3830c80928.ctex"]
 
 [params]
 

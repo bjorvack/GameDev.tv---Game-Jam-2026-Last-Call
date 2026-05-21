@@ -1,6 +1,7 @@
 ## Two-ended patch cord. Click-to-plug: clicks on Socket nodes drive plug /
-## unplug. Visual is a Line2D whose two endpoints sit at the shelf when idle
-## and snap to the plugged-in sockets' centres otherwise.
+## unplug. Visual is a Line2D that arcs between two Jack instances; each
+## Jack handles its own idle/socketed sprite swap and exposes a
+## Connection Marker2D as the cable's attach point.
 ##
 ## Lifecycle, driven by the CallDirector's RINGING / ANSWERED / AWAITING_ROUTING
 ## phases:
@@ -8,11 +9,7 @@
 ##     "answers" — emits `answered(socket_key)`, end A snaps to that socket.
 ##   - During ANSWERED + AWAITING_ROUTING: end A stays plugged in the caller
 ##     socket. Clicking any reachable socket plugs end B and emits
-##     `routed(socket_key)`. Clicking either plugged socket again unplugs that
-##     end and returns it to the shelf.
-##
-## CallDirector decides whether `routed` is correct/wrong; the cable itself
-## doesn't care.
+##     `routed(socket_key)`. Clicking the routed socket again unplugs it.
 extends Line2D
 
 signal answered(socket_key: StringName)
@@ -26,14 +23,23 @@ signal end_unplugged(socket_key: StringName)
 ## Vertical offset of the jacks relative to `jack_position`.
 @export var jack_height_offset: float = 0.0
 
+## How many segments the cable curve is sampled at. Higher = smoother.
+const CURVE_SUBDIVISIONS := 24
+## How much the cable droops under gravity, in pixels at a 600-px-long span.
+## Shorter spans droop proportionally less, longer spans more.
+const SAG_PER_600PX := 180.0
+## Minimum sag regardless of span — keeps an idle cable looking like a slack
+## cord rather than a tight string when the two jacks rest side by side.
+const MIN_SAG := 60.0
+
 ## The CallDirector flips these as it walks through the per-call phases.
 ## Sockets ignore clicks when both are false — so between calls (and during
 ## the caller's opening) nothing is pluggable.
 var accepting_answer: bool = false
 var accepting_routing: bool = false
 
-var _jack_a: Sprite2D
-var _jack_b: Sprite2D
+var _jack_a: Jack
+var _jack_b: Jack
 
 var _socket_a: Socket = null
 var _socket_b: Socket = null
@@ -41,21 +47,12 @@ var _socket_b: Socket = null
 func _ready() -> void:
 	_jack_a = get_node_or_null("JackA")
 	_jack_b = get_node_or_null("JackB")
-	# Backwards compat: older scenes only have one Jack — use it for A and
-	# spawn a clone for B at runtime.
-	if _jack_a == null:
-		var legacy := get_node_or_null("Jack")
-		if legacy is Sprite2D:
-			legacy.name = "JackA"
-			_jack_a = legacy
-	if _jack_b == null and _jack_a:
-		_jack_b = _jack_a.duplicate()
-		_jack_b.name = "JackB"
-		add_child(_jack_b)
 
 	clear_points()
-	add_point(_rest_position_a())
-	add_point(_rest_position_b())
+	# Reserve the points for the curve subdivisions; they'll be repositioned
+	# by _apply_endpoints. We only need to allocate once.
+	for i in CURVE_SUBDIVISIONS + 1:
+		add_point(Vector2.ZERO)
 	_apply_endpoints()
 
 	# Subscribe to socket clicks across the scene tree.
@@ -70,12 +67,32 @@ func _rest_position_b() -> Vector2:
 	return to_local(Vector2(jack_position.x + jack_spacing * 0.5, jack_position.y + jack_height_offset))
 
 func _apply_endpoints() -> void:
-	set_point_position(0, _endpoint_for(_socket_a, _rest_position_a()))
-	set_point_position(1, _endpoint_for(_socket_b, _rest_position_b()))
-	if _jack_a:
-		_jack_a.position = get_point_position(0)
-	if _jack_b:
-		_jack_b.position = get_point_position(1)
+	var p0 := _place_jack(_jack_a, _endpoint_for(_socket_a, _rest_position_a()), _socket_a)
+	var p1 := _place_jack(_jack_b, _endpoint_for(_socket_b, _rest_position_b()), _socket_b)
+	# Quadratic Bezier control point: midpoint pulled DOWN under gravity.
+	# Sag scales with the horizontal span so short spans droop a little,
+	# long spans droop a lot.
+	var mid := (p0 + p1) * 0.5
+	var span := p0.distance_to(p1)
+	var sag := maxf(MIN_SAG, SAG_PER_600PX * (span / 600.0))
+	var ctrl := mid + Vector2(0, sag)
+	for i in CURVE_SUBDIVISIONS + 1:
+		var t := float(i) / float(CURVE_SUBDIVISIONS)
+		var omt := 1.0 - t
+		var pt := omt * omt * p0 + 2.0 * omt * t * ctrl + t * t * p1
+		set_point_position(i, pt)
+
+## Swap the jack's visual to match the plug state, ask it to align its
+## active anchor with `anchor`, then return the actual cable attach point.
+## For the idle pose the cable end coincides with `anchor`; for the
+## socketed pose the cable attaches slightly below the socket hole,
+## wherever the Jack's `Connection` marker lands.
+func _place_jack(jack: Jack, anchor: Vector2, plugged_socket: Socket) -> Vector2:
+	if jack == null:
+		return anchor
+	jack.set_plugged(plugged_socket != null)
+	jack.place_at(anchor)
+	return jack.connection_point()
 
 func _endpoint_for(socket: Socket, fallback: Vector2) -> Vector2:
 	if socket == null:

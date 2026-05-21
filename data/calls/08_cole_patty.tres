@@ -6,20 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://j8hv8r6dejab" path="res://art/portraits/patty.png" id="3_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 
-[sub_resource type="Resource" id="opening_0"]
-script = ExtResource("2_dline")
-speaker = "Cole"
-text = "Operator — Cole. Payphone at 7th and Vine."
-portrait = ExtResource("3_portrait_0")
-duration = 3.0
-
-[sub_resource type="Resource" id="opening_1"]
-script = ExtResource("2_dline")
-speaker = "Cole"
-text = "Put me through to Patty's, would you? Truck stalled out and I need to ask her something."
-portrait = ExtResource("3_portrait_0")
-duration = 4.5
-
 [sub_resource type="Resource" id="connected_pickup"]
 script = ExtResource("2_dline")
 speaker = "Patty"
@@ -74,6 +60,20 @@ speaker = "Cole"
 text = "Sorry — wrong number."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
+
+[sub_resource type="Resource" id="opening_0"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Operator — Cole. Payphone at 7th and Vine."
+portrait = ExtResource("3_portrait_0")
+duration = 3.0
+
+[sub_resource type="Resource" id="opening_1"]
+script = ExtResource("2_dline")
+speaker = "Cole"
+text = "Put me through to Patty's, would you? Truck stalled out and I need to ask her something."
+portrait = ExtResource("3_portrait_0")
+duration = 4.5
 
 [resource]
 script = ExtResource("1_calldata")

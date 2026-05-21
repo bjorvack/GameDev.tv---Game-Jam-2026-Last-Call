@@ -74,8 +74,13 @@ func _start_pulse(glow: Light2D) -> void:
 	_pulse_tween.tween_property(glow, "energy", 0.8, 0.55)
 	_pulse_tween.tween_property(glow, "energy", 0.2, 0.55)
 
-## Center of this socket in viewport coords — cable.gd snaps the jack here.
+## Centre of this socket in viewport coords — cable.gd snaps the jack here.
+## Uses the `Visual/Center` Marker2D when present, so the alignment point
+## tracks the painted socket hole rather than the bounding rect's centre.
 func plug_target() -> Vector2:
+	var marker := get_node_or_null("Visual/Center") as Marker2D
+	if marker:
+		return marker.global_position
 	return get_global_rect().get_center()
 
 ## Called by cable.gd when a cable end is dropped here.
