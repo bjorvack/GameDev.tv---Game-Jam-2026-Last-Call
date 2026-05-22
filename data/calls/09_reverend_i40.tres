@@ -89,6 +89,16 @@ text = "Whoever picks up, tell them to flag him down. Tell him his mother's aliv
 portrait = ExtResource("3_portrait_0")
 duration = 5.0
 
+[sub_resource type="Resource" id="thought_0"]
+script = ExtResource("2_dline")
+text = "The line went warm. He knows now."
+duration = 3.5
+
+[sub_resource type="Resource" id="thought_1"]
+script = ExtResource("2_dline")
+text = "One more call before the board goes dark."
+duration = 3.5
+
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
@@ -107,16 +117,6 @@ script = ExtResource("2_dline")
 speaker = "Reverend Carter"
 text = "No — not yet — he needs to know FIRST."
 portrait = ExtResource("3_portrait_0")
-duration = 3.5
-
-[sub_resource type="Resource" id="thought_0"]
-script = ExtResource("2_dline")
-text = "The line went warm. He knows now."
-duration = 3.5
-
-[sub_resource type="Resource" id="thought_1"]
-script = ExtResource("2_dline")
-text = "One more call before the board goes dark."
 duration = 3.5
 
 [resource]

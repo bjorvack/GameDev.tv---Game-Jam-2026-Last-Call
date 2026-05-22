@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 [ext_resource type="Texture2D" uid="uid://cnjf2igh8v1so" path="res://art/portraits/nurse.png" id="3_portrait_3"]
+[ext_resource type="Texture2D" path="res://art/portraits/mrs_bray.png" id="3_portrait_4"]
 
 [sub_resource type="Resource" id="connected_pickup"]
 script = ExtResource("2_dline")
@@ -54,6 +55,13 @@ text = "Old Mr. Bray's taken a turn — bad. Put me through to Doc Wheeler, quic
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
 
+[sub_resource type="Resource" id="timer_0"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Doc — anyone — Lord have mercy. He's gone still."
+portrait = ExtResource("3_portrait_0")
+duration = 4.0
+
 [sub_resource type="Resource" id="wrong_hospital_0"]
 script = ExtResource("2_dline")
 speaker = "Nurse"
@@ -72,7 +80,7 @@ duration = 3.5
 script = ExtResource("2_dline")
 speaker = "Mrs. Bray"
 text = "Hello?"
-portrait = ExtResource("3_portrait_2")
+portrait = ExtResource("3_portrait_4")
 duration = 1.8
 
 [sub_resource type="Resource" id="wrong_bray_1"]
@@ -81,13 +89,6 @@ speaker = "Reverend Carter"
 text = "Mrs. Bray — wrong line, dear. Walter's fine. Sorry to wake you."
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
-
-[sub_resource type="Resource" id="timer_0"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "Doc — anyone — Lord have mercy. He's gone still."
-portrait = ExtResource("3_portrait_0")
-duration = 4.0
 
 [resource]
 script = ExtResource("1_calldata")
@@ -98,8 +99,8 @@ caller_socket = &"reverend"
 correct_socket = &"doc"
 connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_explain"), SubResource("connected_0")])
 wrong_responses = {
-&"hospital": Array[Resource]([SubResource("wrong_hospital_0"), SubResource("wrong_hospital_1")]),
-&"bray": Array[Resource]([SubResource("wrong_bray_0"), SubResource("wrong_bray_1")])
+&"bray": Array[Resource]([SubResource("wrong_bray_0"), SubResource("wrong_bray_1")]),
+&"hospital": Array[Resource]([SubResource("wrong_hospital_0"), SubResource("wrong_hospital_1")])
 }
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 20.0

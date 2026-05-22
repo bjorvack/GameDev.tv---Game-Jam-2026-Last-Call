@@ -25,7 +25,6 @@ script = ExtResource("2_dline")
 speaker = "Cole"
 text = "Yep, I'll be over in twenty."
 portrait = ExtResource("3_portrait_1")
-duration = 2.5
 
 [sub_resource type="Resource" id="connected_thanks"]
 script = ExtResource("2_dline")

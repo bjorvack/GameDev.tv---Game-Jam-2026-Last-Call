@@ -78,13 +78,6 @@ text = "I need to know if I can still — "
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
-[sub_resource type="Resource" id="timer_0"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "(silence — then a click)"
-portrait = ExtResource("3_portrait_0")
-duration = 3.5
-
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")
 text = "(no answer — that line is empty now)"
