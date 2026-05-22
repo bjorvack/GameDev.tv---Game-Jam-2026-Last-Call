@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bsocket0001" path="res://components/socket.tscn" id="3_bndc3"]
 [ext_resource type="PackedScene" uid="uid://dupqjqgirp0xs" path="res://components/caller_card.tscn" id="4_48g3e"]
 [ext_resource type="PackedScene" path="res://components/patience_light.tscn" id="5_v2baq"]
-[ext_resource type="PackedScene" uid="uid://drub42ey1woxf" path="res://components/post_connect_box.tscn" id="6_a0qgv"]
 [ext_resource type="Resource" uid="uid://dy7ujjg5hcuce" path="res://data/calls/01_patty_cole.tres" id="7_call01"]
 [ext_resource type="Resource" uid="uid://dlpv2k422pre3" path="res://data/calls/02_daniel_hayes.tres" id="8_call02"]
 [ext_resource type="Resource" uid="uid://b27ql1p70t40h" path="res://data/calls/03_henley_sheriff.tres" id="9_call03"]
@@ -21,11 +20,10 @@
 [ext_resource type="Texture2D" uid="uid://bapvq0fsw84tc" path="res://art/backgrounds/title.png" id="18_bg"]
 [ext_resource type="Texture2D" uid="uid://bdyj614ghr8nw" path="res://art/props/switchboard_panel_small.png" id="19_panel"]
 
-[node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "post_box", "patience_container", "call_timer")]
+[node name="root" type="Node2D" unique_id=324246320 node_paths=PackedStringArray("caller_card", "patience_container", "call_timer")]
 script = ExtResource("1_krb3x")
 calls = Array[ExtResource("2_dq83r")]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
 caller_card = NodePath("HUD/CallerCard")
-post_box = NodePath("HUD/BottomBar/PostConnectBox")
 patience_container = NodePath("HUD/Patience")
 call_timer = NodePath("HUD/BottomBar/CallTimer")
 cable_path = NodePath("CableLayer/Cable")
@@ -237,11 +235,6 @@ offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
-
-[node name="PostConnectBox" parent="HUD/BottomBar" unique_id=1476095253 instance=ExtResource("6_a0qgv")]
-visible = false
-layout_mode = 2
 mouse_filter = 2
 
 [node name="CallTimer" parent="HUD/BottomBar" unique_id=1319055906 instance=ExtResource("17_timer")]

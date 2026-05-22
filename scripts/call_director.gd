@@ -21,7 +21,6 @@ enum CallPhase { IDLE, RINGING, OPENING, AWAITING, WRONG_RESP, DIALING, CONNECTE
 @export var calls: Array[CallData] = []
 
 @export var caller_card: CallerCard
-@export var post_box: PostConnectBox  # legacy slot; unused but kept to avoid breaking older scenes
 @export var patience_container: HBoxContainer
 @export var call_timer: CallTimer
 @export var cable_path: NodePath

@@ -47,19 +47,6 @@ func show_line(line: DialogueLine) -> void:
 	request_text.text = line.text
 	_fade_to(1.0)
 
-## Voice-over mode. Hides the portrait + halo + shadow so the line floats
-## alone with no character framing — used for the operator's inner monologue
-## between calls.
-func show_operator_thought(line: DialogueLine) -> void:
-	portrait.visible = false
-	if _halo:
-		_halo.visible = false
-	if _shadow:
-		_shadow.visible = false
-	caller_name.text = line.speaker if line.speaker != "" else "Operator"
-	request_text.text = line.text
-	_fade_to(1.0)
-
 ## Hidden between dialogue lines — the player is routing.
 func show_waiting() -> void:
 	_fade_to(0.0)
