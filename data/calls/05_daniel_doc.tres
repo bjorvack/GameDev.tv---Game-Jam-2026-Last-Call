@@ -100,6 +100,16 @@ script = ExtResource("2_dline")
 text = "Margaret's running out of time."
 duration = 3.5
 
+[sub_resource type="Resource" id="thought_fail_0"]
+script = ExtResource("2_dline")
+text = "The line went static. He's gone."
+duration = 3.5
+
+[sub_resource type="Resource" id="thought_fail_1"]
+script = ExtResource("2_dline")
+text = "Mom never picked up. I don't know what to tell him."
+duration = 4.0
+
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
@@ -157,5 +167,6 @@ generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0")
 time_limit = 25.0
 timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
 operator_thought = Array[ExtResource("2_dline")]([SubResource("thought_0"), SubResource("thought_1")])
+timer_expired_thought = Array[ExtResource("2_dline")]([SubResource("thought_fail_0"), SubResource("thought_fail_1")])
 first_leg_socket = &"hayes"
 first_leg_dialogue = Array[ExtResource("2_dline")]([SubResource("first_leg_0"), SubResource("first_leg_1"), SubResource("first_leg_2")])

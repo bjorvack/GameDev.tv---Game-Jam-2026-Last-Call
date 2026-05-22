@@ -62,6 +62,16 @@ text = "Doc — anyone — Lord have mercy. He's gone still."
 portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
+[sub_resource type="Resource" id="thought_fail_0"]
+script = ExtResource("2_dline")
+text = "Mr. Bray. Lord rest him."
+duration = 3.0
+
+[sub_resource type="Resource" id="thought_fail_1"]
+script = ExtResource("2_dline")
+text = "I should have plugged faster."
+duration = 3.5
+
 [sub_resource type="Resource" id="wrong_bray_0"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Bray"
@@ -105,3 +115,4 @@ wrong_responses = {
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 20.0
 timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
+timer_expired_thought = Array[ExtResource("2_dline")]([SubResource("thought_fail_0"), SubResource("thought_fail_1")])

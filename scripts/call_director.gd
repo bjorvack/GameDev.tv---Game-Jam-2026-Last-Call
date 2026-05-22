@@ -52,6 +52,10 @@ var _cable: Node
 ## Tracks whether the current call's first-leg routing (if any) has been
 ## resolved. Reset on every new call.
 var _first_leg_completed: bool = false
+## Set when the previous call ended on a timer expiry so the inter-call
+## monologue can use that call's `timer_expired_thought` instead of its
+## `operator_thought` (which assumes the player heard the connect dialogue).
+var _last_call_timed_out: bool = false
 
 func _ready() -> void:
 	GameState.reset()
@@ -95,12 +99,20 @@ func _start_next() -> void:
 		await _play_operator_thought(calls[idx - 1])
 	_current = calls[idx]
 	_first_leg_completed = false
+	# The next call's _on_timer_expired (if any) will set this true again.
+	_last_call_timed_out = false
 	_apply_lit_state(_current)
 	_enter_ringing()
 
 func _play_operator_thought(prev: CallData) -> void:
-	if prev == null or prev.operator_thought.is_empty():
-		# No monologue — just a quick visual reset.
+	if prev == null:
+		if SceneTransition:
+			await SceneTransition.dip()
+		return
+	# Pick the monologue source based on how the call ended.
+	var lines: Array[DialogueLine] = prev.timer_expired_thought if _last_call_timed_out else prev.operator_thought
+	if lines.is_empty():
+		# No monologue authored for this outcome — just a quick visual reset.
 		if SceneTransition:
 			await SceneTransition.dip()
 		return
@@ -109,7 +121,7 @@ func _play_operator_thought(prev: CallData) -> void:
 	# Show each monologue line centred on top of the black overlay,
 	# bypassing the caller card entirely. The board is hidden — only the
 	# operator's words exist for these few seconds.
-	for line in prev.operator_thought:
+	for line in lines:
 		if line is DialogueLine and SceneTransition:
 			await SceneTransition.show_monologue(line.text, line.duration)
 	caller_card.show_idle()
@@ -276,6 +288,9 @@ func _on_timer_expired() -> void:
 	GameState.lose_patience()
 	# Timer expiry ends the call regardless of remaining patience.
 	if GameState.patience > 0:
+		# Mark the previous call as a timer failure so the inter-call
+		# monologue picks the right thought source.
+		_last_call_timed_out = true
 		GameState.advance_call()
 		_start_next()
 

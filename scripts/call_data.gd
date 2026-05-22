@@ -60,11 +60,18 @@ extends Resource
 ## of just consuming a patience token.
 @export var pivotal: bool = false
 
-## Optional operator inner-monologue lines played after this call wraps and
-## during the fade to the next one. Authored as DialogueLines with
+## Optional operator inner-monologue lines played after a SUCCESSFUL call
+## wraps, during the fade to the next one. Authored as DialogueLines with
 ## `speaker = "Operator"` (and no portrait). Empty = no monologue, the
 ## inter-call beat is just a short dip.
 @export var operator_thought: Array[DialogueLine] = []
+
+## Optional operator monologue used INSTEAD of `operator_thought` when the
+## call ended via timer expiry rather than a correct route. Lets the
+## operator's between-call beat reflect the silence of a missed connection
+## without leaking information the player never learnt. Empty falls back
+## to no monologue.
+@export var timer_expired_thought: Array[DialogueLine] = []
 
 ## Optional first-leg routing. If set, the player must plug the routing end
 ## here BEFORE plugging into `correct_socket` — typically a number that
