@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 [ext_resource type="Texture2D" uid="uid://cnjf2igh8v1so" path="res://art/portraits/nurse.png" id="3_portrait_3"]
-[ext_resource type="Texture2D" path="res://art/portraits/mrs_bray.png" id="3_portrait_4"]
+[ext_resource type="Texture2D" uid="uid://cqewhq5jjwbvl" path="res://art/portraits/mrs_bray.png" id="3_portrait_4"]
 
 [sub_resource type="Resource" id="connected_pickup"]
 script = ExtResource("2_dline")
@@ -62,20 +62,6 @@ text = "Doc — anyone — Lord have mercy. He's gone still."
 portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
-[sub_resource type="Resource" id="wrong_hospital_0"]
-script = ExtResource("2_dline")
-speaker = "Nurse"
-text = "County General."
-portrait = ExtResource("3_portrait_3")
-duration = 1.8
-
-[sub_resource type="Resource" id="wrong_hospital_1"]
-script = ExtResource("2_dline")
-speaker = "Reverend Carter"
-text = "No — Doc Wheeler. He needs Doc, not the hospital."
-portrait = ExtResource("3_portrait_0")
-duration = 3.5
-
 [sub_resource type="Resource" id="wrong_bray_0"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Bray"
@@ -89,6 +75,20 @@ speaker = "Reverend Carter"
 text = "Mrs. Bray — wrong line, dear. Walter's fine. Sorry to wake you."
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
+
+[sub_resource type="Resource" id="wrong_hospital_0"]
+script = ExtResource("2_dline")
+speaker = "Nurse"
+text = "County General."
+portrait = ExtResource("3_portrait_3")
+duration = 1.8
+
+[sub_resource type="Resource" id="wrong_hospital_1"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "No — Doc Wheeler. He needs Doc, not the hospital."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
 
 [resource]
 script = ExtResource("1_calldata")

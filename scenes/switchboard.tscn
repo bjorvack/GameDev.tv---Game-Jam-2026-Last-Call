@@ -25,7 +25,7 @@ script = ExtResource("1_krb3x")
 calls = Array[ExtResource("2_dq83r")]([ExtResource("7_call01"), ExtResource("8_call02"), ExtResource("9_call03"), ExtResource("10_call04"), ExtResource("11_call05"), ExtResource("12_call06"), ExtResource("13_call07"), ExtResource("14_call08"), ExtResource("15_call09"), ExtResource("16_call10")])
 caller_card = NodePath("HUD/CallerCard")
 patience_container = NodePath("HUD/Patience")
-call_timer = NodePath("HUD/BottomBar/CallTimer")
+call_timer = NodePath("HUD/CallTimer")
 cable_path = NodePath("CableLayer/Cable")
 
 [node name="CableLayer" type="CanvasLayer" parent="." unique_id=184587880]
@@ -224,21 +224,14 @@ layout_mode = 2
 [node name="PatienceLight3" parent="HUD/Patience" unique_id=997110224 instance=ExtResource("5_v2baq")]
 layout_mode = 2
 
-[node name="BottomBar" type="MarginContainer" parent="HUD" unique_id=205405213]
-anchors_preset = 12
+[node name="CallTimer" parent="HUD" unique_id=1319055906 instance=ExtResource("17_timer")]
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
+offset_left = 32.0
 offset_top = -160.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 2
+offset_right = 160.0
+offset_bottom = -32.0
+grow_horizontal = 1
 grow_vertical = 0
-mouse_filter = 2
-
-[node name="CallTimer" parent="HUD/BottomBar" unique_id=1319055906 instance=ExtResource("17_timer")]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 mouse_filter = 2
