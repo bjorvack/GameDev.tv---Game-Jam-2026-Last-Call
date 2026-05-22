@@ -6,86 +6,89 @@
 [ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
 [ext_resource type="Texture2D" uid="uid://bp7ikauukk2wh" path="res://art/portraits/sheriff.png" id="3_portrait_3"]
-
-[sub_resource type="Resource" id="connected_0"]
-script = ExtResource("2_dline")
-speaker = "Doc Wheeler"
-text = "Wheeler."
-portrait = ExtResource("3_portrait_1")
-duration = 1.5
-
-[sub_resource type="Resource" id="connected_1"]
-script = ExtResource("2_dline")
-speaker = "Doc Wheeler"
-text = "Daniel… your mother came in Thursday with chest pains."
-portrait = ExtResource("3_portrait_1")
-duration = 4.0
-
-[sub_resource type="Resource" id="connected_2"]
-script = ExtResource("2_dline")
-speaker = "Doc Wheeler"
-text = "I told her to call me at the first sign it came back."
-portrait = ExtResource("3_portrait_1")
-duration = 3.5
-
-[sub_resource type="Resource" id="connected_3"]
-script = ExtResource("2_dline")
-speaker = "Doc Wheeler"
-text = "Son — drive faster."
-portrait = ExtResource("3_portrait_1")
-
-[sub_resource type="Resource" id="generic_0"]
-script = ExtResource("2_dline")
-speaker = "???"
-text = "Hello?"
-portrait = ExtResource("3_portrait_2")
-duration = 1.5
-
-[sub_resource type="Resource" id="generic_1"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Sorry — wrong number."
-portrait = ExtResource("3_portrait_0")
-duration = 2.0
+[ext_resource type="Texture2D" uid="uid://dp0vqo8n6o7pc" path="res://art/portraits/margaret_empty_chair.png" id="3_portrait_4"]
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Operator, it's Daniel Hayes again. Pulled off at the diesel stop, marker 88."
+text = "Operator, it's Daniel Hayes. Pulled off at the diesel stop, marker 88."
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Still no answer at Mom's."
+text = "Try Mom again — 7th and Vine. Please."
+portrait = ExtResource("3_portrait_0")
+duration = 3.0
+
+[sub_resource type="Resource" id="first_leg_0"]
+script = ExtResource("2_dline")
+text = "(Ring. Ring. Ring. No answer.)"
+portrait = ExtResource("3_portrait_4")
+duration = 3.5
+
+[sub_resource type="Resource" id="first_leg_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Damn. Damn it."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
-[sub_resource type="Resource" id="opening_2"]
+[sub_resource type="Resource" id="first_leg_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Could you try Doc Wheeler? She had a check-up Thursday — maybe he knows if she went somewhere."
+text = "Operator — try Doc Wheeler. She had a check-up Thursday. He might know."
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
 
-[sub_resource type="Resource" id="timer_0"]
+[sub_resource type="Resource" id="connected_pickup"]
+script = ExtResource("2_dline")
+speaker = "Doc Wheeler"
+text = "Wheeler."
+portrait = ExtResource("3_portrait_1")
+duration = 1.5
+
+[sub_resource type="Resource" id="connected_explain"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Operator? I'm losing signal. Try again — please."
+text = "Doc — it's Daniel. Mom's not answering. I'm on Hwy 40, two hours out. Did she—"
 portrait = ExtResource("3_portrait_0")
+duration = 4.5
+
+[sub_resource type="Resource" id="connected_0"]
+script = ExtResource("2_dline")
+speaker = "Doc Wheeler"
+text = "Daniel… your mother came in Thursday with chest pains."
+portrait = ExtResource("3_portrait_1")
+duration = 4.0
+
+[sub_resource type="Resource" id="connected_1"]
+script = ExtResource("2_dline")
+speaker = "Doc Wheeler"
+text = "I told her to call me at the first sign it came back."
+portrait = ExtResource("3_portrait_1")
 duration = 3.5
 
-[sub_resource type="Resource" id="wrong_hayes_0"]
+[sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
-text = "(no answer)"
+speaker = "Doc Wheeler"
+text = "Son — get home. Fast."
+portrait = ExtResource("3_portrait_1")
 
-[sub_resource type="Resource" id="wrong_hayes_1"]
+[sub_resource type="Resource" id="wrong_doc_0"]
+script = ExtResource("2_dline")
+speaker = "Doc Wheeler"
+text = "Wheeler."
+portrait = ExtResource("3_portrait_1")
+duration = 1.5
+
+[sub_resource type="Resource" id="wrong_doc_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Still nothing. Operator, please — try Doc Wheeler."
+text = "Doc — sorry, wrong line. Operator, I asked for Mom. 7th and Vine, please."
 portrait = ExtResource("3_portrait_0")
-duration = 3.5
+duration = 4.5
 
 [sub_resource type="Resource" id="wrong_sheriff_0"]
 script = ExtResource("2_dline")
@@ -97,9 +100,9 @@ duration = 1.8
 [sub_resource type="Resource" id="wrong_sheriff_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Sheriff — I'm sorry, wrong line. I'm trying to reach Doc Wheeler."
+text = "Sheriff — wrong line, sorry. I'm trying Mom."
 portrait = ExtResource("3_portrait_0")
-duration = 4.0
+duration = 3.0
 
 [sub_resource type="Resource" id="wrong_sheriff_2"]
 script = ExtResource("2_dline")
@@ -107,18 +110,52 @@ speaker = "Sheriff Briggs"
 text = "…Son, who am I talking to?"
 portrait = ExtResource("3_portrait_3")
 
+[sub_resource type="Resource" id="generic_0"]
+script = ExtResource("2_dline")
+speaker = "???"
+text = "Hello?"
+portrait = ExtResource("3_portrait_2")
+duration = 1.5
+
+[sub_resource type="Resource" id="generic_1"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Sorry — wrong line."
+portrait = ExtResource("3_portrait_0")
+duration = 2.0
+
+[sub_resource type="Resource" id="thought_0"]
+script = ExtResource("2_dline")
+text = "Doc didn't say it. But I heard it."
+duration = 3.5
+
+[sub_resource type="Resource" id="thought_1"]
+script = ExtResource("2_dline")
+text = "Margaret's running out of time."
+duration = 3.5
+
+[sub_resource type="Resource" id="timer_0"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Operator? I'm losing signal. Try again — please."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
+
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 caller_portrait = ExtResource("3_portrait_0")
-opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
+opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 caller_socket = &"i40"
 correct_socket = &"doc"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_explain"), SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])
 wrong_responses = {
-&"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")]),
+&"doc": Array[Resource]([SubResource("wrong_doc_0"), SubResource("wrong_doc_1")]),
 &"sheriff": Array[Resource]([SubResource("wrong_sheriff_0"), SubResource("wrong_sheriff_1"), SubResource("wrong_sheriff_2")])
 }
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
-time_limit = 20.0
+time_limit = 25.0
 timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
+first_leg_socket = &"hayes"
+first_leg_dialogue = Array[ExtResource("2_dline")]([SubResource("first_leg_0"), SubResource("first_leg_1"), SubResource("first_leg_2")])
+operator_thought = Array[ExtResource("2_dline")]([SubResource("thought_0"), SubResource("thought_1")])

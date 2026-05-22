@@ -15,10 +15,17 @@ duration = 1.5
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
+speaker = "Mrs. Henley"
+text = "Sheriff, there's an ambulance on Vine—"
+portrait = ExtResource("3_portrait_0")
+duration = 2.5
+
+[sub_resource type="Resource" id="connected_2"]
+script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
-text = "Appreciate the call, Mrs. Henley. We're already on it. Stay inside."
+text = "I know, Mrs. Henley. We're on it. Stay inside."
 portrait = ExtResource("3_portrait_1")
-duration = 4.0
+duration = 3.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -30,41 +37,41 @@ duration = 1.5
 [sub_resource type="Resource" id="generic_1"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
-text = "Sorry — wrong number."
+text = "Wrong line — sorry. Try the sheriff!"
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
-text = "Operator, this is Henley over on 8th."
+text = "Operator? It's Henley on 8th — quick now."
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
-text = "There's been an ambulance sitting two streets over near Vine for ten minutes."
+text = "There's an ambulance on Vine. Two streets over. Been there ten minutes."
 portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
-text = "Connect me to the sheriff, would you? Something's not right."
+text = "Put me through to the sheriff. Something's not right."
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")
-text = "(no answer)"
+text = "(Ring. Ring. No answer.)"
 duration = 2.0
 
 [sub_resource type="Resource" id="wrong_hayes_1"]
 script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
-text = "Lord, that's her line. Try the sheriff, operator."
+text = "Operator — that wasn't the Hayes place, was it? Try the sheriff. Please."
 portrait = ExtResource("3_portrait_0")
-duration = 3.5
+duration = 4.5
 
 [resource]
 script = ExtResource("1_calldata")
@@ -73,7 +80,7 @@ caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
 caller_socket = &"henley"
 correct_socket = &"sheriff"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")])
 }

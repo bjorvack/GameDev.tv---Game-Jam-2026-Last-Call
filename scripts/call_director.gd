@@ -30,9 +30,9 @@ const DEFAULT_LIT: Array[StringName] = [
 	&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole",
 	&"henley", &"bray",
 	# Red herrings — always reachable, never correct.
-	&"fire", &"telegram", &"town_hall", &"lounge",
+	&"fire", &"phone_vine", &"town_hall", &"lounge",
 	&"sentinel", &"funeral", &"bus", &"esso",
-	&"mill", &"school",
+	&"phone_west", &"phone_east",
 ]
 
 ## Quiet beat after a call ends, before the next one rings in.
@@ -50,6 +50,9 @@ const MONOLOGUE_FADE := 0.8
 var _current: CallData
 var _phase: int = CallPhase.IDLE
 var _cable: Node
+## Tracks whether the current call's first-leg routing (if any) has been
+## resolved. Reset on every new call.
+var _first_leg_completed: bool = false
 
 func _ready() -> void:
 	GameState.reset()
@@ -92,6 +95,7 @@ func _start_next() -> void:
 		await get_tree().create_timer(INTER_CALL_PAUSE).timeout
 		await _play_operator_thought(calls[idx - 1])
 	_current = calls[idx]
+	_first_leg_completed = false
 	_apply_lit_state(_current)
 	_enter_ringing()
 
@@ -103,10 +107,12 @@ func _play_operator_thought(prev: CallData) -> void:
 		return
 	if SceneTransition:
 		await SceneTransition.fade_out(MONOLOGUE_FADE)
+	# Show each monologue line centred on top of the black overlay,
+	# bypassing the caller card entirely. The board is hidden — only the
+	# operator's words exist for these few seconds.
 	for line in prev.operator_thought:
-		if line is DialogueLine:
-			caller_card.show_operator_thought(line)
-			await get_tree().create_timer(line.duration).timeout
+		if line is DialogueLine and SceneTransition:
+			await SceneTransition.show_monologue(line.text, line.duration)
 	caller_card.show_idle()
 	if SceneTransition:
 		await SceneTransition.fade_in(MONOLOGUE_FADE)
@@ -163,6 +169,15 @@ func _on_cable_routed(socket_key: StringName) -> void:
 	# Lock the cable while we play the result so the player can't unplug
 	# mid-line.
 	_arm_cable(false, false)
+	# First-leg routing: caller wants the operator to try a number that
+	# won't pick up, before being redirected. Until that's done, the
+	# real `correct_socket` is not yet accepted.
+	if _current.first_leg_socket != &"" and not _first_leg_completed:
+		if socket_key == _current.first_leg_socket:
+			_resolve_first_leg()
+			return
+		_resolve_wrong(socket_key)
+		return
 	var success := socket_key == _current.correct_socket
 	if success:
 		_resolve_correct()
@@ -188,6 +203,28 @@ func _shuffle_sockets() -> void:
 	sockets.shuffle()
 	for i in sockets.size():
 		grid.move_child(sockets[i], i)
+
+## First-leg routing: the caller asked us to try a number that won't pick
+## up. Play the ringback, then the dialogue (typically "no answer" + the
+## caller asking us to try someone else), then auto-release the routing
+## end so the player can re-route to `correct_socket`.
+func _resolve_first_leg() -> void:
+	# Pause the patience timer while the no-answer beat plays — the player
+	# isn't doing anything wrong, the line just isn't picking up.
+	if call_timer:
+		call_timer.stop()
+	_phase = CallPhase.DIALING
+	caller_card.show_waiting()
+	AudioManager.play_ring()
+	await get_tree().create_timer(DIALING_DURATION).timeout
+	AudioManager.stop_ring()
+	_phase = CallPhase.CONNECTED
+	await _play_lines(_current.first_leg_dialogue)
+	_first_leg_completed = true
+	# Pop the routing end back to the shelf and re-enable plugging.
+	if _cable:
+		_cable.release_routing_end()
+	_enter_awaiting()
 
 func _resolve_correct() -> void:
 	if call_timer:

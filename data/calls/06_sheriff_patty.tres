@@ -16,9 +16,9 @@ duration = 1.5
 [sub_resource type="Resource" id="connected_greet"]
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
-text = "Patty? Briggs. Has Margaret Hayes been in today? Henley says there's a unit at her place."
+text = "Patty? Briggs. Margaret Hayes been in today? Henley spotted a unit on Vine."
 portrait = ExtResource("3_portrait_0")
-duration = 5.0
+duration = 4.0
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -30,7 +30,21 @@ duration = 3.5
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
 speaker = "Patty"
-text = "Hasn't been in today, Sheriff. Oh god."
+text = "Hasn't been in today, Sheriff."
+portrait = ExtResource("3_portrait_1")
+duration = 3.0
+
+[sub_resource type="Resource" id="connected_pause"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "…"
+portrait = ExtResource("3_portrait_1")
+duration = 2.0
+
+[sub_resource type="Resource" id="connected_2"]
+script = ExtResource("2_dline")
+speaker = "Patty"
+text = "Oh god."
 portrait = ExtResource("3_portrait_1")
 duration = 3.0
 
@@ -44,14 +58,14 @@ duration = 1.5
 [sub_resource type="Resource" id="generic_1"]
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
-text = "Sorry — wrong number."
+text = "Wrong line."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Sheriff Briggs"
-text = "Operator — Briggs. Patty's Diner, quick."
+text = "Operator — Briggs. Get me Patty's, quick."
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
@@ -69,5 +83,5 @@ caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 caller_socket = &"sheriff"
 correct_socket = &"patty"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_greet"), SubResource("connected_0"), SubResource("connected_1")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_greet"), SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_pause"), SubResource("connected_2")])
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])

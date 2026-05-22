@@ -24,7 +24,7 @@ duration = 3.0
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "I'll try again later. Thanks."
+text = "I'll try again from the next stop. Thanks, operator."
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="generic_0"]
@@ -44,21 +44,31 @@ duration = 2.0
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Hello? Operator?"
+text = "Operator — please."
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "I need to reach Mrs. Hayes on 7th and Vine. She's my mother — she didn't answer her morning call."
+text = "I need to reach Mrs. Hayes on 7th and Vine — my mother. She missed her morning call and I've been on the road all day."
 portrait = ExtResource("3_portrait_0")
-duration = 4.5
+duration = 5.5
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I'm two hours out on Highway 40."
 portrait = ExtResource("3_portrait_0")
+
+[sub_resource type="Resource" id="thought_0"]
+script = ExtResource("2_dline")
+text = "Margaret Hayes. Her line never rings out like that."
+duration = 3.5
+
+[sub_resource type="Resource" id="thought_1"]
+script = ExtResource("2_dline")
+text = "She always picks up by the third ring."
+duration = 3.5
 
 [sub_resource type="Resource" id="timer_0"]
 script = ExtResource("2_dline")
@@ -77,7 +87,7 @@ duration = 2.0
 [sub_resource type="Resource" id="wrong_doc_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Doc — sorry, I was trying my mother."
+text = "Doc — sorry, wrong line. I'm trying to reach Mom."
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
@@ -91,7 +101,7 @@ duration = 1.8
 [sub_resource type="Resource" id="wrong_patty_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Patty, have you seen my mom today?"
+text = "Patty — wrong line, sorry. Have you seen Mom today?"
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="wrong_patty_2"]
@@ -106,7 +116,7 @@ script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
-caller_socket = &"i40"
+caller_socket = &"phone_west"
 correct_socket = &"hayes"
 connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])
 wrong_responses = {
@@ -116,3 +126,4 @@ wrong_responses = {
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
 time_limit = 25.0
 timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
+operator_thought = Array[ExtResource("2_dline")]([SubResource("thought_0"), SubResource("thought_1")])

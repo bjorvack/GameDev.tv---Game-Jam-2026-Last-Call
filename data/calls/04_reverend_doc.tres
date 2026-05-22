@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://djxt48wvhl80x" path="res://art/portraits/reverend.png" id="3_portrait_0"]
 [ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait_1"]
 [ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait_2"]
+[ext_resource type="Texture2D" uid="uid://cnjf2igh8v1so" path="res://art/portraits/nurse.png" id="3_portrait_3"]
 
 [sub_resource type="Resource" id="connected_pickup"]
 script = ExtResource("2_dline")
@@ -12,6 +13,13 @@ speaker = "Doc Wheeler"
 text = "Wheeler."
 portrait = ExtResource("3_portrait_1")
 duration = 1.5
+
+[sub_resource type="Resource" id="connected_explain"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Doc — Mr. Bray's taken a turn. We're at the Chapel."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -29,22 +37,57 @@ duration = 1.5
 [sub_resource type="Resource" id="generic_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "Sorry — wrong number."
+text = "Wrong line — apologies. Please, hurry."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "Operator — the Chapel here."
+text = "Operator — Reverend Carter, from the Chapel."
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "I've got old Mr. Bray taking a turn during evening prayer. Put me through to Doc Wheeler, please."
+text = "Old Mr. Bray's taken a turn — bad. Put me through to Doc Wheeler, quickly."
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
+
+[sub_resource type="Resource" id="wrong_hospital_0"]
+script = ExtResource("2_dline")
+speaker = "Nurse"
+text = "County General."
+portrait = ExtResource("3_portrait_3")
+duration = 1.8
+
+[sub_resource type="Resource" id="wrong_hospital_1"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "No — Doc Wheeler. He needs Doc, not the hospital."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
+
+[sub_resource type="Resource" id="wrong_bray_0"]
+script = ExtResource("2_dline")
+speaker = "Mrs. Bray"
+text = "Hello?"
+portrait = ExtResource("3_portrait_2")
+duration = 1.8
+
+[sub_resource type="Resource" id="wrong_bray_1"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Mrs. Bray — wrong line, dear. Walter's fine. Sorry to wake you."
+portrait = ExtResource("3_portrait_0")
+duration = 4.5
+
+[sub_resource type="Resource" id="timer_0"]
+script = ExtResource("2_dline")
+speaker = "Reverend Carter"
+text = "Doc — anyone — Lord have mercy. He's gone still."
+portrait = ExtResource("3_portrait_0")
+duration = 4.0
 
 [resource]
 script = ExtResource("1_calldata")
@@ -53,5 +96,11 @@ caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
 caller_socket = &"reverend"
 correct_socket = &"doc"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_0")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_explain"), SubResource("connected_0")])
+wrong_responses = {
+&"hospital": Array[Resource]([SubResource("wrong_hospital_0"), SubResource("wrong_hospital_1")]),
+&"bray": Array[Resource]([SubResource("wrong_bray_0"), SubResource("wrong_bray_1")])
+}
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
+time_limit = 20.0
+timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])

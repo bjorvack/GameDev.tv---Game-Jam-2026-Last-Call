@@ -13,6 +13,13 @@ text = "County General."
 portrait = ExtResource("3_portrait_1")
 duration = 1.8
 
+[sub_resource type="Resource" id="connected_choke"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "…is she—"
+portrait = ExtResource("3_portrait_0")
+duration = 2.0
+
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
 speaker = "Nurse"
@@ -47,7 +54,7 @@ duration = 1.5
 [sub_resource type="Resource" id="generic_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Sorry — wrong number."
+text = "Sorry — operator, the hospital. Please."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
@@ -95,13 +102,11 @@ script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1"), SubResource("opening_2")])
-caller_socket = &"i40"
+caller_socket = &"phone_east"
 correct_socket = &"hospital"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_choke"), SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2"), SubResource("connected_3")])
 wrong_responses = {
 &"hayes": Array[Resource]([SubResource("wrong_hayes_0"), SubResource("wrong_hayes_1")])
 }
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
-time_limit = 25.0
-timer_expired = Array[ExtResource("2_dline")]([SubResource("timer_0")])
 sockets_lit = Array[StringName]([&"hayes", &"doc", &"sheriff", &"reverend", &"patty", &"cole", &"hospital"])

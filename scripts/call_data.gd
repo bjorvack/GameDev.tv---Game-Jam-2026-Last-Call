@@ -65,3 +65,18 @@ extends Resource
 ## `speaker = "Operator"` (and no portrait). Empty = no monologue, the
 ## inter-call beat is just a short dip.
 @export var operator_thought: Array[DialogueLine] = []
+
+## Optional first-leg routing. If set, the player must plug the routing end
+## here BEFORE plugging into `correct_socket` — typically a number that
+## won't pick up. After `first_leg_dialogue` plays, the routing end is
+## released automatically and the player is expected to reroute to the
+## true recipient.
+##
+## Plugging any other socket (including `correct_socket`) during the first
+## leg counts as a wrong route and triggers the normal wrong-response logic.
+@export var first_leg_socket: StringName = &""
+
+## Lines played when the first-leg socket is plugged (ring → no answer →
+## caller asks the operator to try someone else). Plays without consuming
+## a patience token.
+@export var first_leg_dialogue: Array[DialogueLine] = []

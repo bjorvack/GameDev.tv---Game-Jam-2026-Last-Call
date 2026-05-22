@@ -14,6 +14,13 @@ text = "Carter."
 portrait = ExtResource("3_portrait_1")
 duration = 1.2
 
+[sub_resource type="Resource" id="connected_explain"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Reverend — it's Daniel. Mom's not picking up and Doc says she's bad. Can you—"
+portrait = ExtResource("3_portrait_0")
+duration = 4.0
+
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
@@ -23,16 +30,16 @@ portrait = ExtResource("3_portrait_1")
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "I'll be at your mother's door in five."
+text = "I'll be at her door in five."
 portrait = ExtResource("3_portrait_1")
 duration = 3.0
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Reverend Carter"
-text = "Stay on the road."
+text = "Doc's been working all night. Stay on the road."
 portrait = ExtResource("3_portrait_1")
-duration = 2.0
+duration = 3.5
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -44,7 +51,7 @@ duration = 1.5
 [sub_resource type="Resource" id="generic_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
-text = "Sorry — wrong number."
+text = "Sorry — wrong line."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
@@ -85,9 +92,9 @@ script = ExtResource("1_calldata")
 caller_name = "Daniel Hayes"
 caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
-caller_socket = &"i40"
+caller_socket = &"phone_west"
 correct_socket = &"reverend"
-connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])
+connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_explain"), SubResource("connected_0"), SubResource("connected_1"), SubResource("connected_2")])
 wrong_responses = {
 &"doc": Array[Resource]([SubResource("wrong_doc_0"), SubResource("wrong_doc_1")])
 }

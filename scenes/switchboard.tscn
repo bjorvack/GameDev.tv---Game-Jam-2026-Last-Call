@@ -150,10 +150,10 @@ layout_mode = 2
 socket_key = &"fire"
 label_text = "Fire Station"
 
-[node name="Telegram" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3004 instance=ExtResource("3_bndc3")]
+[node name="PhoneVine" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3004 instance=ExtResource("3_bndc3")]
 layout_mode = 2
-socket_key = &"telegram"
-label_text = "Western Union"
+socket_key = &"phone_vine"
+label_text = "Vine St Booth"
 
 [node name="TownHall" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3005 instance=ExtResource("3_bndc3")]
 layout_mode = 2
@@ -185,15 +185,15 @@ layout_mode = 2
 socket_key = &"esso"
 label_text = "Mayfield Esso"
 
-[node name="Mill" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3011 instance=ExtResource("3_bndc3")]
+[node name="PhoneWest" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3011 instance=ExtResource("3_bndc3")]
 layout_mode = 2
-socket_key = &"mill"
-label_text = "Cotton Mill"
+socket_key = &"phone_west"
+label_text = "Hwy 40 Booth"
 
-[node name="School" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3012 instance=ExtResource("3_bndc3")]
+[node name="PhoneEast" parent="HUD/Panel/PanelMargin/SocketsCenter/SocketsGrid" unique_id=3012 instance=ExtResource("3_bndc3")]
 layout_mode = 2
-socket_key = &"school"
-label_text = "Mayfield School"
+socket_key = &"phone_east"
+label_text = "Cherokee Booth"
 
 [node name="CallerCard" parent="HUD" unique_id=1278693595 instance=ExtResource("4_48g3e")]
 layout_mode = 3

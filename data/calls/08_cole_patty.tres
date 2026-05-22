@@ -71,16 +71,27 @@ duration = 3.0
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Cole"
-text = "Put me through to Patty's, would you? Truck stalled out and I need to ask her something."
+text = "Put me through to Patty's. Something's going on at the Hayes' place — I need to ask her."
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
+
+[sub_resource type="Resource" id="thought_0"]
+script = ExtResource("2_dline")
+text = "He's driving home thinking the worst."
+duration = 3.5
+
+[sub_resource type="Resource" id="thought_1"]
+script = ExtResource("2_dline")
+text = "Lord — let someone reach him before he reaches her door."
+duration = 4.0
 
 [resource]
 script = ExtResource("1_calldata")
 caller_name = "Cole"
 caller_portrait = ExtResource("3_portrait_0")
 opening = Array[ExtResource("2_dline")]([SubResource("opening_0"), SubResource("opening_1")])
-caller_socket = &"hayes"
+caller_socket = &"phone_vine"
 correct_socket = &"patty"
 connected_dialogue = Array[ExtResource("2_dline")]([SubResource("connected_pickup"), SubResource("connected_intro"), SubResource("connected_news"), SubResource("connected_ask"), SubResource("connected_0"), SubResource("connected_1")])
 generic_wrong_response = Array[ExtResource("2_dline")]([SubResource("generic_0"), SubResource("generic_1")])
+operator_thought = Array[ExtResource("2_dline")]([SubResource("thought_0"), SubResource("thought_1")])

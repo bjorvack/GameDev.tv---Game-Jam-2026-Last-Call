@@ -30,6 +30,7 @@ const SFX_VOLUME_DB := -6.0
 var _ring_streams: Array[AudioStream] = []
 var _plug_stream: AudioStream
 var _hangup_stream: AudioStream
+var _ringing: bool = false
 
 func _ready() -> void:
 	for path in RING_PATHS:
@@ -41,17 +42,28 @@ func _ready() -> void:
 	music_player.volume_db = MUSIC_VOLUME_DB
 	ring_player.volume_db = RING_VOLUME_DB
 	sfx_player.volume_db = SFX_VOLUME_DB
-	# Manual loop for music — reliable across WAV/MP3/OGG formats.
+	# Manual loop for music + ring — reliable across WAV/MP3/OGG formats.
 	music_player.finished.connect(_replay_music)
+	ring_player.finished.connect(_replay_ring)
 
 func play_ring() -> void:
 	if _ring_streams.is_empty():
 		return
+	_ringing = true
 	ring_player.stream = _ring_streams.pick_random()
 	ring_player.play()
 
 func stop_ring() -> void:
+	_ringing = false
 	ring_player.stop()
+
+func _replay_ring() -> void:
+	# Re-pick a sample on each loop so the call doesn't sound robotic, but
+	# only while we're still in a RINGING phase.
+	if not _ringing or _ring_streams.is_empty():
+		return
+	ring_player.stream = _ring_streams.pick_random()
+	ring_player.play()
 
 func play_plug() -> void:
 	if _plug_stream:
