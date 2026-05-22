@@ -19,3 +19,11 @@ build/
 
 # Playwright MCP screenshots
 .playwright-mcp/
+
+# Dead Godot scenes that Godot keeps restoring from .godot/exported/ cache
+# even after deletion. Their referenced scripts/shaders are also gone, so
+# they're harmless orphans — just ignored so they don't sneak back into
+# commits.
+/components/jack_visual.tscn
+/components/socket_visual.tscn
+/components/post_connect_box.tscn
