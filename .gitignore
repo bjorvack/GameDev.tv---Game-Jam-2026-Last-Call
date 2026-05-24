@@ -8,7 +8,7 @@
 *.pck
 *.zip
 
-# Devin local config (personal, not shared)
+# Local-only project config (personal, not shared)
 .devin/config.local.json
 
 # macOS
