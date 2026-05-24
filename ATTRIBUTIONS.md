@@ -63,4 +63,3 @@ All shaders in `shaders/` were written by me from scratch for this jam.
 - **Godot 4.6** — engine
 - **mflux 0.17.5** running **FLUX.2 klein 9B** (FLUX Non-Commercial Licence) — local image generation for all art assets, on Apple Silicon via MLX. Per-image prompts/seeds in `*.metadata.json` and `docs/AI_PROMPTS.md`.
 - **rembg** (`isnet-general-use`, MIT) — background removal for RGBA cutouts of portraits and props. Driven by [`tools/cutout.py`](tools/cutout.py) (PEP 723 inline script, runs via `uv`).
-- **Devin (CLI)** by Cognition — coding assistant used as a pair-programming agent throughout development.

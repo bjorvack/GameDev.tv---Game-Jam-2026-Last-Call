@@ -51,7 +51,6 @@ Built in five days in [Godot 4.6](https://godotengine.org). Art generated locall
 ## Credits
 
 - Design, code, story — Bjorn Vanacker
-- Pair programming assist — [Cognition Devin](https://devin.ai)
 - Engine — Godot 4.6 (GL Compatibility on web)
 - Music — *[fill in CC-BY track + author]*
 - SFX — *[fill in CC0 sources]*
