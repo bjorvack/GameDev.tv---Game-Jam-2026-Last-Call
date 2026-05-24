@@ -8,7 +8,13 @@ extends Node
 const SCREENSHOT_PATH := "user://debug_screenshot.png"
 
 func _ready() -> void:
-	get_tree().create_timer(1.0).timeout.connect(_capture)
+	var delay := 1.0
+	# Override via OS env so the shoot_screenshots.sh tool can wait long
+	# enough for scene fade-ins and the first ringing socket to appear.
+	var env_delay := OS.get_environment("SCREENSHOT_DELAY")
+	if env_delay != "":
+		delay = float(env_delay)
+	get_tree().create_timer(delay).timeout.connect(_capture)
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F12:
