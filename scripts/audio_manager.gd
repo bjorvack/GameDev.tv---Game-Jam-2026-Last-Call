@@ -32,6 +32,10 @@ const MUSIC_VOLUME_DB := -14.0
 const MUSIC_BED_VOLUME_DB := -22.0
 const RING_VOLUME_DB := -4.0
 const SFX_VOLUME_DB := -6.0
+## Cap on how long a single ringback one-shot may play. The cvp1965 ring
+## sample is ~20 s, but for the post-route "recipient picks up" beat we only
+## want one short chirp before the connected dialogue starts.
+const RING_ONCE_MAX_DURATION := 1.5
 
 @onready var music_player: AudioStreamPlayer = $Music
 @onready var music_bed_player: AudioStreamPlayer = $MusicBed
@@ -74,9 +78,11 @@ func stop_ring() -> void:
 	_ringing = false
 	ring_player.stop()
 
-## Awaitable single-shot ring. Plays one full ring sample without engaging
-## the loop, then returns. Used after a correct route to play the recipient's
-## ringback as a one-shot punctuation between plug and pickup.
+## Awaitable single-shot ringback. Plays the ring sample but caps the wait
+## at RING_ONCE_MAX_DURATION — the source sample is ~20 s but the post-route
+## "recipient picks up" beat only wants one short chirp before the connected
+## dialogue starts. If the sample is still playing when the cap expires we
+## stop it explicitly.
 func play_ring_once() -> void:
 	if _ring_stream == null:
 		return
@@ -86,7 +92,10 @@ func play_ring_once() -> void:
 	ring_player.stream = _ring_stream
 	_log("ring", "one-shot", _ring_stream)
 	ring_player.play()
-	await ring_player.finished
+	await get_tree().create_timer(RING_ONCE_MAX_DURATION).timeout
+	if ring_player.playing:
+		_log("ring", "one-shot cut", _ring_stream)
+		ring_player.stop()
 
 func _replay_ring() -> void:
 	# Only re-arm while we're still in a RINGING phase.
