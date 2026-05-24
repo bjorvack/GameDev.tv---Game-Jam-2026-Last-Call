@@ -43,7 +43,7 @@ jobs:
       image: barichello/godot-ci:4.6.3
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Move export templates into place
         # The image stores templates under /root/.local/share/godot/...
@@ -72,12 +72,12 @@ jobs:
           touch "${OUTPUT_DIR}/.nojekyll"
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ${{ env.OUTPUT_DIR }}
 
       - name: Upload raw build for the itch job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: web-build
           path: ${{ env.OUTPUT_DIR }}
@@ -93,7 +93,7 @@ jobs:
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   deploy_itch:
     name: Push build to itch.io
@@ -104,7 +104,7 @@ jobs:
     if: ${{ vars.SKIP_ITCH != 'true' }}
     steps:
       - name: Download Web build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: web-build
           path: web-build
