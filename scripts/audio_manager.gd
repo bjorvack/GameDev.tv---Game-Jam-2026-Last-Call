@@ -15,7 +15,6 @@ const HANGUP_PATH := "res://audio/sfx/531060__haleyreesecalhoun__sneaky-phone-pu
 
 const MUSIC_PATHS: Dictionary = {
 	"contemplative": "res://audio/music/839571__cvltiv8r__contemplative-string-loop-violin-and-cello.wav",
-	"mellow": "res://audio/music/693423__gis_sweden__waiting-for-mellow-cinematic-loop.wav",
 	"noise": "res://audio/music/197795__yuval__soundtrack-noise-1940s.wav",
 }
 ## Default two-layer score: a quiet ambient room-tone bed + a slow melodic
