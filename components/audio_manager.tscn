@@ -1,14 +1,14 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://bqm2abswws65b"]
 
-[ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_audio"]
+[ext_resource type="Script" uid="uid://bfddeph28jncl" path="res://scripts/audio_manager.gd" id="1_audio"]
 
-[node name="AudioManager" type="Node"]
+[node name="AudioManager" type="Node" unique_id=307448426]
 script = ExtResource("1_audio")
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1709698318]
 
-[node name="MusicBed" type="AudioStreamPlayer" parent="."]
+[node name="MusicBed" type="AudioStreamPlayer" parent="." unique_id=875744644]
 
-[node name="Ring" type="AudioStreamPlayer" parent="."]
+[node name="Ring" type="AudioStreamPlayer" parent="." unique_id=1695605128]
 
-[node name="SFX" type="AudioStreamPlayer" parent="."]
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=838139077]

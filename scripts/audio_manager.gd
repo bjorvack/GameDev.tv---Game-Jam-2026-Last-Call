@@ -1,10 +1,18 @@
 ## Global audio manager. Autoload as "AudioManager".
 ##
-## Owns three AudioStreamPlayers — music, ring, sfx — and exposes simple
-## play/stop helpers per event. Streams are loaded by path so authoring new
-## sounds is just dropping a file in audio/sfx or audio/music and adding a
-## constant below.
+## Owns four AudioStreamPlayers — Music (foreground melody), MusicBed
+## (ambient layer), Ring, and SFX — and exposes simple play/stop helpers
+## per event. Streams are loaded by path so authoring new sounds is just
+## dropping a file in audio/sfx or audio/music and adding a constant below.
+##
+## Lifecycle logs:
+## When AUDIO_LOG is true, every start / loop / stop emits a [Audio] line
+## with the player name and the file basename so you can audit the score
+## from the console while play-testing.
 extends Node
+
+const AUDIO_LOG := true
+const LOG_PREFIX := "[Audio]"
 
 const RING_PATHS: Array[String] = [
 	"res://audio/sfx/274289__abernstein__rotary-phone-ring-medium.wav",
@@ -54,14 +62,19 @@ func _ready() -> void:
 	music_bed_player.finished.connect(_replay_music_bed)
 	ring_player.finished.connect(_replay_ring)
 
+# -- ring ---------------------------------------------------------------------
+
 func play_ring() -> void:
 	if _ring_streams.is_empty():
 		return
 	_ringing = true
 	ring_player.stream = _ring_streams.pick_random()
+	_log("ring", "start (looping)", ring_player.stream)
 	ring_player.play()
 
 func stop_ring() -> void:
+	if _ringing or ring_player.playing:
+		_log("ring", "stop", ring_player.stream)
 	_ringing = false
 	ring_player.stop()
 
@@ -76,6 +89,7 @@ func play_ring_once() -> void:
 	# in once this sample finishes.
 	_ringing = false
 	ring_player.stream = _ring_streams.pick_random()
+	_log("ring", "one-shot", ring_player.stream)
 	ring_player.play()
 	await ring_player.finished
 
@@ -85,17 +99,26 @@ func _replay_ring() -> void:
 	if not _ringing or _ring_streams.is_empty():
 		return
 	ring_player.stream = _ring_streams.pick_random()
+	_log("ring", "loop", ring_player.stream)
 	ring_player.play()
 
+# -- sfx ----------------------------------------------------------------------
+
 func play_plug() -> void:
-	if _plug_stream:
-		sfx_player.stream = _plug_stream
-		sfx_player.play()
+	if _plug_stream == null:
+		return
+	sfx_player.stream = _plug_stream
+	_log("sfx", "plug", _plug_stream)
+	sfx_player.play()
 
 func play_hangup() -> void:
-	if _hangup_stream:
-		sfx_player.stream = _hangup_stream
-		sfx_player.play()
+	if _hangup_stream == null:
+		return
+	sfx_player.stream = _hangup_stream
+	_log("sfx", "hangup", _hangup_stream)
+	sfx_player.play()
+
+# -- music --------------------------------------------------------------------
 
 func play_music(track: StringName = &"contemplative") -> void:
 	var key := String(track)
@@ -105,13 +128,17 @@ func play_music(track: StringName = &"contemplative") -> void:
 	if stream == null:
 		return
 	music_player.stream = stream
+	_log("music", "start", stream)
 	music_player.play()
 
 func stop_music() -> void:
+	if music_player.playing:
+		_log("music", "stop", music_player.stream)
 	music_player.stop()
 
 func _replay_music() -> void:
 	if music_player.stream != null:
+		_log("music", "loop", music_player.stream)
 		music_player.play()
 
 ## Starts the two-layer score (foreground melody + ambient bed) and loops
@@ -122,19 +149,44 @@ func play_music_bed() -> void:
 	var bg_stream := load(MUSIC_PATHS[MUSIC_BG]) as AudioStream
 	if fg_stream and music_player.stream != fg_stream:
 		music_player.stream = fg_stream
+		_log("music", "start", fg_stream)
 		music_player.play()
 	elif fg_stream and not music_player.playing:
+		_log("music", "resume", fg_stream)
 		music_player.play()
 	if bg_stream and music_bed_player.stream != bg_stream:
 		music_bed_player.stream = bg_stream
+		_log("bed", "start", bg_stream)
 		music_bed_player.play()
 	elif bg_stream and not music_bed_player.playing:
+		_log("bed", "resume", bg_stream)
 		music_bed_player.play()
 
 func stop_music_bed() -> void:
+	if music_player.playing:
+		_log("music", "stop", music_player.stream)
+	if music_bed_player.playing:
+		_log("bed", "stop", music_bed_player.stream)
 	music_player.stop()
 	music_bed_player.stop()
 
 func _replay_music_bed() -> void:
 	if music_bed_player.stream != null:
+		_log("bed", "loop", music_bed_player.stream)
 		music_bed_player.play()
+
+# -- logging ------------------------------------------------------------------
+
+func _log(channel: String, event: String, stream: AudioStream) -> void:
+	if not AUDIO_LOG:
+		return
+	var basename := _stream_name(stream)
+	print("%s %s %s — %s" % [LOG_PREFIX, channel, event, basename])
+
+func _stream_name(stream: AudioStream) -> String:
+	if stream == null:
+		return "<null>"
+	var path := stream.resource_path
+	if path == "":
+		return "<inline>"
+	return path.get_file()
