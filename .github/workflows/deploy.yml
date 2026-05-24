@@ -1,10 +1,13 @@
-# Build the Web export and publish it to GitHub Pages whenever a tag is
-# pushed. Tag pattern is anything starting with `v` (e.g. `v0.3.0`,
-# `v1.0-jam`), so day-to-day commits don't redeploy the playable build.
+# Build the Web export and publish it to GitHub Pages and itch.io
+# whenever a tag is pushed. Tag pattern is anything starting with `v`
+# (e.g. `v0.3.0`, `v1.0-jam`), so day-to-day commits don't redeploy.
 #
-# Requires: in the repo's Settings → Pages, set "Build and deployment"
-# source to "GitHub Actions".
-name: Deploy Web build to GitHub Pages
+# One-time setup:
+#   - Settings → Pages → "Build and deployment" source = "GitHub Actions".
+#   - Settings → Secrets and variables → Actions → new secret
+#     `BUTLER_API_KEY` with a token from
+#     https://itch.io/user/settings/api-keys.
+name: Deploy Web build
 
 on:
   push:
@@ -26,6 +29,8 @@ env:
   GODOT_VERSION: 4.6.3
   EXPORT_PRESET: Web
   OUTPUT_DIR: build/web
+  ITCH_TARGET: bjorvack/last-call-a-story-in-ten-calls
+  ITCH_CHANNEL: html5
 
 jobs:
   build:
@@ -71,7 +76,14 @@ jobs:
         with:
           path: ${{ env.OUTPUT_DIR }}
 
-  deploy:
+      - name: Upload raw build for the itch job
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: ${{ env.OUTPUT_DIR }}
+          if-no-files-found: error
+
+  deploy_pages:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
@@ -82,3 +94,38 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
+
+  deploy_itch:
+    name: Push build to itch.io
+    needs: build
+    runs-on: ubuntu-latest
+    # Skip silently if the secret isn't configured yet so the Pages job
+    # can still publish from a freshly-forked repo.
+    if: ${{ vars.SKIP_ITCH != 'true' }}
+    steps:
+      - name: Download Web build
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: web-build
+
+      - name: Install Butler
+        run: |
+          curl -L -o butler.zip "https://broth.itch.zone/butler/linux-amd64/LATEST/archive/default"
+          unzip -o butler.zip
+          chmod +x butler
+          ./butler -V
+
+      - name: Push to itch.io
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+        run: |
+          if [ -z "$BUTLER_API_KEY" ]; then
+            echo "::warning::BUTLER_API_KEY secret is not set — skipping itch.io push."
+            exit 0
+          fi
+          # Tag name (e.g. v0.1.0) becomes the channel's user-version on itch.
+          VERSION="${GITHUB_REF_NAME:-manual}"
+          echo "Pushing channel ${ITCH_CHANNEL} of ${ITCH_TARGET} as ${VERSION}"
+          ./butler push --userversion "$VERSION" \
+            web-build "${ITCH_TARGET}:${ITCH_CHANNEL}"
