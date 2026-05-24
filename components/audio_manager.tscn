@@ -7,6 +7,8 @@ script = ExtResource("1_audio")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 
+[node name="MusicBed" type="AudioStreamPlayer" parent="."]
+
 [node name="Ring" type="AudioStreamPlayer" parent="."]
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]

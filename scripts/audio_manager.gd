@@ -18,12 +18,19 @@ const MUSIC_PATHS: Dictionary = {
 	"mellow": "res://audio/music/693423__gis_sweden__waiting-for-mellow-cinematic-loop.wav",
 	"noise": "res://audio/music/197795__yuval__soundtrack-noise-1940s.wav",
 }
+## Default two-layer score: a quiet ambient room-tone bed + a slow melodic
+## foreground that loops over it. Both start when play_music_bed() is called
+## and persist across scene changes because AudioManager is an autoload.
+const MUSIC_FG := "contemplative"
+const MUSIC_BG := "noise"
 
-const MUSIC_VOLUME_DB := -12.0
+const MUSIC_VOLUME_DB := -14.0
+const MUSIC_BED_VOLUME_DB := -22.0
 const RING_VOLUME_DB := -4.0
 const SFX_VOLUME_DB := -6.0
 
 @onready var music_player: AudioStreamPlayer = $Music
+@onready var music_bed_player: AudioStreamPlayer = $MusicBed
 @onready var ring_player: AudioStreamPlayer = $Ring
 @onready var sfx_player: AudioStreamPlayer = $SFX
 
@@ -40,10 +47,12 @@ func _ready() -> void:
 	_plug_stream = load(PLUG_PATH)
 	_hangup_stream = load(HANGUP_PATH)
 	music_player.volume_db = MUSIC_VOLUME_DB
+	music_bed_player.volume_db = MUSIC_BED_VOLUME_DB
 	ring_player.volume_db = RING_VOLUME_DB
 	sfx_player.volume_db = SFX_VOLUME_DB
 	# Manual loop for music + ring — reliable across WAV/MP3/OGG formats.
 	music_player.finished.connect(_replay_music)
+	music_bed_player.finished.connect(_replay_music_bed)
 	ring_player.finished.connect(_replay_ring)
 
 func play_ring() -> void:
@@ -105,3 +114,28 @@ func stop_music() -> void:
 func _replay_music() -> void:
 	if music_player.stream != null:
 		music_player.play()
+
+## Starts the two-layer score (foreground melody + ambient bed) and loops
+## both indefinitely. Idempotent — calling twice from successive scene
+## _ready hooks is safe.
+func play_music_bed() -> void:
+	var fg_stream := load(MUSIC_PATHS[MUSIC_FG]) as AudioStream
+	var bg_stream := load(MUSIC_PATHS[MUSIC_BG]) as AudioStream
+	if fg_stream and music_player.stream != fg_stream:
+		music_player.stream = fg_stream
+		music_player.play()
+	elif fg_stream and not music_player.playing:
+		music_player.play()
+	if bg_stream and music_bed_player.stream != bg_stream:
+		music_bed_player.stream = bg_stream
+		music_bed_player.play()
+	elif bg_stream and not music_bed_player.playing:
+		music_bed_player.play()
+
+func stop_music_bed() -> void:
+	music_player.stop()
+	music_bed_player.stop()
+
+func _replay_music_bed() -> void:
+	if music_bed_player.stream != null:
+		music_bed_player.play()

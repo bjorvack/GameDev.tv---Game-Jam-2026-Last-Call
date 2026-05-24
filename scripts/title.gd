@@ -14,6 +14,11 @@ func _ready() -> void:
 	# the overlay fades back in.
 	if SceneTransition:
 		SceneTransition.fade_in()
+	# Start the two-layer score from the very first frame the player sees.
+	# AudioManager is an autoload so both tracks keep playing through every
+	# subsequent scene change until an ending stops them.
+	if AudioManager:
+		AudioManager.play_music_bed()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
