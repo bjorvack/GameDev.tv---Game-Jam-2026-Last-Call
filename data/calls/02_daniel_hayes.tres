@@ -70,6 +70,13 @@ script = ExtResource("2_dline")
 text = "She always picks up by the third ring."
 duration = 3.5
 
+[sub_resource type="Resource" id="timer_0"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Operator? Operator, please — I'll call back."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
+
 [sub_resource type="Resource" id="thought_fail_0"]
 script = ExtResource("2_dline")
 text = "He hung up before I could even try her line."
@@ -78,13 +85,6 @@ duration = 3.5
 [sub_resource type="Resource" id="thought_fail_1"]
 script = ExtResource("2_dline")
 text = "I hope he calls back from the next stop."
-duration = 3.5
-
-[sub_resource type="Resource" id="timer_0"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Operator? Operator, please — I'll call back."
-portrait = ExtResource("3_portrait_0")
 duration = 3.5
 
 [sub_resource type="Resource" id="wrong_doc_0"]

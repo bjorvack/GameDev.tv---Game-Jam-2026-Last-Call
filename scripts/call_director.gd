@@ -39,9 +39,6 @@ const INTER_CALL_PAUSE := 1.5
 ## How long the "incoming / *ring*" indicator shows before the caller socket
 ## starts pulsing.
 const RING_DURATION := 1.2
-## Time the destination line rings after a correct route plug, before the
-## recipient picks up and the connected_dialogue starts.
-const DIALING_DURATION := 1.4
 ## How long the SceneTransition fade lasts on each side of the operator
 ## monologue beat. Longer than a normal dip so the voice-over has air.
 const MONOLOGUE_FADE := 0.8
@@ -76,7 +73,6 @@ func _ready() -> void:
 	if _cable:
 		_cable.answered.connect(_on_cable_answered)
 		_cable.routed.connect(_on_cable_routed)
-	AudioManager.play_music()
 	# We may have been loaded mid-fade by SceneTransition.change_scene —
 	# fade the black overlay back in before the first ring lands.
 	if SceneTransition:
@@ -226,9 +222,9 @@ func _resolve_first_leg() -> void:
 		call_timer.stop()
 	_phase = CallPhase.DIALING
 	caller_card.show_waiting()
-	AudioManager.play_ring()
-	await get_tree().create_timer(DIALING_DURATION).timeout
-	AudioManager.stop_ring()
+	# One ringback sample, played to completion, then the recipient line
+	# fails to answer — segues straight into the first_leg dialogue.
+	await AudioManager.play_ring_once()
 	_phase = CallPhase.CONNECTED
 	await _play_lines(_current.first_leg_dialogue)
 	_first_leg_completed = true
@@ -240,15 +236,13 @@ func _resolve_first_leg() -> void:
 func _resolve_correct() -> void:
 	if call_timer:
 		call_timer.stop()
-	# DIALING: the destination phone rings while we wait for the recipient
-	# to pick up. Caller card is hidden so the player just hears the
-	# ringback over a quiet board.
+	# DIALING: the destination phone rings once as a ringback, then the
+	# recipient picks up. Caller card is hidden so the player just hears
+	# the single ring over a quiet board.
 	_phase = CallPhase.DIALING
 	call_resolved.emit(true, _current)
 	caller_card.show_waiting()
-	AudioManager.play_ring()
-	await get_tree().create_timer(DIALING_DURATION).timeout
-	AudioManager.stop_ring()
+	await AudioManager.play_ring_once()
 
 	_phase = CallPhase.CONNECTED
 	await _play_lines(_current.connected_dialogue)

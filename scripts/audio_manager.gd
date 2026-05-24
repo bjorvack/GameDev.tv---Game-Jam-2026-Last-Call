@@ -57,6 +57,20 @@ func stop_ring() -> void:
 	_ringing = false
 	ring_player.stop()
 
+## Awaitable single-shot ring. Plays one random ring sample to completion
+## without engaging the looping behaviour, then returns. Used after a correct
+## route to play the recipient's ringback as a one-shot punctuation between
+## the player's plug and the recipient's pickup.
+func play_ring_once() -> void:
+	if _ring_streams.is_empty():
+		return
+	# Make sure the loop flag is off so _replay_ring won't sneak another play
+	# in once this sample finishes.
+	_ringing = false
+	ring_player.stream = _ring_streams.pick_random()
+	ring_player.play()
+	await ring_player.finished
+
 func _replay_ring() -> void:
 	# Re-pick a sample on each loop so the call doesn't sound robotic, but
 	# only while we're still in a RINGING phase.

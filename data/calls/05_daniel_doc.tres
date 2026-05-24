@@ -100,6 +100,13 @@ script = ExtResource("2_dline")
 text = "Margaret's running out of time."
 duration = 3.5
 
+[sub_resource type="Resource" id="timer_0"]
+script = ExtResource("2_dline")
+speaker = "Daniel"
+text = "Operator? I'm losing signal. Try again — please."
+portrait = ExtResource("3_portrait_0")
+duration = 3.5
+
 [sub_resource type="Resource" id="thought_fail_0"]
 script = ExtResource("2_dline")
 text = "The line went static. He's gone."
@@ -109,13 +116,6 @@ duration = 3.5
 script = ExtResource("2_dline")
 text = "Mom never picked up. I don't know what to tell him."
 duration = 4.0
-
-[sub_resource type="Resource" id="timer_0"]
-script = ExtResource("2_dline")
-speaker = "Daniel"
-text = "Operator? I'm losing signal. Try again — please."
-portrait = ExtResource("3_portrait_0")
-duration = 3.5
 
 [sub_resource type="Resource" id="wrong_doc_0"]
 script = ExtResource("2_dline")
