@@ -78,21 +78,22 @@ func stop_ring() -> void:
 	_ringing = false
 	ring_player.stop()
 
-## Awaitable single-shot ringback. Plays the ring sample but caps the wait
-## at RING_ONCE_MAX_DURATION — the source sample is ~20 s but the post-route
-## "recipient picks up" beat only wants one short chirp before the connected
-## dialogue starts. If the sample is still playing when the cap expires we
-## stop it explicitly.
-func play_ring_once() -> void:
+## Awaitable single-shot ringback. Plays the ring sample for at most
+## `duration` seconds (defaults to RING_ONCE_MAX_DURATION). The source
+## sample is ~20 s but the post-route "recipient picks up" beat only
+## wants a short chirp; the caller passes the desired duration so each
+## connect can feel a little different (e.g. randf_range(1.0, 2.0)). If
+## the sample is still playing when the timer fires we stop it explicitly.
+func play_ring_once(duration: float = RING_ONCE_MAX_DURATION) -> void:
 	if _ring_stream == null:
 		return
 	# Make sure the loop flag is off so _replay_ring won't sneak another play
 	# in once this sample finishes.
 	_ringing = false
 	ring_player.stream = _ring_stream
-	_log("ring", "one-shot", _ring_stream)
+	_log("ring", "one-shot (%.2fs)" % duration, _ring_stream)
 	ring_player.play()
-	await get_tree().create_timer(RING_ONCE_MAX_DURATION).timeout
+	await get_tree().create_timer(duration).timeout
 	if ring_player.playing:
 		_log("ring", "one-shot cut", _ring_stream)
 		ring_player.stop()
