@@ -32,10 +32,9 @@ model, MIT licence) to turn the flat-background renders into clean RGBA cutouts.
 
 | File | Source | License | Notes |
 |------|--------|---------|-------|
-| `audio/sfx/274289__abernstein__rotary-phone-ring-medium.wav` | https://freesound.org/people/abernstein/sounds/274289/ | CC0 (declared by uploader) | Rotary phone ring. Uploader marks this as CC0, but it is a remix of [lwdickens/269380](https://freesound.org/people/lwdickens/sounds/269380/) which is **CC-BY-NC 4.0**. To be safe, credit lwdickens too. |
-| `audio/sfx/275053__cvp1965__old-phone-ringing (1).wav` | https://freesound.org/people/cvp1965/sounds/275053/ | CC0 | Old phone ringing |
-| `audio/sfx/477641__joao_janz__power-cord-unplug-1_2.wav` | https://freesound.org/people/joao_janz/sounds/477641/ | CC0 | Cable unplug |
-| `audio/sfx/531060__haleyreesecalhoun__sneaky-phone-put-down-hrc.wav` (and `.m4a`) | https://freesound.org/people/haleyreesecalhoun/sounds/531060/ | CC0 | Phone hang-up |
+| `audio/sfx/275053__cvp1965__old-phone-ringing (1).wav` | https://freesound.org/people/cvp1965/sounds/275053/ | CC0 | Old phone ringing — used for both the incoming-call loop and the ringback one-shot |
+| `audio/sfx/477641__joao_janz__power-cord-unplug-1_2.wav` | https://freesound.org/people/joao_janz/sounds/477641/ | CC0 | Cable plug |
+| `audio/sfx/531060__haleyreesecalhoun__sneaky-phone-put-down-hrc.wav` | https://freesound.org/people/haleyreesecalhoun/sounds/531060/ | CC0 | Phone hang-up |
 
 ## Audio — Music
 

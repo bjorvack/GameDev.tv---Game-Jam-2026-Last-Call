@@ -14,10 +14,7 @@ extends Node
 const AUDIO_LOG := true
 const LOG_PREFIX := "[Audio]"
 
-const RING_PATHS: Array[String] = [
-	"res://audio/sfx/274289__abernstein__rotary-phone-ring-medium.wav",
-	"res://audio/sfx/275053__cvp1965__old-phone-ringing (1).wav",
-]
+const RING_PATH := "res://audio/sfx/275053__cvp1965__old-phone-ringing (1).wav"
 const PLUG_PATH := "res://audio/sfx/477641__joao_janz__power-cord-unplug-1_2.wav"
 const HANGUP_PATH := "res://audio/sfx/531060__haleyreesecalhoun__sneaky-phone-put-down-hrc.wav"
 
@@ -41,16 +38,13 @@ const SFX_VOLUME_DB := -6.0
 @onready var ring_player: AudioStreamPlayer = $Ring
 @onready var sfx_player: AudioStreamPlayer = $SFX
 
-var _ring_streams: Array[AudioStream] = []
+var _ring_stream: AudioStream
 var _plug_stream: AudioStream
 var _hangup_stream: AudioStream
 var _ringing: bool = false
 
 func _ready() -> void:
-	for path in RING_PATHS:
-		var s := load(path) as AudioStream
-		if s:
-			_ring_streams.append(s)
+	_ring_stream = load(RING_PATH)
 	_plug_stream = load(PLUG_PATH)
 	_hangup_stream = load(HANGUP_PATH)
 	music_player.volume_db = MUSIC_VOLUME_DB
@@ -64,42 +58,41 @@ func _ready() -> void:
 
 # -- ring ---------------------------------------------------------------------
 
+## Start the ring sample looping. Repeats `_ring_stream` until `stop_ring()`
+## flips `_ringing` back off.
 func play_ring() -> void:
-	if _ring_streams.is_empty():
+	if _ring_stream == null:
 		return
 	_ringing = true
-	ring_player.stream = _ring_streams.pick_random()
-	_log("ring", "start (looping)", ring_player.stream)
+	ring_player.stream = _ring_stream
+	_log("ring", "start (looping)", _ring_stream)
 	ring_player.play()
 
 func stop_ring() -> void:
 	if _ringing or ring_player.playing:
-		_log("ring", "stop", ring_player.stream)
+		_log("ring", "stop", _ring_stream)
 	_ringing = false
 	ring_player.stop()
 
-## Awaitable single-shot ring. Plays one random ring sample to completion
-## without engaging the looping behaviour, then returns. Used after a correct
-## route to play the recipient's ringback as a one-shot punctuation between
-## the player's plug and the recipient's pickup.
+## Awaitable single-shot ring. Plays one full ring sample without engaging
+## the loop, then returns. Used after a correct route to play the recipient's
+## ringback as a one-shot punctuation between plug and pickup.
 func play_ring_once() -> void:
-	if _ring_streams.is_empty():
+	if _ring_stream == null:
 		return
 	# Make sure the loop flag is off so _replay_ring won't sneak another play
 	# in once this sample finishes.
 	_ringing = false
-	ring_player.stream = _ring_streams.pick_random()
-	_log("ring", "one-shot", ring_player.stream)
+	ring_player.stream = _ring_stream
+	_log("ring", "one-shot", _ring_stream)
 	ring_player.play()
 	await ring_player.finished
 
 func _replay_ring() -> void:
-	# Re-pick a sample on each loop so the call doesn't sound robotic, but
-	# only while we're still in a RINGING phase.
-	if not _ringing or _ring_streams.is_empty():
+	# Only re-arm while we're still in a RINGING phase.
+	if not _ringing or _ring_stream == null:
 		return
-	ring_player.stream = _ring_streams.pick_random()
-	_log("ring", "loop", ring_player.stream)
+	_log("ring", "loop", _ring_stream)
 	ring_player.play()
 
 # -- sfx ----------------------------------------------------------------------
