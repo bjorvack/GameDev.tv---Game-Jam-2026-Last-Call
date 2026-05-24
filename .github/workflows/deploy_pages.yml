@@ -1,0 +1,84 @@
+# Build the Web export and publish it to GitHub Pages whenever a tag is
+# pushed. Tag pattern is anything starting with `v` (e.g. `v0.3.0`,
+# `v1.0-jam`), so day-to-day commits don't redeploy the playable build.
+#
+# Requires: in the repo's Settings → Pages, set "Build and deployment"
+# source to "GitHub Actions".
+name: Deploy Web build to GitHub Pages
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Avoid two deploys stepping on each other if tags are pushed quickly.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  GODOT_VERSION: 4.6.3
+  EXPORT_PRESET: Web
+  OUTPUT_DIR: build/web
+
+jobs:
+  build:
+    name: Export Web build
+    runs-on: ubuntu-latest
+    container:
+      # barichello/godot-ci ships the Godot editor + matching export
+      # templates pre-installed, so we don't have to download them by
+      # hand in the workflow.
+      image: barichello/godot-ci:4.6.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Move export templates into place
+        # The image stores templates under /root/.local/share/godot/...
+        # but the actions/checkout runner clears HOME differences; symlink
+        # them into the runner's home so the Godot CLI finds them.
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          ln -sfn /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable \
+                  ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Export Web preset
+        run: |
+          mkdir -p "${OUTPUT_DIR}"
+          godot --headless --export-release "${EXPORT_PRESET}" "${OUTPUT_DIR}/index.html"
+          ls -lh "${OUTPUT_DIR}"
+
+      - name: Inject Cross-Origin-Isolation headers via _headers
+        # GitHub Pages serves static files; we can't set HTTP response
+        # headers globally, but Godot 4 web builds need
+        # SharedArrayBuffer which requires COOP/COEP. Since we can't set
+        # those on Pages, fall back to the gd-html5-cross-origin
+        # service-worker shim Godot generates when
+        # `ensure_cross_origin_isolation_headers=false` is set in the
+        # preset — that's the default for our Web preset.
+        run: |
+          touch "${OUTPUT_DIR}/.nojekyll"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.OUTPUT_DIR }}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
