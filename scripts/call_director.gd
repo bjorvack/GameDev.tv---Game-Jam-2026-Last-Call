@@ -224,7 +224,7 @@ func _resolve_first_leg() -> void:
 	caller_card.show_waiting()
 	# One ringback sample, played to completion, then the recipient line
 	# fails to answer — segues straight into the first_leg dialogue.
-	await AudioManager.play_ring_once(randf_range(1.0, 2.0))
+	await AudioManager.play_ring_once(randf_range(3.0, 4.0))
 	_phase = CallPhase.CONNECTED
 	await _play_lines(_current.first_leg_dialogue)
 	_first_leg_completed = true
@@ -242,7 +242,7 @@ func _resolve_correct() -> void:
 	_phase = CallPhase.DIALING
 	call_resolved.emit(true, _current)
 	caller_card.show_waiting()
-	await AudioManager.play_ring_once(randf_range(1.0, 2.0))
+	await AudioManager.play_ring_once(randf_range(3.0, 4.0))
 
 	_phase = CallPhase.CONNECTED
 	await _play_lines(_current.connected_dialogue)
