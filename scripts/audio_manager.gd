@@ -33,11 +33,11 @@ const MUSIC_BED_VOLUME_DB := -22.0
 const RING_VOLUME_DB := -4.0
 const SFX_VOLUME_DB := -6.0
 ## Default cap on how long a single ringback one-shot may play. The cvp1965
-## ring sample is ~20 s; for the post-route "recipient picks up" beat we
-## want one short ringback before the connected dialogue starts. Callers
-## pass an explicit duration (e.g. randf_range(3.0, 4.0)) for organic
-## variation; this value is just the fallback when none is given.
-const RING_ONCE_MAX_DURATION := 3.5
+## ring sample is ~20 s; the director currently passes
+## randf_range(5.0, 7.5) for recipient pickups and randf_range(8.0, 11.0)
+## for unanswered first-leg lines, so this fallback only kicks in for
+## ad-hoc calls that don't specify a duration.
+const RING_ONCE_MAX_DURATION := 6.0
 
 @onready var music_player: AudioStreamPlayer = $Music
 @onready var music_bed_player: AudioStreamPlayer = $MusicBed
