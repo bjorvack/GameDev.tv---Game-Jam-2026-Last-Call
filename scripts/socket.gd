@@ -13,6 +13,8 @@
 class_name Socket
 extends Control
 
+const RingGlyphScript := preload("res://scripts/ring_glyph.gd")
+
 signal cable_plugged(socket_key: StringName)
 signal socket_pressed(socket: Socket)
 
@@ -62,6 +64,12 @@ func _apply_state() -> void:
 	if glow:
 		glow.energy = 0.0
 		glow.color = GLOW_AMBER
+	# Default: hide the ringing arcs. Only RINGING turns them on.
+	# This gives colour-blind players a shape + motion cue independent
+	# of the amber lamp pulse.
+	var ring_glyph := get_node_or_null("RingGlyph") as RingGlyphScript
+	if ring_glyph:
+		ring_glyph.stop()
 	match state:
 		State.UNLIT:
 			# Don't darken the socket — paint a small red halo instead so
@@ -74,6 +82,8 @@ func _apply_state() -> void:
 			pass
 		State.RINGING:
 			_start_pulse(glow)
+			if ring_glyph:
+				ring_glyph.play()
 		State.PLUGGED:
 			if glow:
 				glow.energy = 0.6
