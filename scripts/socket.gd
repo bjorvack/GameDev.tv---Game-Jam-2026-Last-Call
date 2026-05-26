@@ -70,6 +70,14 @@ func _apply_state() -> void:
 	var ring_glyph := get_node_or_null("RingGlyph") as RingGlyphScript
 	if ring_glyph:
 		ring_glyph.stop()
+	# Default: the dimmer filter is ON, so an idle lit socket reads as
+	# "available but quiet". States that need the player's attention
+	# (RINGING) or that already carry their own clear signal — UNLIT's
+	# red halo, PLUGGED's visible cable — switch it OFF below so the
+	# underlying glow comes through at full strength.
+	var light_filter := get_node_or_null("LightFilter") as Node2D
+	if light_filter:
+		light_filter.visible = true
 	match state:
 		State.UNLIT:
 			# Don't darken the socket — paint a small red halo instead so
@@ -78,15 +86,21 @@ func _apply_state() -> void:
 			if glow:
 				glow.color = GLOW_RED
 				glow.energy = 0.45
+			if light_filter:
+				light_filter.visible = false
 		State.REACHABLE:
 			pass
 		State.RINGING:
 			_start_pulse(glow)
 			if ring_glyph:
 				ring_glyph.play()
+			if light_filter:
+				light_filter.visible = false
 		State.PLUGGED:
 			if glow:
 				glow.energy = 0.6
+			if light_filter:
+				light_filter.visible = false
 
 func _start_pulse(glow: Light2D) -> void:
 	if glow == null:

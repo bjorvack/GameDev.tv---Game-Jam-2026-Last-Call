@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://ctvdaf8f02xax" path="res://art/props/paper_card.png" id="3_paper_card"]
 [ext_resource type="FontFile" uid="uid://07ch50330ycu" path="res://art/fonts/SpecialElite-Regular.ttf" id="4_label_font"]
 [ext_resource type="Script" uid="uid://u63a6fud7m3s" path="res://scripts/ring_glyph.gd" id="5_ring_glyph"]
+[ext_resource type="Script" uid="uid://d1b8x0mtunydw" path="res://scripts/light_filter.gd" id="6_light_filter"]
 
 [sub_resource type="Gradient" id="Gradient_socket_glow"]
 offsets = PackedFloat32Array(0, 0.35, 0.7, 1)
@@ -50,6 +51,14 @@ stretch_mode = 5
 
 [node name="Center" type="Marker2D" parent="Visual" unique_id=2087213654]
 position = Vector2(38, 42)
+
+[node name="LightFilter" type="Node2D" parent="." unique_id=991917303]
+light_mask = 0
+position = Vector2(65, 28.7)
+script = ExtResource("6_light_filter")
+inner_radius = 3.3
+outer_radius = 8.0
+dim_color = Color(0, 0, 0, 0.43529412)
 
 [node name="LabelCard" type="NinePatchRect" parent="." unique_id=991917300]
 layout_mode = 1
