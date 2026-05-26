@@ -1,0 +1,75 @@
+# Manually publish the latest `main` to GitHub Pages as a live preview.
+# Tagged releases are handled separately by deploy.yml, which also
+# pushes to itch.io — this workflow intentionally does NOT touch itch
+# so manual previews don't churn the storefront.
+#
+# Trigger via Actions → "Publish main to GitHub Pages" → Run workflow.
+#
+# Since GitHub Pages hosts a single site per repo, whichever workflow
+# (this one or deploy.yml) ran last wins. Both share the same
+# `concurrency: pages` group so they can't deploy on top of each other.
+#
+# One-time setup (same as deploy.yml):
+#   - Settings → Pages → "Build and deployment" source = "GitHub Actions".
+name: Publish main to GitHub Pages
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  GODOT_VERSION: 4.6.3
+  EXPORT_PRESET: Web
+  OUTPUT_DIR: build/web
+
+jobs:
+  build:
+    name: Export Web build
+    runs-on: ubuntu-latest
+    container:
+      # Same image as deploy.yml so the two workflows stay in lockstep
+      # on Godot version + export templates.
+      image: barichello/godot-ci:4.6.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Move export templates into place
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates
+          ln -sfn /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable \
+                  ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+
+      - name: Export Web preset
+        run: |
+          mkdir -p "${OUTPUT_DIR}"
+          godot --headless --export-release "${EXPORT_PRESET}" "${OUTPUT_DIR}/index.html"
+          ls -lh "${OUTPUT_DIR}"
+
+      - name: Mark output as non-Jekyll
+        run: touch "${OUTPUT_DIR}/.nojekyll"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ env.OUTPUT_DIR }}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5
