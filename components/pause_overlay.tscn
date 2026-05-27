@@ -55,18 +55,21 @@ color = Color(0.91, 0.72, 0.42, 0.4)
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="Menu/Center/Panel/VBox"]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Settings"
 
 [node name="TitleButton" type="Button" parent="Menu/Center/Panel/VBox"]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Back to title"
 
 [node name="SettingsOverlay" parent="." instance=ExtResource("3_settings")]

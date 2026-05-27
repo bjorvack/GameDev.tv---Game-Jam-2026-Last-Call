@@ -71,6 +71,7 @@ theme_override_constants/separation = 18
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 visible = false
 text = "Continue"
 
@@ -78,12 +79,14 @@ text = "Continue"
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Start Call"
 
 [node name="SettingsButton" type="Button" parent="MainMenu/VBox"]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Settings"
 
 [node name="SettingsOverlay" parent="." instance=ExtResource("5_settings")]

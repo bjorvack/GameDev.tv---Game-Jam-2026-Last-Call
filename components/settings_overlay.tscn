@@ -73,6 +73,7 @@ color = Color(0.91, 0.72, 0.42, 0.4)
 [node name="ManualAdvanceToggle" type="Button" parent="Center/Panel/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "[  ]  Manual dialogue advance"
 theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
@@ -88,10 +89,38 @@ theme_override_styles/pressed = SubResource("ToggleStyle_empty")
 theme_override_styles/disabled = SubResource("ToggleStyle_empty")
 theme_override_styles/focus = SubResource("ToggleStyle_focus")
 
-[node name="HelpLabel" type="Label" parent="Center/Panel/VBox"]
+[node name="ManualHelpLabel" type="Label" parent="Center/Panel/VBox"]
 layout_mode = 2
 text = "When enabled, dialogue lines wait for you to press
 Space, Enter, or click before advancing."
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.78, 0.74, 0.62, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 14
+
+[node name="SystemCursorToggle" type="Button" parent="Center/Panel/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
+toggle_mode = true
+text = "[  ]  Use system cursor"
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_colors/font_hover_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_pressed_color = Color(0.91, 0.72, 0.42, 1)
+theme_override_colors/font_focus_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("ToggleStyle_empty")
+theme_override_styles/hover = SubResource("ToggleStyle_empty")
+theme_override_styles/pressed = SubResource("ToggleStyle_empty")
+theme_override_styles/disabled = SubResource("ToggleStyle_empty")
+theme_override_styles/focus = SubResource("ToggleStyle_focus")
+
+[node name="CursorHelpLabel" type="Label" parent="Center/Panel/VBox"]
+layout_mode = 2
+text = "Bypass the custom cursor and use your operating system's
+default pointer for higher contrast or larger sizes."
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.78, 0.74, 0.62, 1)
 theme_override_constants/outline_size = 0
@@ -104,4 +133,5 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="Center/Panel/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 text = "Back"
