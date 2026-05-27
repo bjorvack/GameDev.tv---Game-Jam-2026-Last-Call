@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameState="*res://scripts/game_state.gd"
+SettingsState="*res://scripts/settings_state.gd"
 DebugScreenshot="*res://scripts/debug_screenshot.gd"
 AudioManager="*res://components/audio_manager.tscn"
 SceneTransition="*res://scripts/scene_transition.gd"
