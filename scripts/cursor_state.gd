@@ -16,9 +16,9 @@ extends Node
 
 const DEFAULT_PATH := "res://art/cursors/cursor_default.png"
 const INTERACT_PATH := "res://art/cursors/cursor_interact.png"
-## Hotspot in the 28x28 canvas — coincides with the arrow tip baked
-## into tools/generate_cursor_set.py (TIP = (2, 2) after downsample).
-const HOTSPOT := Vector2(2, 2)
+## Hotspot in the 48x48 canvas — coincides with the brass tip baked
+## into tools/generate_cursor_set.py (TIP = (3, 3) after downsample).
+const HOTSPOT := Vector2(3, 3)
 
 var _default_tex: Texture2D
 var _interact_tex: Texture2D
