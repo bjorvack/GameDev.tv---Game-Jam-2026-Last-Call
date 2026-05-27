@@ -38,6 +38,11 @@ func _ready() -> void:
 	_settings_button.pressed.connect(_settings_overlay.open)
 	_settings_overlay.opened.connect(_on_settings_opened)
 	_settings_overlay.closed.connect(_on_settings_closed)
+	# Forward / confirm clicks on the title menu — every press here moves
+	# the player deeper into the game.
+	_continue_button.pressed.connect(UiAudio.play_click)
+	_start_button.pressed.connect(UiAudio.play_click)
+	_settings_button.pressed.connect(UiAudio.play_click)
 	_refresh_continue_visibility()
 
 func _refresh_continue_visibility() -> void:

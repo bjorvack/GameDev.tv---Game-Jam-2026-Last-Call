@@ -23,6 +23,11 @@ func _ready() -> void:
 	_title_button.pressed.connect(_on_back_to_title)
 	_settings_overlay.opened.connect(_on_settings_opened)
 	_settings_overlay.closed.connect(_on_settings_closed)
+	# Resume = forward (back into the game); Settings = forward (deeper
+	# into menus); Back to title = back (out of the run).
+	_resume_button.pressed.connect(UiAudio.play_click)
+	_settings_button.pressed.connect(UiAudio.play_click)
+	_title_button.pressed.connect(UiAudio.play_back)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
