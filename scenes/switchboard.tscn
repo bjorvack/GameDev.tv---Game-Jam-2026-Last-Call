@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" path="res://components/call_timer.tscn" id="17_timer"]
 [ext_resource type="Texture2D" uid="uid://bapvq0fsw84tc" path="res://art/backgrounds/title.png" id="18_bg"]
 [ext_resource type="Texture2D" uid="uid://bdyj614ghr8nw" path="res://art/props/switchboard_panel_small.png" id="19_panel"]
+[ext_resource type="PackedScene" path="res://components/pause_overlay.tscn" id="20_pause"]
 
 [sub_resource type="Gradient" id="Gradient_vignette"]
 offsets = PackedFloat32Array(0, 0.5, 0.85, 1)
@@ -249,6 +250,8 @@ offset_right = 160.0
 offset_bottom = -32.0
 grow_vertical = 0
 mouse_filter = 2
+
+[node name="PauseOverlay" parent="." unique_id=1271622551 instance=ExtResource("20_pause")]
 
 [node name="VignetteLayer" type="CanvasLayer" parent="." unique_id=341494151]
 layer = 50

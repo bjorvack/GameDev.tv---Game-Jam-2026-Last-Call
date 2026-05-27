@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://components/pause_overlay.gd" id="1_pause"]
+[ext_resource type="Theme" path="res://art/themes/menu_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://components/settings_overlay.tscn" id="3_settings"]
+
+[node name="PauseOverlay" type="CanvasLayer"]
+layer = 75
+script = ExtResource("1_pause")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+theme = ExtResource("2_theme")
+
+[node name="Dim" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+mouse_filter = 1
+
+[node name="Center" type="CenterContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="Panel" type="PanelContainer" parent="Menu/Center"]
+custom_minimum_size = Vector2(440, 0)
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Menu/Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="Menu/Center/Panel/VBox"]
+layout_mode = 2
+text = "PAUSED"
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.91, 0.72, 0.42, 1)
+theme_override_font_sizes/font_size = 34
+
+[node name="Divider" type="ColorRect" parent="Menu/Center/Panel/VBox"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.91, 0.72, 0.42, 0.4)
+
+[node name="ResumeButton" type="Button" parent="Menu/Center/Panel/VBox"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="Menu/Center/Panel/VBox"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="TitleButton" type="Button" parent="Menu/Center/Panel/VBox"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to title"
+
+[node name="SettingsOverlay" parent="." instance=ExtResource("3_settings")]
+process_mode = 3
