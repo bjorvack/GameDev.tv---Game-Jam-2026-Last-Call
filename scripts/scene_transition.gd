@@ -87,16 +87,80 @@ func _tween_alpha(target: float, duration: float) -> void:
 	tween.tween_property(_rect, "color:a", target, duration)
 	await tween.finished
 
+## Minimum time a manual-advance monologue line must stay on screen before
+## input is accepted. Matches CallerCard.MIN_VISIBLE_TIME so the feel is
+## consistent between in-call dialogue and inter-call monologues.
+const MONOLOGUE_MIN_VISIBLE := 0.3
+
+signal monologue_dismissed
+
+var _monologue_active: bool = false
+var _monologue_duration: float = 0.0
+var _awaiting_monologue_dismiss: bool = false
+var _monologue_shown_at_msec: int = 0
+var _monologue_timer_token: int = 0
+
 ## Awaitable. Assumes the screen is already faded out; fades a line of text
-## in at the centre of the viewport, holds it for `hold_duration` seconds,
-## then fades it back out so the caller can resume the normal fade-in.
+## in at the centre of the viewport, holds it for `hold_duration` seconds
+## in auto mode, or until the player presses Space / Enter / clicks in
+## manual mode. Reacts to mid-monologue toggle changes the same way the
+## caller card does.
 func show_monologue(text: String, hold_duration: float) -> void:
 	_monologue_label.text = text
 	var tw_in := create_tween()
 	tw_in.tween_property(_monologue_label, "modulate:a", 1.0, MONOLOGUE_FADE)
 	await tw_in.finished
-	await get_tree().create_timer(maxf(hold_duration, 0.0)).timeout
+	_monologue_active = true
+	_monologue_duration = maxf(hold_duration, 0.0)
+	if SettingsState and not SettingsState.manual_dialogue_changed.is_connected(_on_manual_dialogue_changed):
+		SettingsState.manual_dialogue_changed.connect(_on_manual_dialogue_changed)
+	_apply_monologue_mode()
+	await monologue_dismissed
 	var tw_out := create_tween()
 	tw_out.tween_property(_monologue_label, "modulate:a", 0.0, MONOLOGUE_FADE)
 	await tw_out.finished
 	_monologue_label.text = ""
+
+func _on_manual_dialogue_changed(_value: bool) -> void:
+	if _monologue_active:
+		_apply_monologue_mode()
+
+func _apply_monologue_mode() -> void:
+	if not _monologue_active:
+		return
+	_monologue_timer_token += 1
+	if SettingsState and SettingsState.manual_dialogue:
+		_awaiting_monologue_dismiss = true
+		_monologue_shown_at_msec = Time.get_ticks_msec()
+	else:
+		_awaiting_monologue_dismiss = false
+		var token := _monologue_timer_token
+		var t := get_tree().create_timer(_monologue_duration)
+		t.timeout.connect(func(): _on_monologue_timeout(token))
+
+func _on_monologue_timeout(token: int) -> void:
+	if not _monologue_active or token != _monologue_timer_token:
+		return
+	_finish_monologue()
+
+func _finish_monologue() -> void:
+	_monologue_active = false
+	_awaiting_monologue_dismiss = false
+	_monologue_timer_token += 1
+	monologue_dismissed.emit()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not _awaiting_monologue_dismiss or not _monologue_active:
+		return
+	var is_dismiss := false
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_SPACE or event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+			is_dismiss = true
+	elif event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		is_dismiss = true
+	if not is_dismiss:
+		return
+	if Time.get_ticks_msec() - _monologue_shown_at_msec < int(MONOLOGUE_MIN_VISIBLE * 1000.0):
+		return
+	get_viewport().set_input_as_handled()
+	_finish_monologue()

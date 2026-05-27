@@ -293,10 +293,12 @@ func _on_timer_expired() -> void:
 func _play_lines(lines: Array) -> void:
 	if lines == null or lines.is_empty():
 		return
+	# CallerCard.play_line handles auto-timer XOR manual-dismiss internally
+	# and reacts to mid-line toggle changes, so we just await each line.
 	for line in lines:
 		if line is DialogueLine:
-			caller_card.show_line(line)
-			await get_tree().create_timer(line.duration).timeout
+			caller_card.play_line(line)
+			await caller_card.line_dismissed
 
 func _on_patience_changed(value: int) -> void:
 	for i in patience_container.get_child_count():
