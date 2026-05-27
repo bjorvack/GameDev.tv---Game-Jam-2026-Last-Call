@@ -35,6 +35,7 @@ model, MIT licence) to turn the flat-background renders into clean RGBA cutouts.
 | `audio/sfx/275053__cvp1965__old-phone-ringing (1).wav` | https://freesound.org/people/cvp1965/sounds/275053/ | CC0 | Old phone ringing — used for both the incoming-call loop and the ringback one-shot |
 | `audio/sfx/477641__joao_janz__power-cord-unplug-1_2.wav` | https://freesound.org/people/joao_janz/sounds/477641/ | CC0 | Cable plug |
 | `audio/sfx/531060__haleyreesecalhoun__sneaky-phone-put-down-hrc.wav` | https://freesound.org/people/haleyreesecalhoun/sounds/531060/ | CC0 | Phone hang-up |
+| `audio/sfx/717365__1bob__click.wav` | https://freesound.org/people/1Bob/sounds/717365/ | CC0 | Menu button click — pitched in code for back / toggle variants |
 
 ## Audio — Music
 

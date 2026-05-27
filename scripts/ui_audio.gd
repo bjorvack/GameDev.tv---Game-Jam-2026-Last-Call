@@ -16,12 +16,15 @@
 ## research (group sounds by intent, not by file format).
 extends Node
 
-const CLICK_PATH := "res://audio/sfx/ui_click.wav"
+const CLICK_PATH := "res://audio/sfx/717365__1bob__click.wav"
 const TOGGLE_PATH := "res://audio/sfx/ui_toggle.wav"
 
-## Default playback volume — matches the existing AudioManager SFX level
-## so menu clicks sit at the same loudness as gameplay plug/hangup SFX.
-const VOLUME_DB := -8.0
+## Default playback volume — UI sits one tier below gameplay SFX in the
+## project's loudness hierarchy (ring -4, plug/hangup -6, UI -12, music
+## -14, bed -22). Standard best practice from game audio mixing guides
+## (Audiokinetic, SFX Engine) is to keep UI clearly below in-world
+## events so they read as confirmation, not as action.
+const VOLUME_DB := -12.0
 
 ## Pitch ratios for the various sub-events. 0.85 is roughly two semitones
 ## down, 1.12 is roughly two up — both still recognisable as the same
