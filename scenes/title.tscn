@@ -67,6 +67,13 @@ mouse_filter = 1
 layout_mode = 2
 theme_override_constants/separation = 18
 
+[node name="ContinueButton" type="Button" parent="MainMenu/VBox"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+visible = false
+text = "Continue"
+
 [node name="StartButton" type="Button" parent="MainMenu/VBox"]
 custom_minimum_size = Vector2(280, 0)
 layout_mode = 2
