@@ -88,10 +88,15 @@ func _on_auto_timeout(token: int) -> void:
 		return
 	_finish_line()
 
+const HINT_FADE_TIME := 0.15
+
+var _hint_fade_tween: Tween
+
 func _arm_dismiss() -> void:
 	_awaiting_dismiss = true
 	_line_shown_at_msec = Time.get_ticks_msec()
 	if _continue_hint:
+		_set_hint_alpha(0.0)
 		_continue_hint.visible = false
 		# Defer showing the hint until the line has been visible long enough
 		# to be safely dismissable, so it doesn't flicker on for one frame.
@@ -101,11 +106,27 @@ func _arm_dismiss() -> void:
 func _show_continue_hint_if_armed() -> void:
 	if _awaiting_dismiss and _continue_hint:
 		_continue_hint.visible = true
+		_fade_hint_to(1.0)
 
 func _disarm_dismiss() -> void:
 	_awaiting_dismiss = false
 	if _continue_hint:
+		# Snap the hint off rather than fading — the line itself is about
+		# to fade out, so a hint fade-out on top would feel redundant.
 		_continue_hint.visible = false
+		_set_hint_alpha(1.0)
+
+func _set_hint_alpha(a: float) -> void:
+	if _continue_hint and _continue_hint is CanvasItem:
+		_continue_hint.modulate.a = a
+
+func _fade_hint_to(target: float) -> void:
+	if _continue_hint == null:
+		return
+	if _hint_fade_tween:
+		_hint_fade_tween.kill()
+	_hint_fade_tween = create_tween()
+	_hint_fade_tween.tween_property(_continue_hint, "modulate:a", target, HINT_FADE_TIME)
 
 func _finish_line() -> void:
 	_line_active = false
