@@ -15,6 +15,11 @@ const MAX_PATIENCE := 3
 const _PROGRESS_PATH := "user://progress.cfg"
 const _PROGRESS_SECTION := "checkpoint"
 const _PROGRESS_KEY_CALL_INDEX := "call_index"
+## Persisted alongside the call index so the inter-call monologue on
+## Continue picks the same thought source (operator_thought vs.
+## timer_expired_thought) that the player would have heard in the
+## original session.
+const _PROGRESS_KEY_TIMED_OUT := "last_call_timed_out"
 
 var patience: int = MAX_PATIENCE
 var current_call_index: int = 0
@@ -35,12 +40,15 @@ func lose_patience() -> void:
 	if patience <= 0:
 		end_game(false)
 
-func advance_call() -> void:
+## Advance to the next call. `timed_out` records whether the previous
+## call ended via timer expiry so a future Continue picks the right
+## inter-call monologue source.
+func advance_call(timed_out: bool = false) -> void:
 	current_call_index += 1
 	# Persist progress every time the player gets past a call (correct
 	# connect *or* a non-pivotal timer expiry that lets the story move
 	# on). On a Continue this is where the run resumes.
-	save_checkpoint(current_call_index)
+	save_checkpoint(current_call_index, timed_out)
 	call_advanced.emit(current_call_index)
 
 func end_game(good: bool) -> void:
@@ -54,6 +62,7 @@ func end_game(good: bool) -> void:
 ## --- Checkpoint persistence -------------------------------------------
 
 var _checkpoint_cache: int = 0
+var _checkpoint_timed_out_cache: bool = false
 
 func has_checkpoint() -> bool:
 	# Only meaningful checkpoints (i.e. the player completed at least one
@@ -63,22 +72,31 @@ func has_checkpoint() -> bool:
 func checkpoint_call_index() -> int:
 	return _checkpoint_cache
 
+## Whether the call immediately *before* the checkpoint ended on a timer
+## expiry. CallDirector reads this on resume to seed _last_call_timed_out
+## so the inter-call monologue follows the original path.
+func checkpoint_timed_out() -> bool:
+	return _checkpoint_timed_out_cache
+
 ## Persist that the player has progressed past `index - 1` and the next
 ## call to play on Continue is `index`. Called by the CallDirector after
 ## every successful connect via advance_call.
-func save_checkpoint(index: int) -> void:
+func save_checkpoint(index: int, timed_out: bool = false) -> void:
 	if index <= 0:
 		return
 	_checkpoint_cache = index
+	_checkpoint_timed_out_cache = timed_out
 	var cfg := ConfigFile.new()
 	cfg.load(_PROGRESS_PATH)
 	cfg.set_value(_PROGRESS_SECTION, _PROGRESS_KEY_CALL_INDEX, index)
+	cfg.set_value(_PROGRESS_SECTION, _PROGRESS_KEY_TIMED_OUT, timed_out)
 	cfg.save(_PROGRESS_PATH)
 
 ## Wipe the on-disk checkpoint. Called on a good ending (game complete)
 ## and when the player chooses New Game from the title.
 func clear_checkpoint() -> void:
 	_checkpoint_cache = 0
+	_checkpoint_timed_out_cache = false
 	# Remove the file entirely so the next has_checkpoint() check is fast
 	# and the user:// directory stays tidy.
 	if FileAccess.file_exists(_PROGRESS_PATH):
@@ -88,5 +106,7 @@ func _load_checkpoint_cache() -> void:
 	var cfg := ConfigFile.new()
 	if cfg.load(_PROGRESS_PATH) != OK:
 		_checkpoint_cache = 0
+		_checkpoint_timed_out_cache = false
 		return
 	_checkpoint_cache = int(cfg.get_value(_PROGRESS_SECTION, _PROGRESS_KEY_CALL_INDEX, 0))
+	_checkpoint_timed_out_cache = bool(cfg.get_value(_PROGRESS_SECTION, _PROGRESS_KEY_TIMED_OUT, false))

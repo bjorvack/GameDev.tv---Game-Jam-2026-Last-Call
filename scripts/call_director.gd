@@ -60,6 +60,11 @@ func _ready() -> void:
 	# checkpoint (current_call_index = saved index), and patience is
 	# always full at the start of a session — see Title's button
 	# handlers. Resetting here would clobber a resume.
+	# On Continue, seed the inter-call monologue source from the persisted
+	# checkpoint so the operator's thought matches how the previous call
+	# actually ended in the saved session.
+	if GameState.has_checkpoint() and GameState.current_call_index == GameState.checkpoint_call_index():
+		_last_call_timed_out = GameState.checkpoint_timed_out()
 	# Reorder the socket grid before anyone sees the board, so each run has
 	# a different layout and players can't memorise positions.
 	_shuffle_sockets()
@@ -289,9 +294,10 @@ func _on_timer_expired() -> void:
 	# Timer expiry ends the call regardless of remaining patience.
 	if GameState.patience > 0:
 		# Mark the previous call as a timer failure so the inter-call
-		# monologue picks the right thought source.
+		# monologue picks the right thought source — and persist it onto
+		# the checkpoint so a future Continue picks the same source.
 		_last_call_timed_out = true
-		GameState.advance_call()
+		GameState.advance_call(true)
 		_start_next()
 
 func _play_lines(lines: Array) -> void:
