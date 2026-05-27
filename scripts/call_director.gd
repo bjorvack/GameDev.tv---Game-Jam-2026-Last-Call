@@ -55,7 +55,11 @@ var _first_leg_completed: bool = false
 var _last_call_timed_out: bool = false
 
 func _ready() -> void:
-	GameState.reset()
+	# We deliberately don't reset GameState here. The title screen sets up
+	# either a fresh run (current_call_index = 0) or a resume from
+	# checkpoint (current_call_index = saved index), and patience is
+	# always full at the start of a session — see Title's button
+	# handlers. Resetting here would clobber a resume.
 	# Reorder the socket grid before anyone sees the board, so each run has
 	# a different layout and players can't memorise positions.
 	_shuffle_sockets()
