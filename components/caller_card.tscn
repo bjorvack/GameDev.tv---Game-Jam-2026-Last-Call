@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dupqjqgirp0xs"]
+[gd_scene format=3 uid="uid://dupqjqgirp0xs"]
 
 [ext_resource type="Script" uid="uid://bcu65tf2x4ihc" path="res://components/caller_card.gd" id="1_d0414"]
-[ext_resource type="Texture2D" path="res://art/props/continue_glyph.png" id="6_continue_glyph"]
+[ext_resource type="Texture2D" uid="uid://bt8qwqkowf2eu" path="res://art/props/continue_glyph.png" id="6_continue_glyph"]
 
 [sub_resource type="Gradient" id="Gradient_halo"]
 offsets = PackedFloat32Array(0, 0.5, 1)
@@ -108,8 +108,8 @@ offset_right = 180.0
 offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 0
-alignment = 1
 theme_override_constants/separation = 8
+alignment = 1
 
 [node name="Icon" type="TextureRect" parent="ContinueHint" unique_id=998127002]
 custom_minimum_size = Vector2(20, 20)
@@ -121,7 +121,6 @@ stretch_mode = 5
 
 [node name="HintText" type="Label" parent="ContinueHint" unique_id=998127003]
 layout_mode = 2
-size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.91, 0.72, 0.42, 0.85)
 theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
 theme_override_constants/outline_size = 4
