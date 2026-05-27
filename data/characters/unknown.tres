@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
+[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
+[ext_resource type="Texture2D" uid="uid://cl1e4w5jgcnci" path="res://art/portraits/unknown.png" id="3_portrait"]
+
+[sub_resource type="Resource" id="voice_default"]
+script = ExtResource("2_vref")
+mood = &"default"
+audio = null
+transcript = ""
+notes = "Source TBD — needs a generic mid-to-older voice that reads as 'startled stranger picking up an unexpected call'. Slight hesitation, soft register. LibriVox narrator pool is a good fit."
+
+[resource]
+script = ExtResource("1_char")
+name = "???"
+aliases = Array[StringName]([&"?", &"unknown"])
+gender = "unspecified — typically older male or middle-aged voice depending on which line lands here"
+age = "varies"
+speaking_tone = "hesitant, startled, polite"
+description = "The placeholder identity for any wrong-number recipient in the game. Used when the operator routes the cord to a socket the caller didn't ask for: a stranger picks up, says hello, the caller realises the mistake. The voice should feel domestic and quiet — someone who answered the phone in their own kitchen, not a switchboard professional."
+portrait = ExtResource("3_portrait")
+voices = Array[Resource]([SubResource("voice_default")])

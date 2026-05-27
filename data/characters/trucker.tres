@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
+[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
+[ext_resource type="Texture2D" uid="uid://bnjqhn1j78wpa" path="res://art/portraits/trucker.png" id="3_portrait"]
+
+[sub_resource type="Resource" id="voice_default"]
+script = ExtResource("2_vref")
+mood = &"default"
+audio = null
+transcript = ""
+notes = "Source TBD — needs a 5–10s 1960s-American adult-male voice, rough, road-weary, helpful. CB-radio recordings, Prelinger long-haul-trucker shorts, or any working-class character actor from the era."
+
+[resource]
+script = ExtResource("1_char")
+name = "Trucker"
+aliases = Array[StringName]([])
+gender = "male"
+age = "40s"
+speaking_tone = "rough, road-weary, plain-spoken, helpful when asked"
+description = "Anonymous long-haul driver, picks up at the Highway 40 truck-stop phone booth when the Reverend places the long-shot call in call 9. Doesn't know any of these people. Hears the situation, agrees to help — flags down Daniel's car and tells him to turn around. Speaks in short useful sentences. Last we hear of him is the phone hitting the booth glass as he runs out."
+portrait = ExtResource("3_portrait")
+voices = Array[Resource]([SubResource("voice_default")])

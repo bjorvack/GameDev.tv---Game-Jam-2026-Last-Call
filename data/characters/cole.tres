@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
+[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
+[ext_resource type="Texture2D" uid="uid://c8rie3fgslscn" path="res://art/portraits/cole.png" id="3_portrait"]
+
+[sub_resource type="Resource" id="voice_default"]
+script = ExtResource("2_vref")
+mood = &"default"
+audio = null
+transcript = ""
+notes = "Source TBD — needs a 5–10s 1960s-American working-class man, gruff but not aggressive. Candidate hunting in OTRR Gunsmoke / Dragnet character actor pools."
+
+[resource]
+script = ExtResource("1_char")
+name = "Cole"
+aliases = Array[StringName]([])
+gender = "male"
+age = "early 50s"
+speaking_tone = "gruff, economical, blue-collar"
+description = "Runs Cole's Garage just off the main road. Answers the phone with one word and never wastes a second. Has known Patty since high school and would drive across the county for her, but you'd never hear him say so. Speaks in short clipped sentences, dry humour buried under a workshop accent."
+portrait = ExtResource("3_portrait")
+voices = Array[Resource]([SubResource("voice_default")])

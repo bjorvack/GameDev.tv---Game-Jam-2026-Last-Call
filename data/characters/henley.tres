@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Character" load_steps=4 format=3]
+
+[ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
+[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
+[ext_resource type="Texture2D" uid="uid://brx1g16gqvn36" path="res://art/portraits/henley.png" id="3_portrait"]
+
+[sub_resource type="Resource" id="voice_default"]
+script = ExtResource("2_vref")
+mood = &"default"
+audio = null
+transcript = ""
+notes = "Source TBD — needs a 5–10s 1960s-American older-female voice, anxious but composed. Slight quaver works in her favour; LibriVox older-women narrators or Prelinger civic-defence films are good places to look."
+
+[resource]
+script = ExtResource("1_char")
+name = "Mrs. Henley"
+aliases = Array[StringName]([&"Henley"])
+gender = "female"
+age = "late 60s"
+speaking_tone = "anxious neighbour, soft-spoken, observant"
+description = "Lives on 8th Street with a clear view down Vine. Sees the ambulance and unmarked unit pull up outside Margaret Hayes's house and immediately calls the operator to relay it to Sheriff Briggs. Knows the town like the back of her hand but rarely raises her voice — she watches more than she speaks."
+portrait = ExtResource("3_portrait")
+voices = Array[Resource]([SubResource("voice_default")])

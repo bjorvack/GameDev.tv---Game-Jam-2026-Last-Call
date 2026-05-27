@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="Character" load_steps=8 format=3]
+
+[ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
+[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
+[ext_resource type="Texture2D" uid="uid://5h42femxk4di" path="res://art/portraits/daniel.png" id="3_portrait"]
+[ext_resource type="AudioStream" uid="uid://ctgtvyvlf50nj" path="res://audio/voice_refs/daniel/default.wav" id="4_voice_default"]
+[ext_resource type="AudioStream" uid="uid://canlfnd1iest8" path="res://audio/voice_refs/daniel/anxious.wav" id="5_voice_anxious"]
+[ext_resource type="AudioStream" uid="uid://vx1kjhbr5eeg" path="res://audio/voice_refs/daniel/frantic.wav" id="6_voice_frantic"]
+[ext_resource type="AudioStream" uid="uid://dhqjngn3wxl15" path="res://audio/voice_refs/daniel/relieved.wav" id="7_voice_relieved"]
+
+[sub_resource type="Resource" id="voice_default"]
+script = ExtResource("2_vref")
+mood = &"default"
+audio = ExtResource("4_voice_default")
+transcript = "and a lot of work to appear on suspense. And second, come on out here, Tony. That's right, come on out. Ladies and gentlemen,"
+notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~27:30. Public domain (OTRR / TSP). Heflin's baseline composed register."
+
+[sub_resource type="Resource" id="voice_anxious"]
+script = ExtResource("2_vref")
+mood = &"anxious"
+audio = ExtResource("5_voice_anxious")
+transcript = "to show that it stood there a long time in our moral and like the time last week, the time."
+notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~13:30. Public domain (OTRR / TSP). Mid-episode tension as the burglars enter and Heflin realises something's wrong."
+
+[sub_resource type="Resource" id="voice_frantic"]
+script = ExtResource("2_vref")
+mood = &"frantic"
+audio = ExtResource("6_voice_frantic")
+transcript = "Yeah, yeah, that's good. Sure. Come on. If I go both of you go with me. What time is it?"
+notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~15:30. Public domain (OTRR / TSP). The bomb-clock countdown — Heflin pleading, desperate."
+
+[sub_resource type="Resource" id="voice_relieved"]
+script = ExtResource("2_vref")
+mood = &"relieved"
+audio = ExtResource("7_voice_relieved")
+transcript = "You're gone. The only people in the world who know where I am. I've got to get out!"
+notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~05:30. Public domain (OTRR / TSP). Used as a softer/relieved baseline by tone, even though the line itself is tense — the episode never offers a true relief moment."
+
+[resource]
+script = ExtResource("1_char")
+name = "Daniel"
+aliases = Array[StringName]([&"Daniel Hayes"])
+gender = "male"
+age = "mid 30s"
+speaking_tone = "tired warmth, mild Southern, becomes brittle under stress"
+description = "Margaret Hayes's son. Travelling salesman, driving home down Highway 40 from a sales swing. Calls his mother every morning; today she didn't answer. Across the run he becomes the story's emotional spine — the early lines are his routine son's-on-the-road check-ins, the late lines (calls 5, 7, 10) are him realising something is very wrong. Even at his most frantic he tries to be polite to the operator."
+portrait = ExtResource("3_portrait")
+voices = Array[Resource]([SubResource("voice_default"), SubResource("voice_anxious"), SubResource("voice_frantic"), SubResource("voice_relieved")])
