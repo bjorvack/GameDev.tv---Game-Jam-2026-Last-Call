@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://thp5ii7ptieu"
-path="res://.godot/imported/06_settings.png-1c9bbdd5be4e9ce61a02338bdf6a6f5a.ctex"
+uid="uid://bt8qwqkowf2eu"
+path="res://.godot/imported/continue_glyph.png-060e040bebc6c09b002f8793327267d0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/screenshots/06_settings.png"
-dest_files=["res://.godot/imported/06_settings.png-1c9bbdd5be4e9ce61a02338bdf6a6f5a.ctex"]
+source_file="res://art/props/continue_glyph.png"
+dest_files=["res://.godot/imported/continue_glyph.png-060e040bebc6c09b002f8793327267d0.ctex"]
 
 [params]
 
