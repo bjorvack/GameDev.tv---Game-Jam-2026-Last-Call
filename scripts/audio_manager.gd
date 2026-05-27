@@ -38,6 +38,14 @@ const SFX_VOLUME_DB := -6.0
 ## for unanswered first-leg lines, so this fallback only kicks in for
 ## ad-hoc calls that don't specify a duration.
 const RING_ONCE_MAX_DURATION := 6.0
+## Per-playback pitch jitter range for the ring sample. ±5% is roughly
+## ±1 semitone, just enough that a looping ring no longer reads as the
+## exact same chirp on repeat — mirrors the way real mechanical phone
+## bells drift slightly with temperature and wear. Applied at every
+## play_ring / _replay_ring / play_ring_once start, so each "brrring"
+## sounds subtly different from the last.
+const RING_PITCH_MIN := 0.95
+const RING_PITCH_MAX := 1.05
 
 @onready var music_player: AudioStreamPlayer = $Music
 @onready var music_bed_player: AudioStreamPlayer = $MusicBed
@@ -71,6 +79,7 @@ func play_ring() -> void:
 		return
 	_ringing = true
 	ring_player.stream = _ring_stream
+	ring_player.pitch_scale = randf_range(RING_PITCH_MIN, RING_PITCH_MAX)
 	_log("ring", "start (looping)", _ring_stream)
 	ring_player.play()
 
@@ -93,6 +102,7 @@ func play_ring_once(duration: float = RING_ONCE_MAX_DURATION) -> void:
 	# in once this sample finishes.
 	_ringing = false
 	ring_player.stream = _ring_stream
+	ring_player.pitch_scale = randf_range(RING_PITCH_MIN, RING_PITCH_MAX)
 	_log("ring", "one-shot (%.2fs)" % duration, _ring_stream)
 	ring_player.play()
 	await get_tree().create_timer(duration).timeout
@@ -104,6 +114,10 @@ func _replay_ring() -> void:
 	# Only re-arm while we're still in a RINGING phase.
 	if not _ringing or _ring_stream == null:
 		return
+	# Re-roll the pitch so successive loop iterations don't sound
+	# identical — Tavvoc's jam-rating note that "the ringing SFX
+	# started to become repetitive" was the prompt for this jitter.
+	ring_player.pitch_scale = randf_range(RING_PITCH_MIN, RING_PITCH_MAX)
 	_log("ring", "loop", _ring_stream)
 	ring_player.play()
 
