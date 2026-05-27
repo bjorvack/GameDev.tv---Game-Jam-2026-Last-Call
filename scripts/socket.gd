@@ -35,19 +35,68 @@ var state: int = State.REACHABLE:
 			_apply_state()
 
 var _pulse_tween: Tween
+## Drives the subtle hover-scale + press-scale feedback on the Visual
+## sprite only. The LabelCard is intentionally NOT included so the
+## paper tag stays static and readable while the socket itself reacts.
+var _hover_tween: Tween
+
+## Scale targets for the Visual sprite. Kept tight so the feedback reads
+## as a confirmation, not an animation set piece.
+const HOVER_SCALE := Vector2(1.06, 1.06)
+const PRESS_SCALE := Vector2(0.94, 0.94)
+const IDLE_SCALE := Vector2(1.0, 1.0)
+const HOVER_TWEEN_TIME := 0.08
+const PRESS_TWEEN_TIME := 0.05
 
 func _ready() -> void:
 	$LabelCard/NameLabel.text = label_text
 	_apply_state()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	gui_input.connect(_on_gui_input)
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	# Default cursor only flips to the interact variant when the socket
+	# is actually actionable — see _apply_state below.
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
+		if not _is_actionable():
+			return
 		if mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
+			_tween_visual_scale(PRESS_SCALE, PRESS_TWEEN_TIME)
 			socket_pressed.emit(self)
 			get_viewport().set_input_as_handled()
+		elif not mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
+			# Restore to hover scale if the pointer is still over us,
+			# otherwise idle. The mouse_exited handler will catch the
+			# pointer-already-left case.
+			_tween_visual_scale(HOVER_SCALE, PRESS_TWEEN_TIME)
+
+func _on_mouse_entered() -> void:
+	if _is_actionable():
+		_tween_visual_scale(HOVER_SCALE, HOVER_TWEEN_TIME)
+
+func _on_mouse_exited() -> void:
+	_tween_visual_scale(IDLE_SCALE, HOVER_TWEEN_TIME)
+
+func _is_actionable() -> bool:
+	# The cable.gd input gate decides whether a click actually plugs;
+	# this is just the visual/UX gate, so we light up for any state
+	# that could plausibly become a plug target. UNLIT stays inert.
+	return state != State.UNLIT
+
+func _tween_visual_scale(target: Vector2, duration: float) -> void:
+	var visual := get_node_or_null("Visual") as Control
+	if visual == null:
+		return
+	# Tween from the sprite's centre so the socket "breathes" in place
+	# instead of growing from the top-left.
+	visual.pivot_offset = visual.size * 0.5
+	if _hover_tween:
+		_hover_tween.kill()
+	_hover_tween = create_tween()
+	_hover_tween.tween_property(visual, "scale", target, duration)
 
 const GLOW_AMBER := Color(1.0, 0.78, 0.4, 1.0)
 ## "This line is dead" red glow. Pushed warmer + more saturated than the
@@ -60,6 +109,10 @@ func _apply_state() -> void:
 		_pulse_tween.kill()
 		_pulse_tween = null
 	modulate = Color(1, 1, 1, 1)
+	# Cursor follows actionability: hovering an UNLIT socket leaves the
+	# default arrow on screen, hovering anything that could become a
+	# plug target shows the amber interact variant via CursorState.
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND if _is_actionable() else Control.CURSOR_ARROW
 	var glow := get_node_or_null("Glow") as Light2D
 	if glow:
 		glow.energy = 0.0
