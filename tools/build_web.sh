@@ -55,6 +55,16 @@ if [[ ! -f "$ENTRY" ]]; then
     exit 1
 fi
 
+# Copy static loading assets (favicon, splash bg/logo) next to
+# index.html. The custom HTML shell references them via relative
+# `static/...` paths, and we keep them out of the .pck via
+# `web/static/*` in the export preset's exclude_filter — so the
+# files only live here, not double-packed inside the engine bundle.
+if [[ -d "$PROJECT_ROOT/web/static" ]]; then
+    echo ">> Copying web/static → $WEB_DIR/static"
+    cp -R "$PROJECT_ROOT/web/static" "$WEB_DIR/static"
+fi
+
 echo ">> Sizes:"
 ls -lh "$WEB_DIR"/index.{html,js,pck,wasm} 2>/dev/null | awk '{print "   ", $5, "\t", $9}'
 

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>$GODOT_PROJECT_NAME</title>
+		<link rel="icon" type="image/png" href="static/favicon-256.png" />
+		<link rel="apple-touch-icon" href="static/favicon-256.png" />
+		<style>
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	color: #f5ebd0;
+	background-color: #0e2933;
+	overflow: hidden;
+	touch-action: none;
+	font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+#canvas {
+	display: block;
+}
+
+#canvas:focus {
+	outline: none;
+}
+
+/* Bespoke loading overlay — mirrors the in-game title scene:
+   teal switchboard backdrop, vignette, centred Last Call logo,
+   thin amber progress bar. Crossfades out once the engine signals
+   ready (statusMode → 'hidden'). */
+#status {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-image: url('static/loading-bg.jpg');
+	background-size: cover;
+	background-position: center;
+	background-color: #0e2933;
+	transition: opacity 0.45s ease-out;
+	z-index: 10;
+}
+
+#status::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(ellipse at center,
+		rgba(0,0,0,0.0) 35%, rgba(0,0,0,0.7) 100%),
+		rgba(0,0,0,0.45);
+	pointer-events: none;
+}
+
+#status.fading {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#status-logo {
+	position: relative;
+	z-index: 1;
+	max-width: min(420px, 60vw);
+	width: 100%;
+	height: auto;
+	margin-bottom: 32px;
+	filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.55));
+}
+
+#status-progress-wrap {
+	position: relative;
+	z-index: 1;
+	width: min(360px, 50vw);
+	height: 4px;
+	background: rgba(245, 235, 208, 0.18);
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+#status-progress-bar {
+	height: 100%;
+	width: 0%;
+	background: linear-gradient(90deg, #e8b86a 0%, #f5d18a 100%);
+	box-shadow: 0 0 12px rgba(232, 184, 106, 0.45);
+	transition: width 0.18s ease-out;
+}
+
+#status-progress-bar.indeterminate {
+	width: 30%;
+	animation: indeterminate 1.4s linear infinite;
+}
+
+@keyframes indeterminate {
+	0%   { transform: translateX(-100%); }
+	100% { transform: translateX(366%); }
+}
+
+#status-label {
+	position: relative;
+	z-index: 1;
+	margin-top: 14px;
+	font-size: 12px;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: rgba(245, 235, 208, 0.65);
+	font-family: 'Courier New', monospace;
+}
+
+#status-notice {
+	position: relative;
+	z-index: 2;
+	max-width: min(520px, 80vw);
+	margin-top: 32px;
+	padding: 14px 18px;
+	background-color: #5b3943;
+	border: 1px solid #9b3943;
+	border-radius: 6px;
+	color: #f5ebd0;
+	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.4;
+	text-align: center;
+	display: none;
+}
+		</style>
+$GODOT_HEAD_INCLUDE
+	</head>
+	<body>
+		<canvas id="canvas">
+			Your browser does not support the canvas tag.
+		</canvas>
+
+		<noscript>
+			Your browser does not support JavaScript.
+		</noscript>
+
+		<div id="status">
+			<img id="status-logo" src="static/loading-logo.png" alt="Last Call">
+			<div id="status-progress-wrap">
+				<div id="status-progress-bar" class="indeterminate"></div>
+			</div>
+			<div id="status-label">Connecting&hellip;</div>
+			<div id="status-notice"></div>
+		</div>
+
+		<script src="index.js"></script>
+		<script>
+const GODOT_CONFIG = $GODOT_CONFIG;
+const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+const engine = new Engine(GODOT_CONFIG);
+
+(function () {
+	const statusOverlay = document.getElementById('status');
+	const statusBar = document.getElementById('status-progress-bar');
+	const statusLabel = document.getElementById('status-label');
+	const statusNotice = document.getElementById('status-notice');
+
+	let initializing = true;
+	let statusMode = '';
+
+	function setStatusMode(mode) {
+		if (statusMode === mode || !initializing) {
+			return;
+		}
+		if (mode === 'hidden') {
+			// Fade the overlay out instead of yanking it — the engine
+			// canvas is already rendering behind it by this point.
+			statusOverlay.classList.add('fading');
+			setTimeout(() => statusOverlay.remove(), 500);
+			initializing = false;
+			return;
+		}
+		if (mode === 'progress') {
+			statusBar.classList.add('indeterminate');
+			statusLabel.textContent = 'Connecting…';
+			statusNotice.style.display = 'none';
+		}
+		if (mode === 'notice') {
+			statusBar.style.display = 'none';
+			statusLabel.style.display = 'none';
+			statusNotice.style.display = 'block';
+		}
+		statusMode = mode;
+	}
+
+	function setStatusNotice(text) {
+		while (statusNotice.lastChild) {
+			statusNotice.removeChild(statusNotice.lastChild);
+		}
+		const lines = text.split('\n');
+		lines.forEach((line) => {
+			statusNotice.appendChild(document.createTextNode(line));
+			statusNotice.appendChild(document.createElement('br'));
+		});
+	}
+
+	function displayFailureNotice(err) {
+		console.error(err);
+		if (err instanceof Error) {
+			setStatusNotice(err.message);
+		} else if (typeof err === 'string') {
+			setStatusNotice(err);
+		} else {
+			setStatusNotice('An unknown error occurred.');
+		}
+		setStatusMode('notice');
+		initializing = false;
+	}
+
+	const missing = Engine.getMissingFeatures({
+		threads: GODOT_THREADS_ENABLED,
+	});
+
+	if (missing.length !== 0) {
+		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
+			let serviceWorkerRegistrationPromise;
+			try {
+				serviceWorkerRegistrationPromise = navigator.serviceWorker.getRegistration();
+			} catch (err) {
+				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
+			}
+			// There's a chance that installing the service worker would fix the issue.
+			Promise.race([
+				serviceWorkerRegistrationPromise.then((registration) => {
+					if (registration != null) {
+						return Promise.reject(new Error('Service worker already exists.'));
+					}
+					return registration;
+				}).then(() => engine.installServiceWorker()),
+				new Promise((resolve) => {
+					setTimeout(() => resolve(), 2000);
+				}),
+			]).then(() => {
+				window.location.reload();
+			}).catch((err) => {
+				console.error('Error while registering service worker:', err);
+			});
+		} else {
+			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
+			displayFailureNotice(missingMsg + missing.join('\n'));
+		}
+	} else {
+		setStatusMode('progress');
+		engine.startGame({
+			'onProgress': function (current, total) {
+				if (current > 0 && total > 0) {
+					// Switch from indeterminate to determinate as soon
+					// as we get real numbers from the engine.
+					statusBar.classList.remove('indeterminate');
+					statusBar.style.width = ((current / total) * 100).toFixed(1) + '%';
+					statusLabel.textContent = 'Connecting… ' + Math.round((current / total) * 100) + '%';
+				}
+			},
+		}).then(() => {
+			setStatusMode('hidden');
+		}, displayFailureNotice);
+	}
+}());
+		</script>
+	</body>
+</html>

@@ -52,6 +52,13 @@ jobs:
         run: |
           mkdir -p "${OUTPUT_DIR}"
           godot --headless --export-release "${EXPORT_PRESET}" "${OUTPUT_DIR}/index.html"
+          # Copy static loading assets (favicon, splash bg/logo) next
+          # to index.html. The custom HTML shell references them via
+          # relative `static/...` paths; they're excluded from the .pck
+          # via export_presets.cfg.
+          if [ -d web/static ]; then
+            cp -R web/static "${OUTPUT_DIR}/static"
+          fi
           ls -lh "${OUTPUT_DIR}"
 
       - name: Mark output as non-Jekyll
