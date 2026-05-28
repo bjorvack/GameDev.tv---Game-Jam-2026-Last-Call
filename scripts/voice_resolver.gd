@@ -35,6 +35,11 @@ extends Node
 
 const CHAR_DIR := "res://data/characters/"
 const VOICE_DIR := "res://audio/dialogue/"
+# Mood-enhanced takes from the CosyVoice 2 pass live in parallel under
+# audio/dialogue_enhanced/<slug>/<id>.wav. We check the enhanced tree
+# first per line; if no enhanced clip exists we fall back to the
+# baseline Qwen3 take. Lets us A/B per-line and ship a mix.
+const VOICE_DIR_ENHANCED := "res://audio/dialogue_enhanced/"
 const VOICE_EXT := ".wav"
 
 # speaker String → [Character, slug:String]
@@ -53,12 +58,21 @@ func _load_character_roster() -> void:
 		var f := dir.get_next()
 		if f == "":
 			break
-		if not f.ends_with(".tres"):
+		# In exported PCKs (notably the web build) Godot renames .tres
+		# resources to <name>.tres.remap virtual entries. Accept both so
+		# the roster survives outside the editor — load() transparently
+		# follows the remap regardless of which name we pass it.
+		var tres_name := ""
+		if f.ends_with(".tres"):
+			tres_name = f
+		elif f.ends_with(".tres.remap"):
+			tres_name = f.substr(0, f.length() - ".remap".length())
+		else:
 			continue
-		var c: Character = load(CHAR_DIR + f) as Character
+		var c: Character = load(CHAR_DIR + tres_name) as Character
 		if c == null:
 			continue
-		var slug := f.get_basename()
+		var slug := tres_name.get_basename()
 		_index_character(c, slug)
 	dir.list_dir_end()
 
@@ -84,6 +98,9 @@ func resolve(line: DialogueLine) -> AudioStream:
 	var line_id := _line_id(line)
 	if line_id == "":
 		return null
+	var enhanced := "%s%s/%s%s" % [VOICE_DIR_ENHANCED, slug, line_id, VOICE_EXT]
+	if ResourceLoader.exists(enhanced):
+		return load(enhanced) as AudioStream
 	var path := "%s%s/%s%s" % [VOICE_DIR, slug, line_id, VOICE_EXT]
 	if not ResourceLoader.exists(path):
 		return null
