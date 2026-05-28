@@ -305,9 +305,15 @@ func _play_lines(lines: Array) -> void:
 		return
 	# CallerCard.play_line handles auto-timer XOR manual-dismiss internally
 	# and reacts to mid-line toggle changes, so we just await each line.
+	#
+	# VoiceResolver returns the pre-generated AI voice clip for this line
+	# when one exists; null otherwise (e.g. characters whose references
+	# haven't been sourced yet, stage directions, or lines newer than
+	# the last generation pass). CallerCard handles either case.
 	for line in lines:
 		if line is DialogueLine:
-			caller_card.play_line(line)
+			var voice: AudioStream = VoiceResolver.resolve(line) if VoiceResolver else null
+			caller_card.play_line(line, voice)
 			await caller_card.line_dismissed
 
 func _on_patience_changed(value: int) -> void:
