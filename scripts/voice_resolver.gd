@@ -96,7 +96,6 @@ func _load_character_roster() -> void:
 		if c == null:
 			continue
 		_index_character(c, slug)
-	print("[VoiceResolver] roster indexed: %d speaker keys" % _by_speaker.size())
 
 func _index_character(c: Character, slug: String) -> void:
 	if c.name != "":
@@ -110,38 +109,23 @@ func _index_character(c: Character, slug: String) -> void:
 ## null when no clip is available. Callers should treat null as
 ## "play this line silently" and rely on CallerCard's existing
 ## timer fallback.
-## When true, log the first miss for each unique speaker/path so we can
-## diagnose web-build asset issues from the browser console without
-## drowning the editor in print spam. Flipped off automatically once
-## every miss has been reported once.
-var _diagnostic_seen: Dictionary = {}
-
 func resolve(line: DialogueLine) -> AudioStream:
 	if line == null:
 		return null
 	var entry = _by_speaker.get(line.speaker)
 	if entry == null:
-		_diag_once("speaker:" + str(line.speaker), "no speaker entry for '%s'" % line.speaker)
 		return null
 	var slug: String = entry[1]
 	var line_id := _line_id(line)
 	if line_id == "":
-		_diag_once("lineid:" + str(line.resource_path), "no line_id for %s" % line.resource_path)
 		return null
 	var enhanced := "%s%s/%s%s" % [VOICE_DIR_ENHANCED, slug, line_id, VOICE_EXT]
 	if ResourceLoader.exists(enhanced):
 		return load(enhanced) as AudioStream
 	var path := "%s%s/%s%s" % [VOICE_DIR, slug, line_id, VOICE_EXT]
 	if not ResourceLoader.exists(path):
-		_diag_once("clip:" + path, "no clip at %s" % path)
 		return null
 	return load(path) as AudioStream
-
-func _diag_once(key: String, msg: String) -> void:
-	if _diagnostic_seen.has(key):
-		return
-	_diagnostic_seen[key] = true
-	print("[VoiceResolver] miss: ", msg)
 
 ## Derive "<call_num>_<sub_resource_id>" from a DialogueLine's
 ## resource_path. The path format Godot uses is

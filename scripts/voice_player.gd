@@ -35,7 +35,14 @@ func _ready() -> void:
 	# Routed through the dedicated "Voice" bus (see default_bus_layout.tres)
 	# so dialogue gets its own volume slider and can later host a
 	# telephone-band runtime filter without touching every other source.
-	_player.bus = "Voice"
+	# Defensive fall-through to "Master" if the bus layout ever fails
+	# to load (e.g. someone deletes the .tres) — silently routing to
+	# bus index -1 would mute every clip.
+	if AudioServer.get_bus_index("Voice") == -1:
+		push_warning("VoicePlayer: 'Voice' bus missing; falling back to Master.")
+		_player.bus = "Master"
+	else:
+		_player.bus = "Voice"
 	add_child(_player)
 	_player.finished.connect(_on_natural_finished)
 
