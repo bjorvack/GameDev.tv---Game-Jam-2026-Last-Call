@@ -72,6 +72,7 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator?? OPERATOR."
+voice_text = "Operator? Operator."
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="thought_fail_0"]

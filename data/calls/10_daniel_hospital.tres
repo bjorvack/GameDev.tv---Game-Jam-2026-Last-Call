@@ -17,6 +17,7 @@ duration = 1.8
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "…is she—"
+voice_text = "Is she—"
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
@@ -62,6 +63,7 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator… please."
+voice_text = "Operator, please."
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="opening_1"]
@@ -75,6 +77,7 @@ duration = 3.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I need to know if I can still — "
+voice_text = "I need to know if I can still—"
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
 

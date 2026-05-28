@@ -131,6 +131,45 @@ not voice references for F5-TTS-MLX.
 - **Distinct voice actors / sources to find:** ~10 (one per
   character, plus a non-verbal breath for Daniel)
 
+## Display text vs voice text
+
+Two-field schema on `DialogueLine` (added 2026-05):
+
+- `text` — what the player reads on the caller card. Keeps every
+  authored reading cue: ellipses for breath catches, em-dashes for
+  hesitation, all-caps for shouting, repeated punctuation for
+  escalating panic, parenthetical stage directions.
+- `voice_text` — optional override of what the TTS model receives.
+  Empty for ~90 % of lines; the pipeline derives a TTS-friendly
+  variant from `text` via auto-normalisation. Set explicitly when
+  the auto-normalisation is wrong for a specific line.
+
+### Auto-normalisation rules
+
+Applied by `tools/generate_voices.py` to `text` when `voice_text`
+is empty:
+
+| In `text` | What the TTS gets | Why |
+|---|---|---|
+| `…` (Unicode ellipsis) or three+ dots | a single `,` | comma = natural short pause; ellipsis to F5-TTS is a 1–2 s silence |
+| Repeated `?` or `!` (`??`, `!!`, `?!`, …) | single `?` or `!` | F5 ignores the repeat; the *mood reference* carries the energy, not the typography |
+| ALL-CAPS WORDS | sentence case (`Word`) | same — emotion comes from the reference clip |
+| `— ` (em-dash + space) | `, ` | softer pause than the literal long pause F5 produces |
+| Line entirely matching `^\s*\(.*\)\s*$` | **skipped** — no voice generated | stage directions (e.g. `(Ring. Ring. No answer.)`) |
+| Inline `(parenthetical)` mid-sentence | stripped | rare; covers things like `She came home (briefly)` |
+
+`voice_text = "<none>"` (or any explicit empty-after-normalisation
+value) forces skip even when `text` is non-parenthetical — useful
+if a future line shouldn't be voiced for other reasons.
+
+### Authoring guidance for `voice_text` overrides
+
+Use natural punctuation only: commas, em-dashes, periods, single
+`?` / `!`. **Don't** add ellipses or repeated marks in `voice_text`
+— that's what the cleanup just stripped. The mood reference clip
+is responsible for the emotional energy; `voice_text` only steers
+*prosody* (where the pauses fall, where the intonation rises).
+
 ## Generation params (lessons learnt)
 
 Notes for the eventual `tools/generate_voices.py` pipeline so we
