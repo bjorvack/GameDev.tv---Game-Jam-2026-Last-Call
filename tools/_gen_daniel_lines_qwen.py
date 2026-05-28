@@ -83,13 +83,13 @@ MOODS: dict[str, tuple[str, float, str]] = {
 # identical to display text — no voice_text override gets written.
 LINES: dict[tuple[str, str], tuple[str, str]] = {
     # Call 02 — routine call to mother, edges into worry
-    ("02", "opening_0"):     ("anxious", "Operator — please."),
+    ("02", "opening_0"):     ("anxious", "Operator — please!"),
     ("02", "opening_1"):     ("default", "I need to reach Mrs. Hayes on 7th and Vine — my mother. She missed her morning call and I've been on the road all day."),
     ("02", "opening_2"):     ("default", "I'm two hours out on Highway 40."),
     ("02", "connected_1"):   ("anxious", "She, she must've gone to the market."),
-    ("02", "connected_2"):   ("default", "I'll try again from the next stop. Thanks, operator."),
-    ("02", "generic_1"):     ("default", "Sorry — wrong number."),
-    ("02", "timer_0"):       ("anxious", "Operator? Operator, PLEASE — I'll call back."),
+    ("02", "connected_2"):   ("anxious", "I'll try again from the next stop. Thanks, operator."),
+    ("02", "generic_1"):     ("default", "Sorry, wrong number."),
+    ("02", "timer_0"):       ("anxious", "Operator?! Operator, PLEASE. I'll call back."),
     ("02", "wrong_doc_1"):   ("default", "Doc — sorry, wrong line. I'm trying to reach Mom."),
     ("02", "wrong_patty_1"): ("default", "Patty — wrong line, sorry. Have you seen Mom today?"),
     # Call 05 — Doc tells Daniel his mother has turned
@@ -101,7 +101,7 @@ LINES: dict[tuple[str, str], tuple[str, str]] = {
     ("05", "first_leg_2"):   ("anxious", "Operator — try Doc Wheeler! She had a check-up Thursday. He might know."),
     ("05", "generic_1"):     ("anxious", "Sorry — wrong line."),
     ("05", "wrong_doc_1"):   ("anxious", "Doc — sorry, wrong line. Operator, I asked for MOM. 7th and Vine, please."),
-    ("05", "wrong_sheriff_1"): ("anxious", "Sheriff — wrong line, sorry. I'm trying Mom."),
+    ("05", "wrong_sheriff_1"): ("anxious", "Sheriff — wrong line, sorry. I'm trying to reach my mom."),
     # Call 07 — frantic plea to the Reverend
     ("07", "opening_0"):     ("frantic", "OPERATOR! The Chapel, Reverend Carter!"),
     ("07", "opening_1"):     ("frantic", "Hurry! PLEASE!"),
