@@ -68,6 +68,9 @@ func _play(stream: AudioStream, pitch: float) -> void:
 	var player := AudioStreamPlayer.new()
 	add_child(player)
 	player.stream = stream
+	# Routed through the dedicated "UI" bus so menu clicks have their
+	# own slider and don't ride the gameplay SFX channel.
+	player.bus = "UI"
 	player.volume_db = VOLUME_DB
 	player.pitch_scale = pitch
 	player.finished.connect(player.queue_free)

@@ -1,7 +1,32 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://d0avtqvr6eswy"]
 
-[ext_resource type="Script" path="res://components/settings_overlay.gd" id="1_settings"]
-[ext_resource type="Theme" path="res://art/themes/menu_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://bw1m1hcd1rrqr" path="res://components/settings_overlay.gd" id="1_settings"]
+[ext_resource type="Theme" uid="uid://ds7gbowsns0wa" path="res://art/themes/menu_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxEmpty" id="TabPanel_empty"]
+
+[sub_resource type="StyleBoxEmpty" id="TabBar_empty"]
+
+[sub_resource type="StyleBoxEmpty" id="TabUnselected_empty"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxEmpty" id="TabHovered_empty"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="TabSelected_underline"]
+content_margin_left = 12.0
+content_margin_top = 6.0
+content_margin_right = 12.0
+content_margin_bottom = 6.0
+bg_color = Color(0, 0, 0, 0)
+border_width_bottom = 2
+border_color = Color(0.91, 0.72, 0.42, 1)
 
 [sub_resource type="StyleBoxEmpty" id="ToggleStyle_empty"]
 content_margin_left = 8.0
@@ -10,127 +35,203 @@ content_margin_right = 8.0
 content_margin_bottom = 6.0
 
 [sub_resource type="StyleBoxFlat" id="ToggleStyle_focus"]
-bg_color = Color(0.91, 0.72, 0.42, 0.12)
-border_color = Color(0.91, 0.72, 0.42, 0.55)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_left = 3
-corner_radius_bottom_right = 3
 content_margin_left = 8.0
 content_margin_top = 6.0
 content_margin_right = 8.0
 content_margin_bottom = 6.0
+bg_color = Color(0.91, 0.72, 0.42, 0.12)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.91, 0.72, 0.42, 0.55)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
-[node name="SettingsOverlay" type="Control"]
+[node name="SettingsOverlay" type="Control" unique_id=326404782]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 0
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_settings")
 
-[node name="Dim" type="ColorRect" parent="."]
+[node name="Dim" type="ColorRect" parent="." unique_id=208705524]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 color = Color(0, 0, 0, 0.65)
-mouse_filter = 1
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=1583946503]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="Center"]
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=1656369410]
 custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
 mouse_filter = 1
 
-[node name="VBox" type="VBoxContainer" parent="Center/Panel"]
+[node name="VBox" type="VBoxContainer" parent="Center/Panel" unique_id=1165673533]
 layout_mode = 2
-theme_override_constants/separation = 24
+theme_override_constants/separation = 18
 
-[node name="Title" type="Label" parent="Center/Panel/VBox"]
+[node name="Title" type="Label" parent="Center/Panel/VBox" unique_id=1875840498]
 layout_mode = 2
-text = "SETTINGS"
-horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.91, 0.72, 0.42, 1)
 theme_override_font_sizes/font_size = 34
+text = "SETTINGS"
+horizontal_alignment = 1
 
-[node name="Divider" type="ColorRect" parent="Center/Panel/VBox"]
+[node name="Divider" type="ColorRect" parent="Center/Panel/VBox" unique_id=388638528]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
 color = Color(0.91, 0.72, 0.42, 0.4)
 
-[node name="ManualAdvanceToggle" type="Button" parent="Center/Panel/VBox"]
+[node name="Tabs" type="TabContainer" parent="Center/Panel/VBox" unique_id=974675322]
+custom_minimum_size = Vector2(0, 280)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
+theme_override_colors/font_selected_color = Color(0.91, 0.72, 0.42, 1)
+theme_override_colors/font_hovered_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_unselected_color = Color(0.78, 0.74, 0.62, 0.7)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/panel = SubResource("TabPanel_empty")
+theme_override_styles/tabbar_background = SubResource("TabBar_empty")
+theme_override_styles/tab_unselected = SubResource("TabUnselected_empty")
+theme_override_styles/tab_hovered = SubResource("TabHovered_empty")
+theme_override_styles/tab_selected = SubResource("TabSelected_underline")
+theme_override_styles/tab_disabled = SubResource("TabUnselected_empty")
+current_tab = 0
+
+[node name="Accessibility" type="VBoxContainer" parent="Center/Panel/VBox/Tabs" unique_id=554682097]
+layout_mode = 2
+theme_override_constants/separation = 18
+metadata/_tab_index = 0
+
+[node name="TopPad" type="Control" parent="Center/Panel/VBox/Tabs/Accessibility" unique_id=2028648636]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="ManualGroup" type="VBoxContainer" parent="Center/Panel/VBox/Tabs/Accessibility" unique_id=1250412149]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="ManualAdvanceToggle" type="Button" parent="Center/Panel/VBox/Tabs/Accessibility/ManualGroup" unique_id=1978594651]
+layout_mode = 2
+size_flags_horizontal = 0
 mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+theme_override_colors/font_focus_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_pressed_color = Color(0.91, 0.72, 0.42, 1)
+theme_override_colors/font_hover_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("ToggleStyle_empty")
+theme_override_styles/pressed = SubResource("ToggleStyle_empty")
+theme_override_styles/hover = SubResource("ToggleStyle_empty")
+theme_override_styles/disabled = SubResource("ToggleStyle_empty")
+theme_override_styles/focus = SubResource("ToggleStyle_focus")
 toggle_mode = true
 text = "[  ]  Manual dialogue advance"
+alignment = 0
+
+[node name="ManualHelpLabel" type="Label" parent="Center/Panel/VBox/Tabs/Accessibility/ManualGroup" unique_id=1936902168]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.74, 0.62, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "When enabled, dialogue lines wait for you to press Space, Enter, or click before advancing."
+autowrap_mode = 3
+
+[node name="CursorGroup" type="VBoxContainer" parent="Center/Panel/VBox/Tabs/Accessibility" unique_id=1376359820]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="SystemCursorToggle" type="Button" parent="Center/Panel/VBox/Tabs/Accessibility/CursorGroup" unique_id=1142107407]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
-theme_override_colors/font_hover_color = Color(1, 0.95, 0.78, 1)
-theme_override_colors/font_pressed_color = Color(0.91, 0.72, 0.42, 1)
 theme_override_colors/font_focus_color = Color(1, 0.95, 0.78, 1)
+theme_override_colors/font_pressed_color = Color(0.91, 0.72, 0.42, 1)
+theme_override_colors/font_hover_color = Color(1, 0.95, 0.78, 1)
 theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("ToggleStyle_empty")
-theme_override_styles/hover = SubResource("ToggleStyle_empty")
 theme_override_styles/pressed = SubResource("ToggleStyle_empty")
+theme_override_styles/hover = SubResource("ToggleStyle_empty")
 theme_override_styles/disabled = SubResource("ToggleStyle_empty")
 theme_override_styles/focus = SubResource("ToggleStyle_focus")
-
-[node name="ManualHelpLabel" type="Label" parent="Center/Panel/VBox"]
-layout_mode = 2
-text = "When enabled, dialogue lines wait for you to press
-Space, Enter, or click before advancing."
-horizontal_alignment = 1
-theme_override_colors/font_color = Color(0.78, 0.74, 0.62, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 14
-
-[node name="SystemCursorToggle" type="Button" parent="Center/Panel/VBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_default_cursor_shape = 2
 toggle_mode = true
 text = "[  ]  Use system cursor"
-theme_override_colors/font_color = Color(0.96, 0.92, 0.82, 1)
+alignment = 0
+
+[node name="CursorHelpLabel" type="Label" parent="Center/Panel/VBox/Tabs/Accessibility/CursorGroup" unique_id=842739389]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.74, 0.62, 1)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+text = "Bypass the custom cursor and use your operating system's default pointer for higher contrast or larger sizes."
+autowrap_mode = 3
+
+[node name="Audio" type="VBoxContainer" parent="Center/Panel/VBox/Tabs" unique_id=676780338]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 12
+metadata/_tab_index = 1
+
+[node name="TopPad" type="Control" parent="Center/Panel/VBox/Tabs/Audio" unique_id=1687796018]
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 2
+
+[node name="AudioGrid" type="GridContainer" parent="Center/Panel/VBox/Tabs/Audio" unique_id=1882104993]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="ResetRow" type="HBoxContainer" parent="Center/Panel/VBox/Tabs/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ResetButton" type="Button" parent="Center/Panel/VBox/Tabs/Audio/ResetRow"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Reset to defaults"
+theme_override_colors/font_color = Color(0.91, 0.72, 0.42, 1)
 theme_override_colors/font_hover_color = Color(1, 0.95, 0.78, 1)
-theme_override_colors/font_pressed_color = Color(0.91, 0.72, 0.42, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.95, 0.78, 1)
 theme_override_colors/font_focus_color = Color(1, 0.95, 0.78, 1)
 theme_override_colors/font_outline_color = Color(0.06, 0.16, 0.2, 1)
 theme_override_constants/outline_size = 3
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("ToggleStyle_empty")
 theme_override_styles/hover = SubResource("ToggleStyle_empty")
 theme_override_styles/pressed = SubResource("ToggleStyle_empty")
 theme_override_styles/disabled = SubResource("ToggleStyle_empty")
 theme_override_styles/focus = SubResource("ToggleStyle_focus")
 
-[node name="CursorHelpLabel" type="Label" parent="Center/Panel/VBox"]
-layout_mode = 2
-text = "Bypass the custom cursor and use your operating system's
-default pointer for higher contrast or larger sizes."
-horizontal_alignment = 1
-theme_override_colors/font_color = Color(0.78, 0.74, 0.62, 1)
-theme_override_constants/outline_size = 0
-theme_override_font_sizes/font_size = 14
-
-[node name="Spacer" type="Control" parent="Center/Panel/VBox"]
-custom_minimum_size = Vector2(0, 12)
+[node name="Spacer" type="Control" parent="Center/Panel/VBox" unique_id=741089150]
+custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="BackButton" type="Button" parent="Center/Panel/VBox"]
+[node name="BackButton" type="Button" parent="Center/Panel/VBox" unique_id=1008070714]
 layout_mode = 2
 size_flags_horizontal = 4
 mouse_default_cursor_shape = 2

@@ -32,10 +32,10 @@ func _ready() -> void:
 	# if a pause overlay opens mid-line. (Matches UiAudio.)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_player = AudioStreamPlayer.new()
-	# Default to the existing master bus; if/when a dedicated "Voice"
-	# bus is added (for the telephone-band runtime filter), update
-	# this once and every clip starts using it.
-	_player.bus = "Master"
+	# Routed through the dedicated "Voice" bus (see default_bus_layout.tres)
+	# so dialogue gets its own volume slider and can later host a
+	# telephone-band runtime filter without touching every other source.
+	_player.bus = "Voice"
 	add_child(_player)
 	_player.finished.connect(_on_natural_finished)
 
