@@ -29,6 +29,10 @@ var _fade_tween: Tween
 ## All mode switches and timer callbacks gate on this so we never
 ## advance the same line twice or fire after the call director moved on.
 var _line_active: bool = false
+## True while a voice clip is playing for the current line. Lets
+## _finish_line know whether to call VoicePlayer.stop() and skips
+## the natural-finish auto-advance once we've already advanced.
+var _voice_active: bool = false
 var _current_duration: float = 0.0
 ## When true, _unhandled_input accepts Space/Enter/LMB as a dismiss.
 ## Toggled on/off as the manual-dialogue setting flips, even mid-line.
@@ -51,9 +55,28 @@ func _ready() -> void:
 ## manual-dismiss based on the current SettingsState, and reacts to
 ## mid-line toggle changes via _on_manual_dialogue_changed. Awaiters
 ## listen for the `line_dismissed` signal.
-func play_line(line: DialogueLine) -> void:
+##
+## `voice` is the optional AI-generated voice clip for this line.
+## When provided, it plays immediately via VoicePlayer; the
+## auto-timer is replaced by VoicePlayer.finished so auto-advance
+## fires exactly when the speech ends. Manual-dismiss interrupts
+## the voice (see _finish_line). Pass null for silent lines —
+## auto-advance falls back to `line.duration`.
+func play_line(line: DialogueLine, voice: AudioStream = null) -> void:
 	show_line(line)
-	_current_duration = line.duration
+	var voice_duration := VoicePlayer.play(voice) if voice else 0.0
+	_voice_active = voice_duration > 0.0
+	if _voice_active:
+		# Auto-advance now hangs off VoicePlayer.finished, not a
+		# duration-based SceneTreeTimer — line advances precisely when
+		# speech ends. The auto-timer path stays in place anyway as a
+		# belt-and-suspenders fallback in case VoicePlayer.finished
+		# doesn't fire (e.g. corrupted stream); the stream's reported
+		# length plus a small safety margin caps the wait.
+		VoicePlayer.finished.connect(_on_voice_finished, CONNECT_ONE_SHOT)
+		_current_duration = voice_duration + 0.5
+	else:
+		_current_duration = line.duration
 	_line_active = true
 	_apply_dialogue_mode()
 
@@ -132,7 +155,25 @@ func _finish_line() -> void:
 	_line_active = false
 	_timer_token += 1
 	_disarm_dismiss()
+	if _voice_active:
+		# Player manually advanced (or some other early-finish path)
+		# while the voice clip was still talking. Cut it off cleanly
+		# so the next line doesn't overlap the tail.
+		_voice_active = false
+		VoicePlayer.stop()
 	line_dismissed.emit()
+
+## Voice finished naturally. In auto mode this is the canonical
+## advance trigger; in manual mode we let the player decide when to
+## dismiss, so we just clear the active flag and stop watching the
+## signal.
+func _on_voice_finished() -> void:
+	_voice_active = false
+	if not _line_active:
+		return
+	if _is_manual():
+		return
+	_finish_line()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not _awaiting_dismiss or not _line_active:
@@ -201,6 +242,12 @@ func _cancel_active_line() -> void:
 	_line_active = false
 	_timer_token += 1
 	_disarm_dismiss()
+	if _voice_active:
+		# Phase change (show_idle / show_waiting / show_ringing) means
+		# the voice should go with the line — otherwise the next call's
+		# audio overlaps the abandoned tail.
+		_voice_active = false
+		VoicePlayer.stop()
 
 func _fade_to(target_alpha: float) -> void:
 	if _fade_tween:
