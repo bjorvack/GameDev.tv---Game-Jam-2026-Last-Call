@@ -34,6 +34,15 @@
 extends Node
 
 const CHAR_DIR := "res://data/characters/"
+## Hardcoded roster slugs. Used as a fallback when DirAccess listing of
+## `res://data/characters/` returns nothing (exported PCKs, particularly
+## the web build, have historically been flaky here — see the .remap
+## branch in _load_character_roster). Keeping the list in code is fine
+## since adding a new character already requires touching code anyway.
+const KNOWN_CHARACTER_SLUGS: Array[String] = [
+	"cole", "daniel", "doc", "henley", "mrs_bray", "nurse",
+	"operator", "patty", "reverend", "sheriff", "trucker", "unknown",
+]
 const VOICE_DIR := "res://audio/dialogue/"
 # Mood-enhanced takes from the CosyVoice 2 pass live in parallel under
 # audio/dialogue_enhanced/<slug>/<id>.wav. We check the enhanced tree
@@ -49,32 +58,45 @@ func _ready() -> void:
 	_load_character_roster()
 
 func _load_character_roster() -> void:
+	# Try DirAccess first so any new character.tres dropped into the
+	# folder picks up automatically during editor / desktop play.
 	var dir := DirAccess.open(CHAR_DIR)
-	if dir == null:
-		push_warning("VoiceResolver: %s not found; voice lookups will all miss." % CHAR_DIR)
-		return
-	dir.list_dir_begin()
-	while true:
-		var f := dir.get_next()
-		if f == "":
-			break
-		# In exported PCKs (notably the web build) Godot renames .tres
-		# resources to <name>.tres.remap virtual entries. Accept both so
-		# the roster survives outside the editor — load() transparently
-		# follows the remap regardless of which name we pass it.
-		var tres_name := ""
-		if f.ends_with(".tres"):
-			tres_name = f
-		elif f.ends_with(".tres.remap"):
-			tres_name = f.substr(0, f.length() - ".remap".length())
-		else:
+	if dir != null:
+		dir.list_dir_begin()
+		while true:
+			var f := dir.get_next()
+			if f == "":
+				break
+			# In exported PCKs (notably the web build) Godot renames
+			# .tres resources to <name>.tres.remap virtual entries.
+			# Accept both — load() transparently follows the remap
+			# regardless of which name we pass it.
+			var tres_name := ""
+			if f.ends_with(".tres"):
+				tres_name = f
+			elif f.ends_with(".tres.remap"):
+				tres_name = f.substr(0, f.length() - ".remap".length())
+			else:
+				continue
+			var c: Character = load(CHAR_DIR + tres_name) as Character
+			if c == null:
+				continue
+			var slug := tres_name.get_basename()
+			_index_character(c, slug)
+		dir.list_dir_end()
+	# Then unconditionally walk the hardcoded slug list. _index_character
+	# is idempotent (same key → same data), so this is a safe belt-and-
+	# braces fallback for whenever DirAccess listing comes back empty
+	# inside a PCK — which is what was happening in the web build.
+	for slug in KNOWN_CHARACTER_SLUGS:
+		var path := CHAR_DIR + slug + ".tres"
+		if not ResourceLoader.exists(path):
 			continue
-		var c: Character = load(CHAR_DIR + tres_name) as Character
+		var c: Character = load(path) as Character
 		if c == null:
 			continue
-		var slug := tres_name.get_basename()
 		_index_character(c, slug)
-	dir.list_dir_end()
+	print("[VoiceResolver] roster indexed: %d speaker keys" % _by_speaker.size())
 
 func _index_character(c: Character, slug: String) -> void:
 	if c.name != "":
@@ -88,23 +110,38 @@ func _index_character(c: Character, slug: String) -> void:
 ## null when no clip is available. Callers should treat null as
 ## "play this line silently" and rely on CallerCard's existing
 ## timer fallback.
+## When true, log the first miss for each unique speaker/path so we can
+## diagnose web-build asset issues from the browser console without
+## drowning the editor in print spam. Flipped off automatically once
+## every miss has been reported once.
+var _diagnostic_seen: Dictionary = {}
+
 func resolve(line: DialogueLine) -> AudioStream:
 	if line == null:
 		return null
 	var entry = _by_speaker.get(line.speaker)
 	if entry == null:
+		_diag_once("speaker:" + str(line.speaker), "no speaker entry for '%s'" % line.speaker)
 		return null
 	var slug: String = entry[1]
 	var line_id := _line_id(line)
 	if line_id == "":
+		_diag_once("lineid:" + str(line.resource_path), "no line_id for %s" % line.resource_path)
 		return null
 	var enhanced := "%s%s/%s%s" % [VOICE_DIR_ENHANCED, slug, line_id, VOICE_EXT]
 	if ResourceLoader.exists(enhanced):
 		return load(enhanced) as AudioStream
 	var path := "%s%s/%s%s" % [VOICE_DIR, slug, line_id, VOICE_EXT]
 	if not ResourceLoader.exists(path):
+		_diag_once("clip:" + path, "no clip at %s" % path)
 		return null
 	return load(path) as AudioStream
+
+func _diag_once(key: String, msg: String) -> void:
+	if _diagnostic_seen.has(key):
+		return
+	_diagnostic_seen[key] = true
+	print("[VoiceResolver] miss: ", msg)
 
 ## Derive "<call_num>_<sub_resource_id>" from a DialogueLine's
 ## resource_path. The path format Godot uses is
