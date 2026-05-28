@@ -20,9 +20,10 @@ voice-cloning pipeline.
 ### Daniel
 Travelling salesman driving home; emotional spine of the run.
 
-- ✅ **default** — composed son's check-in (call 02). Source: Suspense
-  *Three O'Clock* (1949-03-10), Van Heflin. **CURRENT CLIP IS WRONG**
-  (host voice, not Heflin). Re-pick from early-episode narration.
+- ✅ **default** — composed son's check-in (call 02). Heflin 02:30
+  ("I wonder why more people haven't thought of this…"). Voicing is
+  clean at `--steps 32`; the reference's cold-narration prosody can
+  bleed into casual lines — see Generation Params note below.
 - ✅ **anxious** — worried, things turning bad (call 05, 07). Heflin
   13:30. Approved.
 - ✅ **frantic** — desperate plea (call 07). Heflin 15:30. Approved.
@@ -125,7 +126,29 @@ not voice references for F5-TTS-MLX.
 ## Quick stats
 
 - **Total references needed (speech):** ~22
-- **Sourced so far:** 3 (Daniel default needs re-do, so 2 are
-  green-light + 1 broken)
+- **Sourced so far:** 3 (Daniel default re-clipped to 02:30, plus
+  anxious + frantic — all three green-light)
 - **Distinct voice actors / sources to find:** ~10 (one per
   character, plus a non-verbal breath for Daniel)
+
+## Generation params (lessons learnt)
+
+Notes for the eventual `tools/generate_voices.py` pipeline so we
+don't re-derive these on every character:
+
+- **`--steps 32 --method euler`** is the sweet spot. The library
+  default (~8 steps) is noticeably hoarse; jumping to 32 cleans
+  it up cleanly. `midpoint` at 32 is barely audibly different
+  from `euler` at 32 but ~2× slower, so stick with euler.
+- **Prosody comes from the reference, not the text.** A clip of
+  cold methodical narration will impose cold methodical tempo on
+  any line you generate, even cheerful sign-offs. When a line's
+  text doesn't fit the reference's energy, the result feels
+  off-beat — the fix is a better reference for that mood, not
+  prompt engineering.
+- **Reference length:** the F5-TTS-MLX README says 5–10 s; in
+  practice 8 s clips are working well. Longer probably helps
+  for prosody capture but slows generation; revisit if a
+  specific clip keeps producing wobbly output.
+- **HF auth:** `~/.cache/huggingface/token` set; suppresses the
+  rate-limit warnings on cold cache pulls.
