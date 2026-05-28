@@ -18,6 +18,8 @@ duration = 1.2
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Reverend — it's Daniel. Mom's not picking up and Doc says she's bad. Can you—"
+voice_text = "REVEREND, it's Daniel! Mom's not picking up and Doc says she's BAD. Can you—"
+mood = &"frantic"
 portrait = ExtResource("3_portrait_0")
 duration = 4.0
 
@@ -52,6 +54,7 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong line."
+mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
@@ -59,12 +62,16 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator — the Chapel, Reverend Carter."
+voice_text = "OPERATOR! The Chapel, Reverend Carter!"
+mood = &"frantic"
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Hurry, please."
+voice_text = "Hurry! PLEASE!"
+mood = &"frantic"
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
@@ -72,7 +79,8 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator?? OPERATOR."
-voice_text = "Operator? Operator."
+mood = &"frantic"
+voice_text = "Operator?! OPERATOR! PLEASE!"
 portrait = ExtResource("3_portrait_0")
 
 [sub_resource type="Resource" id="thought_fail_0"]
@@ -95,6 +103,8 @@ portrait = ExtResource("3_portrait_3")
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Doc, I need the Chapel. The Reverend."
+voice_text = "DOC, I need the Chapel! The Reverend!"
+mood = &"frantic"
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
 
