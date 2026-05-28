@@ -18,16 +18,17 @@ duration = 3.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "She… she must've gone to the market."
-mood = &"anxious"
 voice_text = "She, she must've gone to the market."
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
+mood = &"anxious"
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "I'll try again from the next stop. Thanks, operator."
 portrait = ExtResource("3_portrait_0")
+mood = &"anxious"
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -40,6 +41,7 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong number."
+voice_text = "Sorry, wrong number."
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
 
@@ -47,8 +49,9 @@ duration = 2.0
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator — please."
-mood = &"anxious"
+voice_text = "Operator — please!"
 portrait = ExtResource("3_portrait_0")
+mood = &"anxious"
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
@@ -77,10 +80,10 @@ duration = 3.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator? Operator, please — I'll call back."
-voice_text = "Operator? Operator, PLEASE — I'll call back."
-mood = &"anxious"
+voice_text = "Operator?! Operator, PLEASE. I'll call back."
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
+mood = &"anxious"
 
 [sub_resource type="Resource" id="thought_fail_0"]
 script = ExtResource("2_dline")

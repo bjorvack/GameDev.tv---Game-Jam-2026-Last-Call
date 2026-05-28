@@ -1,32 +1,16 @@
-[gd_resource type="Resource" script_class="Character" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=5 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
 [ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://5h42femxk4di" path="res://art/portraits/daniel.png" id="3_portrait"]
 [ext_resource type="AudioStream" uid="uid://ctgtvyvlf50nj" path="res://audio/voice_refs/daniel/default.wav" id="4_voice_default"]
-[ext_resource type="AudioStream" uid="uid://canlfnd1iest8" path="res://audio/voice_refs/daniel/anxious.wav" id="5_voice_anxious"]
-[ext_resource type="AudioStream" uid="uid://vx1kjhbr5eeg" path="res://audio/voice_refs/daniel/frantic.wav" id="6_voice_frantic"]
 
 [sub_resource type="Resource" id="voice_default"]
 script = ExtResource("2_vref")
 mood = &"default"
 audio = ExtResource("4_voice_default")
-transcript = "I wonder why more people haven't thought of this. Probably wouldn't know how to go about it if they did. There."
-notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~02:30. Public domain (OTRR / TSP). Heflin's cold composed baseline — first-person narration of his plan, no other voices. Replaces an earlier ~27:30 clip that turned out to be the show host's wrap-up rather than Heflin in-character."
-
-[sub_resource type="Resource" id="voice_anxious"]
-script = ExtResource("2_vref")
-mood = &"anxious"
-audio = ExtResource("5_voice_anxious")
-transcript = "to show that it stood there a long time in our moral and like the time last week, the time."
-notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~13:30. Public domain (OTRR / TSP). Mid-episode tension as the burglars enter and Heflin realises something's wrong."
-
-[sub_resource type="Resource" id="voice_frantic"]
-script = ExtResource("2_vref")
-mood = &"frantic"
-audio = ExtResource("6_voice_frantic")
-transcript = "Yeah, yeah, that's good. Sure. Come on. If I go both of you go with me. What time is it?"
-notes = "Clipped from Suspense — \"Three O'Clock\" (1949-03-10), Van Heflin. https://archive.org/details/TSP490310 at ~15:30. Public domain (OTRR / TSP). The bomb-clock countdown — Heflin pleading, desperate."
+transcript = "I can't believe it. Can you prove that?"
+notes = "Sourced from a CC0 voice acting clip on Pixabay (\"faespencer / I can't believe it\"). 2s short clip — Qwen3-TTS-MLX-Instruct adapts the timbre with per-line --instruct directives for default/anxious/frantic moods. Replaces earlier Heflin references which carried alarm-clock SFX bleed."
 
 [resource]
 script = ExtResource("1_char")
@@ -35,6 +19,6 @@ aliases = Array[StringName]([&"Daniel Hayes"])
 gender = "male"
 age = "mid 30s"
 speaking_tone = "tired warmth, mild Southern, becomes brittle under stress"
-description = "Margaret Hayes's son. Travelling salesman, driving home down Highway 40 from a sales swing. Calls his mother every morning; today she didn't answer. Across the run he becomes the story's emotional spine — the early lines are his routine son's-on-the-road check-ins, the late lines (calls 5, 7, 10) are him realising something is very wrong. Even at his most frantic he tries to be polite to the operator. Note: call 10's '(Daniel's breath catches…)' is a non-verbal sound and is handled as an ordinary SFX rather than a voice reference here."
+description = "Margaret Hayes's son. Travelling salesman, driving home down Highway 40 from a sales swing. Calls his mother every morning; today she didn't answer. Across the run he becomes the story's emotional spine — the early lines are his routine son's-on-the-road check-ins, the late lines (calls 5, 7, 10) are him realising something is very wrong. Note: call 10's '(Daniel's breath catches…)' is a non-verbal sound and is handled as an ordinary SFX rather than a voice reference here."
 portrait = ExtResource("3_portrait")
-voices = Array[Resource]([SubResource("voice_default"), SubResource("voice_anxious"), SubResource("voice_frantic")])
+voices = Array[Resource]([SubResource("voice_default")])

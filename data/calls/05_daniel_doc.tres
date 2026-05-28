@@ -20,9 +20,9 @@ script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Doc — it's Daniel. Mom's not answering. I'm on Hwy 40, two hours out. Did she—"
 voice_text = "Doc — it's Daniel. Mom's NOT answering. I'm on Hwy 40, two hours out. Did she—"
-mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
+mood = &"anxious"
 
 [sub_resource type="Resource" id="connected_0"]
 script = ExtResource("2_dline")
@@ -30,6 +30,7 @@ speaker = "Doc Wheeler"
 text = "Daniel… your mother came in Thursday with chest pains."
 portrait = ExtResource("3_portrait_1")
 duration = 4.0
+mood = &"grave"
 
 [sub_resource type="Resource" id="connected_1"]
 script = ExtResource("2_dline")
@@ -37,12 +38,14 @@ speaker = "Doc Wheeler"
 text = "I told her to call me at the first sign it came back."
 portrait = ExtResource("3_portrait_1")
 duration = 3.5
+mood = &"grave"
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
 speaker = "Doc Wheeler"
 text = "Son — get home. Fast."
 portrait = ExtResource("3_portrait_1")
+mood = &"urgent"
 
 [sub_resource type="Resource" id="first_leg_0"]
 script = ExtResource("2_dline")
@@ -55,18 +58,18 @@ script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Damn. Damn it."
 voice_text = "Damn. DAMN IT!"
-mood = &"frantic"
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
+mood = &"frantic"
 
 [sub_resource type="Resource" id="first_leg_2"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator — try Doc Wheeler. She had a check-up Thursday. He might know."
 voice_text = "Operator — try Doc Wheeler! She had a check-up Thursday. He might know."
-mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
+mood = &"anxious"
 
 [sub_resource type="Resource" id="generic_0"]
 script = ExtResource("2_dline")
@@ -79,26 +82,26 @@ duration = 1.5
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sorry — wrong line."
-mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 2.0
+mood = &"anxious"
 
 [sub_resource type="Resource" id="opening_0"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator, it's Daniel Hayes. Pulled off at the diesel stop, marker 88."
-mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
+mood = &"anxious"
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Try Mom again — 7th and Vine. Please."
 voice_text = "Try Mom again — 7th and Vine. PLEASE."
-mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
+mood = &"anxious"
 
 [sub_resource type="Resource" id="thought_0"]
 script = ExtResource("2_dline")
@@ -115,9 +118,9 @@ script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Operator? I'm losing signal. Try again — please."
 voice_text = "Operator?! I'm LOSING SIGNAL! Try again — PLEASE!"
-mood = &"frantic"
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
+mood = &"frantic"
 
 [sub_resource type="Resource" id="thought_fail_0"]
 script = ExtResource("2_dline")
@@ -141,9 +144,9 @@ script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Doc — sorry, wrong line. Operator, I asked for Mom. 7th and Vine, please."
 voice_text = "Doc — sorry, wrong line. Operator, I asked for MOM. 7th and Vine, please."
-mood = &"anxious"
 portrait = ExtResource("3_portrait_0")
 duration = 4.5
+mood = &"anxious"
 
 [sub_resource type="Resource" id="wrong_sheriff_0"]
 script = ExtResource("2_dline")
@@ -156,9 +159,10 @@ duration = 1.8
 script = ExtResource("2_dline")
 speaker = "Daniel"
 text = "Sheriff — wrong line, sorry. I'm trying Mom."
-mood = &"anxious"
+voice_text = "Sheriff — wrong line, sorry. I'm trying to reach my mom."
 portrait = ExtResource("3_portrait_0")
 duration = 3.0
+mood = &"anxious"
 
 [sub_resource type="Resource" id="wrong_sheriff_2"]
 script = ExtResource("2_dline")

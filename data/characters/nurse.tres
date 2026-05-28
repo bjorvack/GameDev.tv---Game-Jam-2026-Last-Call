@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="Character" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=5 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
 [ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://cnjf2igh8v1so" path="res://art/portraits/nurse.png" id="3_portrait"]
+[ext_resource type="AudioStream" uid="uid://2fxypgnqj0ue" path="res://audio/voice_refs/nurse/default.wav" id="4_voice_default"]
 
 [sub_resource type="Resource" id="voice_default"]
 script = ExtResource("2_vref")
 mood = &"default"
-audio = null
-transcript = ""
-notes = "Source TBD — needs a 5–10s 1960s-American adult-female voice, calm professional warmth. Carries the game's final reveal so the read has to land: matter-of-fact reassurance, not a smile, but not flat either."
+audio = ExtResource("4_voice_default")
+transcript = "Thanks, I really appreciate it."
+notes = "Sourced from a CC0 voice acting clip on Pixabay (\"faespencer / Thanks I really appreciate it\"). 1.78s short clip — warm female 30s. Qwen3-TTS-MLX-Instruct will adapt with --instruct directives for the calm-warmth ending register."
 
 [resource]
 script = ExtResource("1_char")
