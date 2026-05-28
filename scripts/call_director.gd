@@ -128,7 +128,12 @@ func _play_operator_thought(prev: CallData) -> void:
 	# operator's words exist for these few seconds.
 	for line in lines:
 		if line is DialogueLine and SceneTransition:
+			var voice: AudioStream = VoiceResolver.resolve(line) if VoiceResolver else null
+			if voice and VoicePlayer:
+				VoicePlayer.play(voice)
 			await SceneTransition.show_monologue(line.text, line.duration)
+			if VoicePlayer:
+				VoicePlayer.stop()
 	caller_card.show_idle()
 	if SceneTransition:
 		await SceneTransition.fade_in(MONOLOGUE_FADE)
