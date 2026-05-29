@@ -37,7 +37,12 @@ const _DEFAULTS: Dictionary = {
 	&"Master": 0.9,
 	&"Music": 0.7,
 	&"SFX": 0.9,
-	&"Voice": 1.0,
+	# Default-muted until the player explicitly enables dialogue audio.
+	# The AI-generated voice takes are still pre-production; shipping
+	# them off-by-default keeps the first-play experience grounded in
+	# the on-card text. Players can raise the slider any time from the
+	# Audio tab.
+	&"Voice": 0.0,
 	&"UI": 0.8,
 }
 
