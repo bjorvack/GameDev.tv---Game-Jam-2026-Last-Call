@@ -33,6 +33,25 @@ func _prepare_and_capture() -> void:
 		await get_tree().process_frame
 		_call_first_node_with_method("open", ["SettingsOverlay"])
 		await get_tree().process_frame
+		# Optional SETTINGS_TAB env var lets the shoot tool snap any tab
+		# (0 = Accessibility, 1 = Audio) without code edits.
+		var tab_env := OS.get_environment("SETTINGS_TAB")
+		if tab_env != "":
+			var overlay := get_tree().root.find_child("SettingsOverlay", true, false)
+			if overlay:
+				var tabs := overlay.find_child("Tabs", true, false)
+				if tabs and "current_tab" in tabs:
+					tabs.current_tab = int(tab_env)
+					await get_tree().process_frame
+		# Optional SETTINGS_RESET_AUDIO=1 fires the audio reset button so
+		# the captured frame shows the post-reset slider state.
+		if OS.get_environment("SETTINGS_RESET_AUDIO") == "1":
+			var overlay2 := get_tree().root.find_child("SettingsOverlay", true, false)
+			if overlay2:
+				var reset := overlay2.find_child("ResetButton", true, false)
+				if reset and reset.has_signal("pressed"):
+					reset.emit_signal("pressed")
+					await get_tree().process_frame
 	# Extra frame so the visible-flag change actually paints into the
 	# viewport texture before we read it back.
 	await get_tree().process_frame
