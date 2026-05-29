@@ -1,15 +1,7 @@
 [gd_resource type="Resource" script_class="Character" format=3 uid="uid://wkubkmndbrvp"]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
-[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://c8rie3fgslscn" path="res://art/portraits/cole.png" id="3_portrait"]
-[ext_resource type="AudioStream" uid="uid://bgwcru7j7uj88" path="res://audio/voice_refs/cole/default.wav" id="4_voice_default"]
-
-[sub_resource type="Resource" id="voice_default"]
-script = ExtResource("2_vref")
-audio = ExtResource("4_voice_default")
-transcript = "They run, they laugh. I see the glow shining in their eyes. Not like hers."
-notes = "Sourced from a CC-licensed short-film monologue on freesound (\"shortfilm-voice-56795\"). The opening 8s of a dramatic grief monologue — gruff, contemplative male delivery. Pixabay/Freesound CC0-equivalent license."
 
 [resource]
 script = ExtResource("1_char")
@@ -19,4 +11,3 @@ age = "early 50s"
 speaking_tone = "gruff, economical, blue-collar"
 description = "Runs Cole's Garage just off the main road. Answers the phone with one word and never wastes a second. Has known Patty since high school and would drive across the county for her, but you'd never hear him say so. Speaks in short clipped sentences, dry humour buried under a workshop accent."
 portrait = ExtResource("3_portrait")
-voices = Array[ExtResource("2_vref")]([SubResource("voice_default")])

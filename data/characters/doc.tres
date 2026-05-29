@@ -1,16 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=3 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
-[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://onqu1tt18bji" path="res://art/portraits/doc.png" id="3_portrait"]
-[ext_resource type="AudioStream" uid="uid://bj8tisw3som6e" path="res://audio/voice_refs/doc/default.wav" id="4_voice_default"]
-
-[sub_resource type="Resource" id="voice_default"]
-script = ExtResource("2_vref")
-mood = &"default"
-audio = ExtResource("4_voice_default")
-transcript = "I fear darkness hunts us. Use what you've learned and stay the course."
-notes = "Sourced from a CC-licensed voice acting clip on Pixabay (\"originalvo medieval gamer voice — darkness hunts us\"). 5.76s, baritone dramatic delivery — natural fit for Doc's weary professional register. Mood handled at generation time via --instruct directive."
 
 [resource]
 script = ExtResource("1_char")
@@ -21,4 +12,3 @@ age = "early 60s"
 speaking_tone = "weary, terse, kindly, never raises his voice"
 description = "Mayfield's only physician. Answers the phone with his surname and one syllable. Has known Margaret Hayes for decades and saw her last week for chest pains; carries the weight of that visit. In call 5 he's the one who tells Daniel his mother's situation has turned — speaks slowly, picks every word."
 portrait = ExtResource("3_portrait")
-voices = Array[Resource]([SubResource("voice_default")])

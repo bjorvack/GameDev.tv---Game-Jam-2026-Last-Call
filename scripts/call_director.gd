@@ -128,12 +128,7 @@ func _play_operator_thought(prev: CallData) -> void:
 	# operator's words exist for these few seconds.
 	for line in lines:
 		if line is DialogueLine and SceneTransition:
-			var voice: AudioStream = VoiceResolver.resolve(line) if VoiceResolver else null
-			if voice and VoicePlayer:
-				VoicePlayer.play(voice)
 			await SceneTransition.show_monologue(line.text, line.duration)
-			if VoicePlayer:
-				VoicePlayer.stop()
 	caller_card.show_idle()
 	if SceneTransition:
 		await SceneTransition.fade_in(MONOLOGUE_FADE)
@@ -310,15 +305,9 @@ func _play_lines(lines: Array) -> void:
 		return
 	# CallerCard.play_line handles auto-timer XOR manual-dismiss internally
 	# and reacts to mid-line toggle changes, so we just await each line.
-	#
-	# VoiceResolver returns the pre-generated AI voice clip for this line
-	# when one exists; null otherwise (e.g. characters whose references
-	# haven't been sourced yet, stage directions, or lines newer than
-	# the last generation pass). CallerCard handles either case.
 	for line in lines:
 		if line is DialogueLine:
-			var voice: AudioStream = VoiceResolver.resolve(line) if VoiceResolver else null
-			caller_card.play_line(line, voice)
+			caller_card.play_line(line)
 			await caller_card.line_dismissed
 
 func _on_patience_changed(value: int) -> void:

@@ -5,10 +5,10 @@
 ##     press Space / Enter / click the caller card instead of auto-advancing
 ##     after the authored `DialogueLine.duration`.
 ##   - use_system_cursor: bypass the custom themed cursor.
-##   - master/music/sfx/voice/ui volume (0.0..1.0): linear-perception
+##   - master/music/sfx/ui volume (0.0..1.0): linear-perception
 ##     gain applied to the matching audio bus via AudioServer. The mapping
-##     to dB is volume_to_db() — linear² for a smoother slider feel — with
-##     0.0 hard-muting the bus and 1.0 leaving it at its layout baseline.
+##     to dB is linear_to_db() with 0.0 hard-muting the bus and 1.0
+##     leaving it at its layout baseline.
 ##
 ## Settings are persisted to `user://settings.cfg` so the toggle survives
 ## scene changes, full game restarts, and (on web) browser reloads via
@@ -27,22 +27,16 @@ const _KEY_USE_SYSTEM_CURSOR := "use_system_cursor"
 
 ## Buses exposed to the settings panel. Order = display order in the UI.
 const BUSES: Array[StringName] = [
-	&"Master", &"Music", &"SFX", &"Voice", &"UI",
+	&"Master", &"Music", &"SFX", &"UI",
 ]
 
-## Default starting volume per bus (0..1). Master sits at 100%; music
-## defaults a notch below the rest so dialogue and SFX read clearly over
-## the score on first launch. Users can rebalance from the settings page.
+## Default starting volume per bus (0..1). Master sits at 90%; music
+## defaults a notch below SFX so in-world cues read clearly over the
+## score on first launch. Players can rebalance from the settings page.
 const _DEFAULTS: Dictionary = {
 	&"Master": 0.9,
 	&"Music": 0.7,
 	&"SFX": 0.9,
-	# Default-muted until the player explicitly enables dialogue audio.
-	# The AI-generated voice takes are still pre-production; shipping
-	# them off-by-default keeps the first-play experience grounded in
-	# the on-card text. Players can raise the slider any time from the
-	# Audio tab.
-	&"Voice": 0.0,
 	&"UI": 0.8,
 }
 

@@ -1,16 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=3 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
-[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://5h42femxk4di" path="res://art/portraits/daniel.png" id="3_portrait"]
-[ext_resource type="AudioStream" uid="uid://ctgtvyvlf50nj" path="res://audio/voice_refs/daniel/default.wav" id="4_voice_default"]
-
-[sub_resource type="Resource" id="voice_default"]
-script = ExtResource("2_vref")
-mood = &"default"
-audio = ExtResource("4_voice_default")
-transcript = "I can't believe it. Can you prove that?"
-notes = "Sourced from a CC0 voice acting clip on Pixabay (\"faespencer / I can't believe it\"). 2s short clip — Qwen3-TTS-MLX-Instruct adapts the timbre with per-line --instruct directives for default/anxious/frantic moods. Replaces earlier Heflin references which carried alarm-clock SFX bleed."
 
 [resource]
 script = ExtResource("1_char")
@@ -21,4 +12,3 @@ age = "mid 30s"
 speaking_tone = "tired warmth, mild Southern, becomes brittle under stress"
 description = "Margaret Hayes's son. Travelling salesman, driving home down Highway 40 from a sales swing. Calls his mother every morning; today she didn't answer. Across the run he becomes the story's emotional spine — the early lines are his routine son's-on-the-road check-ins, the late lines (calls 5, 7, 10) are him realising something is very wrong. Note: call 10's '(Daniel's breath catches…)' is a non-verbal sound and is handled as an ordinary SFX rather than a voice reference here."
 portrait = ExtResource("3_portrait")
-voices = Array[Resource]([SubResource("voice_default")])

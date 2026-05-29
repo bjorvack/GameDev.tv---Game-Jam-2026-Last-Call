@@ -1,16 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=3 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
-[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://bnjqhn1j78wpa" path="res://art/portraits/trucker.png" id="3_portrait"]
-[ext_resource type="AudioStream" uid="uid://ch676jkbmlmvf" path="res://audio/voice_refs/trucker/default.wav" id="4_voice_default"]
-
-[sub_resource type="Resource" id="voice_default"]
-script = ExtResource("2_vref")
-mood = &"default"
-audio = ExtResource("4_voice_default")
-transcript = "Hey, check your blood sugar."
-notes = "Sourced from a CC0 voice acting clip on freesound (\"community / hey-check-your-blood-sugar-44993\"). 1.75s short clip — gruff blue-collar male, Qwen3-TTS-MLX-Instruct adapts with --instruct directives."
 
 [resource]
 script = ExtResource("1_char")
@@ -21,4 +12,3 @@ age = "40s"
 speaking_tone = "rough, road-weary, plain-spoken, helpful when asked"
 description = "Anonymous long-haul driver, picks up at the Highway 40 truck-stop phone booth when the Reverend places the long-shot call in call 9. Doesn't know any of these people. Hears the situation, agrees to help — flags down Daniel's car and tells him to turn around. Speaks in short useful sentences. Last we hear of him is the phone hitting the booth glass as he runs out."
 portrait = ExtResource("3_portrait")
-voices = Array[Resource]([SubResource("voice_default")])

@@ -18,6 +18,7 @@ script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "Sheriff, there's an ambulance on Vine—"
 portrait = ExtResource("3_portrait_0")
+mood = &"worried"
 
 [sub_resource type="Resource" id="connected_2"]
 script = ExtResource("2_dline")
@@ -45,6 +46,7 @@ script = ExtResource("2_dline")
 speaker = "Mrs. Henley"
 text = "Operator? It's Henley on 8th — quick now."
 portrait = ExtResource("3_portrait_0")
+mood = &"worried"
 
 [sub_resource type="Resource" id="opening_1"]
 script = ExtResource("2_dline")
@@ -52,6 +54,7 @@ speaker = "Mrs. Henley"
 text = "There's an ambulance on Vine. Two streets over. Been there ten minutes."
 portrait = ExtResource("3_portrait_0")
 duration = 4.0
+mood = &"worried"
 
 [sub_resource type="Resource" id="opening_2"]
 script = ExtResource("2_dline")
@@ -59,6 +62,7 @@ speaker = "Mrs. Henley"
 text = "Put me through to the sheriff. Something's not right."
 portrait = ExtResource("3_portrait_0")
 duration = 3.5
+mood = &"worried"
 
 [sub_resource type="Resource" id="wrong_hayes_0"]
 script = ExtResource("2_dline")

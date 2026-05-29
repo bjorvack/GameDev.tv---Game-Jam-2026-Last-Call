@@ -1,16 +1,7 @@
-[gd_resource type="Resource" script_class="Character" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=3 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
-[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
 [ext_resource type="Texture2D" uid="uid://brx1g16gqvn36" path="res://art/portraits/henley.png" id="3_portrait"]
-[ext_resource type="AudioStream" uid="uid://df2t26m253ncj" path="res://audio/voice_refs/henley/default.wav" id="4_voice_default"]
-
-[sub_resource type="Resource" id="voice_default"]
-script = ExtResource("2_vref")
-mood = &"default"
-audio = ExtResource("4_voice_default")
-transcript = "I'm having a little problem with my mouth, okay, I'm gonna drink some water."
-notes = "Sourced from a CC-licensed conversational clip on freesound (\"female-blurb-105836\"). 4.7s, anxious-sounding older-female voice — natural fit for the worried-neighbour register."
 
 [resource]
 script = ExtResource("1_char")
@@ -21,4 +12,3 @@ age = "late 60s"
 speaking_tone = "anxious neighbour, soft-spoken, observant"
 description = "Lives on 8th Street with a clear view down Vine. Sees the ambulance and unmarked unit pull up outside Margaret Hayes's house and immediately calls the operator to relay it to Sheriff Briggs. Knows the town like the back of her hand but rarely raises her voice — she watches more than she speaks."
 portrait = ExtResource("3_portrait")
-voices = Array[Resource]([SubResource("voice_default")])

@@ -1,15 +1,6 @@
-[gd_resource type="Resource" script_class="Character" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="Character" load_steps=2 format=3]
 
 [ext_resource type="Script" uid="uid://6cuv2sy6fhs7" path="res://scripts/character.gd" id="1_char"]
-[ext_resource type="Script" uid="uid://cuuops2gcchxj" path="res://scripts/voice_reference.gd" id="2_vref"]
-[ext_resource type="AudioStream" uid="uid://b8lehp4aiphpr" path="res://audio/voice_refs/operator/default.wav" id="3_voice_default"]
-
-[sub_resource type="Resource" id="voice_default"]
-script = ExtResource("2_vref")
-mood = &"default"
-audio = ExtResource("3_voice_default")
-transcript = "It collapses rustling back onto the couch, even the effort of speaking seems to have diminished it a little."
-notes = "Sourced from a CC-licensed literary-narration clip on freesound (\"experimental-64402\"). 8s window — hushed reflective female delivery, perfect fit for the operator's inner-monologue tone."
 
 [resource]
 script = ExtResource("1_char")
@@ -20,4 +11,3 @@ age = "30s"
 speaking_tone = "reflective, hushed, present-tense inner thinking"
 description = "The player character. Mayfield's night-shift switchboard operator. Her voice never appears on the line — she speaks only in the inter-call monologues that play over the black overlay between rings. Those lines are her internal noticing: a missing connection, a familiar caller's silence, the slow assembly of what she's piecing together. The empty-string speaker on DialogueLines is the convention the call data uses for these monologues, hence the alias."
 portrait = null
-voices = Array[Resource]([SubResource("voice_default")])
